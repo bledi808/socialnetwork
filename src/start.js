@@ -1,13 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import Welcome from "./welcome";
 
-ReactDOM.render(
-    <HelloWorld />,
-    document.querySelector('main')
-);
+// import HelloWorld from "./hello-world"; // imports function component from hello-world.js component file
 
-function HelloWorld() {
-    return (
-        <div>Hello, World!</div>
-    );
+let elem;
+const userIsLoggedIn = location.pathname != "/welcome"; // evaluates to false in /welcome route bc user is on that route
+
+if (!userIsLoggedIn) {
+    elem = <Welcome />;
+} else {
+    elem = <h1>LOGOLOGO</h1>;
 }
+//Appends React code to the DOM
+//only called once per project; will never be called again after
+// render() takes 2 args: the component ("HelloWorld") and the DOM node ("main") on which we append the component
+ReactDOM.render(elem, document.querySelector("main"));
