@@ -6,10 +6,7 @@ const csurf = require("csurf");
 const db = require("./db");
 const { hash, compare } = require("./bc");
 const cryptoRandomString = require("crypto-random-string");
-
-// const secretCode = cryptoRandomString({
-//     length: 4,
-// });
+const ses = require("./ses");
 
 //////////////////////////////////////// MIDDLEWARE ////////////////////////////////////////
 app.use(
@@ -162,20 +159,47 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/reset/start", (req, res) => {
-    console.log("ACCESSED POST /reset route ");
+    console.log("ACCESSED POST /reset/start route ");
     const { email } = req.body;
 
     if (email !== "") {
         db.getPwByEmail(email)
             .then(({ rows }) => {
-                console.log(
-                    " rows in POST /reset/start from getPwByEmail()",
-                    rows
-                );
                 if (rows.length === 1) {
-                    res.json({ success: true });
+                    // generate random resetCode
+                    const resetCode = cryptoRandomString({
+                        length: 6,
+                    });
+                    // insert resetCode + email into database
+                    db.addResetCode(resetCode, email)
+                        .then(() => {
+                            // send Email to user containing the code
+                            let recipient = email;
+                            let message = `Plese use the code ${resetCode} to reset you account password for "The Anti-Social Network"`;
+                            let subject = `${resetCode}: Your Password Reset Code`;
+                            ses.sendEmail(recipient, message, subject)
+                                .then(() => {
+                                    res.json({
+                                        success: true,
+                                    });
+                                })
+                                .catch((err) => {
+                                    console.log(
+                                        "error in POST /reset/start with ses.sendEmail()",
+                                        err
+                                    );
+                                });
+                            //send reponse to clientside
+                        })
+                        .catch((err) => {
+                            console.log(
+                                "error in POST /reset/start with addSecretCode()",
+                                err
+                            );
+                        });
                 } else {
-                    res.json({ success: false });
+                    console.log("this email does not exist");
+                    // res.json({ error: true });// render error msg here
                 }
             })
             .catch((err) => {
@@ -187,6 +211,35 @@ app.post("/reset/start", (req, res) => {
     } else {
         console.log("email must be populated");
     }
+});
+
+app.post("/reset/verify", (req, res) => {
+    console.log("ACCESSED POST /reset/verify route ");
+    const { code, password } = req.body;
+    res.json({ success: true });
+
+    // if (code !== "" && password !== "") {
+    //     db.getPwByEmail(email)
+    //         .then(({ rows }) => {
+    //             console.log(
+    //                 " rows in POST /reset/start from getPwByEmail()",
+    //                 rows
+    //             );
+    //             if (rows.length === 1) {
+    //                 res.json({ success: true });
+    //             } else {
+    //                 res.json({ success: false });
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.log(
+    //                 "error in POST /reset/start with getPwByEmail()",
+    //                 err
+    //             );
+    //         });
+    // } else {
+    //     console.log("email must be populated");
+    // }
 });
 
 //it is important that the * route is the LAST GET route

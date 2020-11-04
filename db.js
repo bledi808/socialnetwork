@@ -23,12 +23,11 @@ module.exports.getPwByEmail = (email) => {
 };
 
 // INSERT into new table (reset_codes) the secret code you generated with the help of cryptoRandomString
-module.exports.addCodeByEmail = (code, email) => {
+module.exports.addResetCode = (code, email) => {
     return db.query(
         `
-        INSERT INTO reset_codes (code=$1)
-        WHERE email = $2
-        RETURNING *
+        INSERT INTO reset_codes (code, email)
+        VALUES($1,$2)
     `,
         [code, email]
     );

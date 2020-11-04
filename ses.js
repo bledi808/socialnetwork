@@ -1,5 +1,7 @@
 const aws = require("aws-sdk");
+
 let secrets;
+
 if (process.env.NODE_ENV == "production") {
     secrets = process.env;
 } else {
@@ -8,14 +10,14 @@ if (process.env.NODE_ENV == "production") {
 
 const ses = new aws.SES({
     accessKeyId: secrets.AWS_KEY,
-    secretAccessKey: secrets.AWS_KEY,
-    region: "eu-central-1", //has to match our settings in SES AWS setup
+    secretAccessKey: secrets.AWS_SECRET,
+    region: "eu-west-1", //has to match our settings in SES AWS setup
 });
 
 exports.sendEmail = function (recipient, message, subject) {
     return ses
         .sendEmail({
-            Source: "Beldi Ha <beldihasa1@gmail.com>",
+            Source: "<beldihasa1@gmail.com>",
             Destination: {
                 ToAddresses: [recipient],
             },
