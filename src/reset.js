@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+
 import { Link } from "react-router-dom";
 
 export default class Reset extends React.Component {
@@ -42,6 +43,7 @@ export default class Reset extends React.Component {
             console.log("SECOND step in the RESET process");
             return (
                 <div>
+                    <p>We found your email and sent you a code</p>
                     <p>Please enter the code emailed to you:</p>
                     <input
                         name="code"
@@ -75,52 +77,51 @@ export default class Reset extends React.Component {
         }
     }
 
-    mounted() {
-        //1st display
-        axios
-            .post("/reset/start", this.state)
-            .then((response) => {
-                console.log("response in Reset mounted axios", response);
-                if (response.data.success) {
-                    // then we redirect the user to our social network
-                    // location.replace("/"); // this does the redirect...
-                    console.log("successssss");
-                    this.setState = {
-                        display: "first",
-                    };
-                } else {
-                    this.setState({
-                        error: true,
-                        // here we can do conditional rendering for error message (i.e.have an error message appear based on error: true)
-                    });
-                }
-            })
-            .catch((err) => {
-                console.log("err in submit() axios", err);
-            });
-    }
+    // mounted() {
+    //     //1st display
+    //     axios
+    //         .post("/reset/start", this.state)
+    //         .then((response) => {
+    //             console.log("response in Reset mounted axios", response);
+    //             if (response.data.success) {
+    //                 // then we redirect the user to our social network
+    //                 // location.replace("/"); // this does the redirect...
+    //                 console.log("successssss");
+    //                 this.state.display=
+    //                     display: "2",
+    //                 };
+    //             } else {
+    //                 this.setState({
+    //                     error: true,
+    //                     // here we can do conditional rendering for error message (i.e.have an error message appear based on error: true)
+    //                 });
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.log("err in submit() axios", err);
+    //         });
+    // }
 
     submit() {
-        console.log("Login axios about to submit");
+        console.log("Axios about to submit");
+        // const me = this;
         axios
+            // .post("/reset/:${start}", this.state)
             .post("/reset/start", this.state)
             .then((response) => {
                 console.log("response in submit axios", response);
                 if (response.data.success) {
-                    // then we redirect the user to our social network
                     // location.replace("/"); // this does the redirect...
                     console.log("successssss in reset/start axios");
-                    this.setState = {
-                        display: 2,
-                    };
+                    this.setState({ display: this.state.display + 1 });
+                    // location.replace("/reset");
+                    console.log("me.state after after", this.state);
                 } else {
-                    this.setState({
-                        error: true,
-                        // here we can do conditional rendering for error message (i.e.have an error message appear based on error: true)
-                    });
+                    // me.state.display = 2;
                     console.log(
                         "error with email submission in Password reset"
                     );
+                    //here setStake{display:X} which can be used to conditionally render an error
                 }
             })
             .catch((err) => {

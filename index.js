@@ -163,13 +163,30 @@ app.post("/login", (req, res) => {
 
 app.post("/reset/start", (req, res) => {
     console.log("ACCESSED POST /reset route ");
+    const { email } = req.body;
+
     if (email !== "") {
         db.getPwByEmail(email)
-            .then(({ results }) => {
-                 if (results.rows.length === 0) {
-                     
-
-
+            .then(({ rows }) => {
+                console.log(
+                    " rows in POST /reset/start from getPwByEmail()",
+                    rows
+                );
+                if (rows.length === 1) {
+                    res.json({ success: true });
+                } else {
+                    res.json({ success: false });
+                }
+            })
+            .catch((err) => {
+                console.log(
+                    "error in POST /reset/start with getPwByEmail()",
+                    err
+                );
+            });
+    } else {
+        console.log("email must be populated");
+    }
 });
 
 //it is important that the * route is the LAST GET route
