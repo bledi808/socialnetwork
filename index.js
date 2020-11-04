@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const cookieSession = require("cookie-session");
-// const csurf = require("csurf");
+const csurf = require("csurf");
 const db = require("./db");
 const { hash, compare } = require("./bc");
 
@@ -29,12 +29,12 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-// app.use(csurf());
-// app.use(function (req, res, next) {
-//     res.locals.csrfToken = req.csrfToken();
-//     res.set("x-frame-options", "DENY");
-//     next();
-// });
+app.use(csurf());
+
+app.use(function (req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
 
 //////////////////////////////////////// ROUTES ///////////////////////////////////////
 app.get("/welcome", (req, res) => {

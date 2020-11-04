@@ -1,5 +1,6 @@
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Registration extends React.Component {
     constructor() {
@@ -45,35 +46,57 @@ export default class Registration extends React.Component {
         // console.log("this.state.error in after render()", this.state.error);
 
         return (
-            <div>
-                <h2>And I am the Registration child component</h2>
+            <div className="main-container">
+                <p>Anti-socials unite! By giving us your details</p>
                 {/* conditional rendering of error message */}
                 {this.state.error && (
                     <div>Opps somthing went wrong with registration</div>
                 )}
-
-                <input
-                    name="first"
-                    placeholder="first name"
-                    onChange={(e) => this.handleChange(e)} // instead of binding
-                ></input>
-                <input
-                    name="last"
-                    placeholder="last name"
-                    onChange={(e) => this.handleChange(e)}
-                ></input>
-                <input
-                    name="email"
-                    placeholder="email"
-                    onChange={(e) => this.handleChange(e)}
-                ></input>
-                <input
-                    name="password"
-                    placeholder="password"
-                    type="password"
-                    onChange={(e) => this.handleChange(e)}
-                ></input>
-                <button onClick={() => this.submit()}>Register</button>
+                <div className="form-layout">
+                    <div className="input-fields">
+                        <input
+                            name="first"
+                            placeholder="Name"
+                            onChange={(e) => this.handleChange(e)} // instead of binding
+                            className="reg-input"
+                            autoComplete="off"
+                        ></input>
+                        <input
+                            name="last"
+                            placeholder="Surname"
+                            onChange={(e) => this.handleChange(e)}
+                            className="reg-input"
+                            autoComplete="off"
+                        ></input>
+                        <input
+                            name="email"
+                            placeholder="Email"
+                            onChange={(e) => this.handleChange(e)}
+                            className="reg-input"
+                            autoComplete="off"
+                        ></input>
+                        <input
+                            name="password"
+                            placeholder="Password"
+                            type="password"
+                            onChange={(e) => this.handleChange(e)}
+                            className="reg-input"
+                            autoComplete="off"
+                        ></input>
+                        <div id="reg-actions">
+                            <button
+                                onClick={() => this.submit()}
+                                id="submit-reg"
+                            >
+                                Register
+                            </button>
+                            <span id="already-reg">
+                                Login instead
+                                {/* <Link to="/login">here</Link> */}!
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

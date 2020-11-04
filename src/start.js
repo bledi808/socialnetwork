@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
 
-// import HelloWorld from "./hello-world"; // imports function component from hello-world.js component file
-
 let elem;
 const userIsLoggedIn = location.pathname != "/welcome"; // evaluates to false in /welcome route bc user is on that route
 
