@@ -21,3 +21,42 @@ module.exports.createUser = (first, last, email, password) => {
 module.exports.getPwByEmail = (email) => {
     return db.query(`SELECT * FROM users WHERE email=$1`, [email]);
 };
+
+// INSERT into new table (reset_codes) the secret code you generated with the help of cryptoRandomString
+module.exports.addCodeByEmail = (code, email) => {
+    return db.query(
+        `
+        INSERT INTO reset_codes (code=$1)
+        WHERE email = $2
+        RETURNING *
+    `,
+        [code, email]
+    );
+};
+
+// SELECT that finds code in the new table that matches the email address and is less than 10 minutes old
+module.exports.getCodeByEmail = (email) => {
+    return db.query(
+        `
+        SELECT code 
+        FROM reset_codes 
+        WHERE email=$1 
+        // WHERE timestamp is less than 10mins old...   
+        `,
+        [email]
+    );
+};
+
+// UPDATE password of user's table by email address
+module.exports.updatePassword = (password, email) => {
+    return db.query(
+        `
+        UPDATE users 
+        SET password=$1
+        WHERE email = $2
+        RETURNING *
+
+    `,
+        [password, email]
+    );
+};

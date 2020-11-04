@@ -20,7 +20,7 @@ export default class Registration extends React.Component {
     }
 
     submit() {
-        console.log("about to submit");
+        console.log("Registration axios about to submit");
         axios
             .post("/register", this.state)
             .then((response) => {
@@ -28,7 +28,7 @@ export default class Registration extends React.Component {
                 if (response.data.success) {
                     // then we redirect the user to our social network
                     location.replace("/"); // this does the redirect...
-                    console.log("successssss");
+                    // console.log("successssss");
                 } else {
                     this.setState({
                         error: true,
@@ -91,8 +91,7 @@ export default class Registration extends React.Component {
                                 Register
                             </button>
                             <span id="already-reg">
-                                Login instead
-                                {/* <Link to="/login">here</Link> */}!
+                                <Link to="/login">Log in</Link> instead
                             </span>
                         </div>
                     </div>

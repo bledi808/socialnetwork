@@ -5,6 +5,11 @@ const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 const db = require("./db");
 const { hash, compare } = require("./bc");
+const cryptoRandomString = require("crypto-random-string");
+
+// const secretCode = cryptoRandomString({
+//     length: 4,
+// });
 
 //////////////////////////////////////// MIDDLEWARE ////////////////////////////////////////
 app.use(
@@ -75,6 +80,8 @@ app.post("/register", (req, res) => {
                                         "error with createUser() in POST /register",
                                         err
                                     );
+                                    //render registration page again
+                                    // res.json({ success: false }); // confirm this should go here
                                 });
                         })
                         .catch((err) => {
@@ -82,23 +89,87 @@ app.post("/register", (req, res) => {
                                 "error with hasingPw() in POST /register",
                                 err
                             );
+                            //render registration page again
+                            // res.json({ success: false }); // confirm this should go here
                         });
                 } else {
                     console.log("email address is already being used");
                     //render registration page again
+                    // res.json({ success: false }); // confirm this should go here
                 }
             })
             .catch((err) => {
                 console.log("error in /register with getPwByEmail()", err);
             });
+        //render registration page again
+        // res.json({ success: false }); // confirm this should go here
     } else {
         console.log("all input fields must be populated");
-        //render registration page again
+        res.json({ success: false }); // confirm this should go here
+        //render registration page again???
     }
-    //when everything works (i.e. hashing pw, inserting a row in users table and adding userId to req.session)
-    // this will triigger console.log in the axios .then()
-    // alternatively
-    // res.json({ success: false });
+});
+
+app.post("/login", (req, res) => {
+    console.log("ACCESSED  POST /login route");
+    console.log("req.body at POST /login", req.session);
+
+    const { email, password } = req.body;
+    console.log("req.session at POST /login", req.session);
+
+    if (email !== "" && password !== "") {
+        db.getPwByEmail(email)
+            .then(({ rows }) => {
+                let hashedPw = rows[0].password;
+                compare(password, hashedPw)
+                    .then((match) => {
+                        if (match) {
+                            req.session.userId = rows[0].id;
+                            res.json({ success: true });
+                            console.log(
+                                "server-side: login successful",
+                                rows[0]
+                            );
+                            console.log(
+                                "req.session.userId = rows[0].id",
+                                (req.session.userId = rows[0].id)
+                            );
+                        } else {
+                            console.log("Incorrect email and/or password ");
+                            //conditionally render error message: "Incorrect email and/or password"
+                            // res.json({ success: false }); // confirm this should go here
+                            //render login page page again?
+                        }
+                    })
+                    .catch((err) => {
+                        console.log("error in POST /login compare", err);
+                        //conditionally render error message: "Incorrect email and/or password"
+                        // res.json({ success: false }); // confirm this should go here
+                        //render login page again?
+                    });
+            })
+            .catch((err) => {
+                console.log("error in POST /login with getPwByEmail()", err);
+                //conditionally render error message: "Incorrect email and/or password "
+                // res.json({ success: false }); // confirm this should go here
+                //render login page again?
+            });
+    } else {
+        console.log("all input fields must be populated");
+        // res.json({ success: false }); // confirm this should go here
+        //render login page again?
+    }
+});
+
+app.post("/reset/start", (req, res) => {
+    console.log("ACCESSED POST /reset route ");
+    if (email !== "") {
+        db.getPwByEmail(email)
+            .then(({ results }) => {
+                 if (results.rows.length === 0) {
+                     
+
+
 });
 
 //it is important that the * route is the LAST GET route
