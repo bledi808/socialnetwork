@@ -215,10 +215,57 @@ app.post("/reset/start", (req, res) => {
 
 app.post("/reset/verify", (req, res) => {
     console.log("ACCESSED POST /reset/verify route ");
-    const { code, password } = req.body;
-    res.json({ success: true });
+    const { email, code, password } = req.body;
 
-    // if (code !== "" && password !== "") {
+    if (code !== "" && password !== "") {
+        db.getCodeByEmail(email)
+            .then((response) => {
+                if (response.rows[0].code == code) {
+                    hash(password)
+                        .then((hashedPw) => {
+                            db.updatePassword(hashedPw, email)
+                                .then(({ rows }) => {
+                                    console.log(
+                                        "rows in POST /reset/verify",
+                                        rows
+                                    );
+                                    res.json({ success: true });
+                                })
+                                .catch((err) => {
+                                    console.log(
+                                        "error with updatePassword() in POST /reset/verify",
+                                        err
+                                    );
+                                    // res.json({ error: true }); // confirm this should go here
+                                });
+                        })
+                        .catch((err) => {
+                            console.log(
+                                "error with hashingPw() in POST /register",
+                                err
+                            );
+                            // res.json({ error: true }); // confirm this should go here
+                        });
+                } else {
+                    console.log(
+                        "the code you entered does not match the one we emailed"
+                    );
+                    // res.json({ error: true }); // confirm this should go here
+                }
+            })
+            .catch((err) => {
+                console.log(
+                    "error in POST /reset/verify with getCodeByEmail()",
+                    err
+                );
+            });
+    } else {
+        console.log("code and email fields must be populated");
+    }
+
+    // If the code in the database and the one in the request body are the same, hash the password and update the user's row in the users table
+    // Send response indicating success or error
+
     //     db.getPwByEmail(email)
     //         .then(({ rows }) => {
     //             console.log(

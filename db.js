@@ -39,7 +39,8 @@ module.exports.getCodeByEmail = (email) => {
         `
         SELECT code 
         FROM reset_codes 
-        WHERE email=$1 
+        WHERE email=$1
+        LIMIT 1
         // WHERE timestamp is less than 10mins old...   
         `,
         [email]
