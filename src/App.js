@@ -13,6 +13,8 @@ export default class App extends React.Component {
             ImgUrl: null,
             uploaderIsVisible: false,
         };
+        //bind function
+        this.methodInApp = this.methodInApp.bind(this);
     }
 
     componentDidMount() {
@@ -27,6 +29,12 @@ export default class App extends React.Component {
             uploaderIsVisible: !this.state.uploaderIsVisible,
         });
     }
+
+    methodInApp(arg) {
+        console.log("method in App running in App component");
+        console.log("the argument I got passed is: ", arg);
+    }
+
     render() {
         return (
             <>
@@ -43,7 +51,9 @@ export default class App extends React.Component {
                     <h2 onClick={() => this.toggleUploader}>
                         Changing state with a method toggleUploader
                     </h2>
-                    {this.state.uploaderIsVisible && <Uploader />}
+                    {this.state.uploaderIsVisible && (
+                        <Uploader methodInApp={this.methodInApp} />
+                    )}
                 </div>
             </>
         );

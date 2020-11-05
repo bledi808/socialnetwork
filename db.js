@@ -38,10 +38,11 @@ module.exports.getCodeByEmail = (email) => {
     return db.query(
         `
         SELECT code 
-        FROM reset_codes 
-        WHERE email=$1
-        LIMIT 1
-        // WHERE timestamp is less than 10mins old...   
+        FROM reset_codes
+        WHERE email=$1 
+        AND CURRENT_TIMESTAMP - timestamp <= '10 minutes'
+        ORDER BY id DESC 
+        LIMIT 1;
         `,
         [email]
     );
@@ -54,8 +55,6 @@ module.exports.updatePassword = (password, email) => {
         UPDATE users 
         SET password=$1
         WHERE email = $2
-        RETURNING *
-
     `,
         [password, email]
     );

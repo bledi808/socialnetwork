@@ -175,7 +175,7 @@ app.post("/reset/start", (req, res) => {
                         .then(() => {
                             // send Email to user containing the code
                             let recipient = email;
-                            let message = `Plese use the code ${resetCode} to reset you account password for "The Anti-Social Network"`;
+                            let message = `Please navigate back to our site and use the code ${resetCode} to reset you password`;
                             let subject = `${resetCode}: Your Password Reset Code`;
                             ses.sendEmail(recipient, message, subject)
                                 .then(() => {
@@ -255,7 +255,7 @@ app.post("/reset/verify", (req, res) => {
             })
             .catch((err) => {
                 console.log(
-                    "error in POST /reset/verify with getCodeByEmail()",
+                    "error in POST /reset/verify with getCodeByEmail()/invalid code",
                     err
                 );
             });
