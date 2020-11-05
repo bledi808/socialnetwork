@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Example(props) {
-    // alsternatively you can destructure the props: export default function Example(first, last, imgUrl)
+    // alternatively you can destructure the props: export default function Example(first, last, imgUrl)
     //we then render it like this <h1>My name is {first} {last}</h1>
     console.log("props from parent - App component", props);
     return (

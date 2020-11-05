@@ -59,3 +59,8 @@ module.exports.updatePassword = (password, email) => {
         [password, email]
     );
 };
+
+//Get user info from users table
+module.exports.getUserInfo = (userId) => {
+    return db.query(`SELECT * FROM users WHERE id=$1`, [userId]);
+};

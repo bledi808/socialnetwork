@@ -38,7 +38,37 @@ app.use(function (req, res, next) {
     next();
 });
 
-//////////////////////////////////////// ROUTES ///////////////////////////////////////
+//////////////////////////////////////// LOGGED IN ROUTES ///////////////////////////////////////
+
+app.get("/user", (req, res) => {
+    console.log("ACCESSED GET /user route ");
+    console.log("req.session at /welcome", req.body);
+    console.log("req.body at /user", req.body);
+    let { userId } = req.session;
+    // let {} = req.body;
+
+    // req.body(first, last, userId)
+    // if (userId) {
+    console.log("user is logged in");
+    db.getUserInfo(userId)
+        .then(({ rows }) => {
+            console.log("rows in GET /user", rows);
+            res.json({
+                success: true,
+                rows: rows[0],
+            });
+        })
+        .catch((err) => {
+            "err in GET /user with getPwByEmail()", err;
+        });
+    // } else {
+    //     //user is not logged in
+    //     res.redirect("/");
+    // }
+});
+
+//////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////
+
 app.get("/welcome", (req, res) => {
     console.log("ACCESSED GET /welcome route ");
     console.log("req.session at /welcome", req.session);
@@ -139,14 +169,14 @@ app.post("/login", (req, res) => {
                         }
                     })
                     .catch((err) => {
-                        console.log("error in POST /login compare", err);
+                        console.log("err in POST /login compare", err);
                         //conditionally render error message: "Incorrect email and/or password"
                         // res.json({ success: false }); // confirm this should go here
                         //render login page again?
                     });
             })
             .catch((err) => {
-                console.log("error in POST /login with getPwByEmail()", err);
+                console.log("err in POST /login with getPwByEmail()", err);
                 //conditionally render error message: "Incorrect email and/or password "
                 // res.json({ success: false }); // confirm this should go here
                 //render login page again?

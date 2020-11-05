@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
-// import App from "./App";
+import App from "./App";
 
 let elem;
 const userIsLoggedIn = location.pathname != "/welcome"; // evaluates to false in /welcome route bc user is on that route
@@ -9,8 +9,8 @@ const userIsLoggedIn = location.pathname != "/welcome"; // evaluates to false in
 if (!userIsLoggedIn) {
     elem = <Welcome />;
 } else {
-    // elem = <App />;
-    elem = <h1>You Have Arrived at The Anti Social Network</h1>;
+    elem = <App />;
+    // elem = <h1>You Have Arrived at The Anti Social Network</h1>;
 }
 //Appends React code to the DOM
 //only called once per project; will never be called again after

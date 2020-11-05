@@ -2,15 +2,12 @@ import React from "react";
 // import Logo from "./Logo"; // create logo component
 import Uploader from "./Uploader";
 import Example from "./example";
+import axios from "axios";
 
 export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            // here we hard code info in state but for u=our case we get this info from axios request
-            first: "Bledi",
-            last: "Hasa",
-            ImgUrl: null,
             uploaderIsVisible: false,
         };
         //bind function
@@ -21,7 +18,33 @@ export default class App extends React.Component {
         console.log("App just mounted");
         // here we make an axios request to get info about our logged in user
         //once we have the user's data we add it to setState with the
+        axios
+            .get("/user")
+            .then((response) => {
+                console.log("res in componentDidMount() App axios", response);
+                if (response.data.success) {
+                    console.log("success in componentDidMount() App axios");
+                    this.setState({
+                        first: response.data.rows.first,
+                        last: response.data.rows.last,
+                    });
+                    console.log(
+                        "this.state after componentDidMount() App axios",
+                        this.state
+                    );
+                } else {
+                    // this.state.error = true;
+                    console.log(
+                        "error with email submission in Password reset"
+                    );
+                    //here setState{display:X} which can be used to conditionally render an error
+                }
+            })
+            .catch((err) => {
+                console.log("err in componentDidMount() App axios", err);
+            });
     }
+
     toggleUploader() {
         console.log("toggle uploader component on/off");
         this.setState({
@@ -41,6 +64,9 @@ export default class App extends React.Component {
                 {/* // <Logo /> */}
                 <header>
                     <h1>I am the App</h1>
+                    <p>
+                        My name is {this.state.first} {this.state.last}{" "}
+                    </p>
                 </header>
                 <div>
                     <Example
@@ -48,7 +74,7 @@ export default class App extends React.Component {
                         last={this.state.last}
                         imgUrl={this.state.imgUrl}
                     />
-                    <h2 onClick={() => this.toggleUploader}>
+                    <h2 onClick={() => this.toggleUploader()}>
                         Changing state with a method toggleUploader
                     </h2>
                     {this.state.uploaderIsVisible && (
