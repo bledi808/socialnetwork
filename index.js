@@ -7,6 +7,29 @@ const db = require("./db");
 const { hash, compare } = require("./bc");
 const cryptoRandomString = require("crypto-random-string");
 const ses = require("./ses");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const path = require("path");
+const s3 = require("./s3");
+const s3Url = "https://s3.amazonaws.com/pimento-imgboard/";
+
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152,
+    },
+});
 
 //////////////////////////////////////// MIDDLEWARE ////////////////////////////////////////
 app.use(
@@ -46,9 +69,6 @@ app.get("/user", (req, res) => {
     console.log("req.session at /welcome", req.body);
     console.log("req.body at /user", req.body);
     let { userId } = req.session;
-    // let {} = req.body;
-
-    // req.body(first, last, userId)
     if (userId) {
         console.log("user is logged in");
         db.getUserInfo(userId)
@@ -65,6 +85,29 @@ app.get("/user", (req, res) => {
     } else {
         //user is not logged in
         res.redirect("/");
+    }
+});
+
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("ACCESSED POST /upload route ");
+
+    const { userId } = req.session;
+    const { filename } = req.file;
+    const url = s3Url + filename;
+    if (req.file) {
+        db.uploadProfilePic(url, userId)
+            .then(({ rows }) => {
+                console.log("POST /upload response", rows[0].url);
+                res.json(rows[0].url);
+            })
+            .catch((err) => {
+                console.log(
+                    "error in POST /upload with uploadProfilePic()",
+                    err
+                );
+            });
+    } else {
+        res.json({ success: false });
     }
 });
 

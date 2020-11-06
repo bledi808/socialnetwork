@@ -64,3 +64,16 @@ module.exports.updatePassword = (password, email) => {
 module.exports.getUserInfo = (userId) => {
     return db.query(`SELECT * FROM users WHERE id=$1`, [userId]);
 };
+
+//Update Profile pic
+module.exports.uploadProfilePic = (imgUrl, userId) => {
+    return db.query(
+        `
+        UPDATE users
+        SET url=$1
+        WHERE id=$2
+        RETURNING *
+        `,
+        [imgUrl, userId]
+    );
+};

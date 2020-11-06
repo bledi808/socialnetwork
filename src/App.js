@@ -2,13 +2,17 @@ import React from "react";
 import Logo from "./Logo"; // create logo component
 import Uploader from "./Uploader";
 import ProfilePic from "./ProfilePic";
-import axios from "axios";
+import axios from "./axios";
 
 export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
             uploaderIsVisible: false,
+            // first: "",
+            // last: "",
+            // url: "",
+            // url: url,
         };
         //bind function
         this.methodInApp = this.methodInApp.bind(this);
@@ -24,6 +28,7 @@ export default class App extends React.Component {
                     this.setState({
                         first: response.data.rows.first,
                         last: response.data.rows.last,
+                        imgUrl: response.data.rows.url,
                     });
                 } else {
                     // this.state.error = true;
@@ -46,6 +51,8 @@ export default class App extends React.Component {
 
     methodInApp(arg) {
         this.toggleUploader();
+        // this.setState();
+        this.setState({ imgUrl: arg });
     }
 
     render() {
@@ -64,6 +71,7 @@ export default class App extends React.Component {
                     {this.state.uploaderIsVisible && (
                         <Uploader
                             methodInApp={this.methodInApp}
+                            imgUrl={this.state.imgUrl}
                             // toggleUploader={() => this.toggleUploader()}
                         />
                     )}
