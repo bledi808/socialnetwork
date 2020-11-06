@@ -19,6 +19,7 @@ app.use(
 app.use(compression());
 app.use(express.json());
 app.use(express.static("./public"));
+// app.use(express.static("public"));
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -48,23 +49,23 @@ app.get("/user", (req, res) => {
     // let {} = req.body;
 
     // req.body(first, last, userId)
-    // if (userId) {
-    console.log("user is logged in");
-    db.getUserInfo(userId)
-        .then(({ rows }) => {
-            console.log("rows in GET /user", rows);
-            res.json({
-                success: true,
-                rows: rows[0],
+    if (userId) {
+        console.log("user is logged in");
+        db.getUserInfo(userId)
+            .then(({ rows }) => {
+                console.log("rows in GET /user", rows);
+                res.json({
+                    success: true,
+                    rows: rows[0],
+                });
+            })
+            .catch((err) => {
+                "err in GET /user with getPwByEmail()", err;
             });
-        })
-        .catch((err) => {
-            "err in GET /user with getPwByEmail()", err;
-        });
-    // } else {
-    //     //user is not logged in
-    //     res.redirect("/");
-    // }
+    } else {
+        //user is not logged in
+        res.redirect("/");
+    }
 });
 
 //////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////

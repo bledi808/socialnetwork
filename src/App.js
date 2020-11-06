@@ -1,7 +1,7 @@
 import React from "react";
-// import Logo from "./Logo"; // create logo component
+import Logo from "./Logo"; // create logo component
 import Uploader from "./Uploader";
-import Example from "./example";
+import ProfilePic from "./ProfilePic";
 import axios from "axios";
 
 export default class App extends React.Component {
@@ -68,15 +68,16 @@ export default class App extends React.Component {
                         My name is {this.state.first} {this.state.last}{" "}
                     </p>
                 </header>
+                <Logo />
                 <div>
-                    <Example
+                    <ProfilePic
                         first={this.state.first}
                         last={this.state.last}
                         imgUrl={this.state.imgUrl}
                     />
-                    <h2 onClick={() => this.toggleUploader()}>
+                    <h4 onClick={() => this.toggleUploader()}>
                         Changing state with a method toggleUploader
-                    </h2>
+                    </h4>
                     {this.state.uploaderIsVisible && (
                         <Uploader methodInApp={this.methodInApp} />
                     )}

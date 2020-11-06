@@ -1,7 +1,7 @@
 import React from "react";
-import Registration from "./registration";
-import Login from "./login";
-import Reset from "./reset";
+import Registration from "./Registration";
+import Login from "./Login";
+import Reset from "./Reset";
 import App from "./App";
 import { HashRouter, Route } from "react-router-dom";
 
