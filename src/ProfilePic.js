@@ -1,24 +1,29 @@
 import React from "react";
+import Profile from "./Profile";
 
-export default function ProfilePic(props) {
-    // alternatively you can destructure the props: export default function Example(first, last, imgUrl)
-    //we then render it like this <h1>My name is {first} {last}</h1>
-    console.log("props from parent - App component", props);
+export default function ProfilePic({ first, last, imgUrl, toggleUploader }) {
     return (
         <>
-            <h2>I am the ProfilePic</h2>
-            <p>
-                Name: {props.first} Surname: {props.last}
-            </p>
-            {/* links to profile image for user or default if no profile */}
-            {/* <div className="profile-container" onClick={props.toggleUploader()}> */}
             <div className="profile-container">
-                <img
-                    src={props.imgUrl || "/default.jpg"}
-                    alt={props.first + " " + props.first}
-                    className="profile-image"
-                />
+                <div className="profile-image-container">
+                    <img
+                        src={imgUrl || "/default.jpg"}
+                        alt={first + " " + last}
+                        className="profile-image"
+                        onClick={toggleUploader}
+                    />
+                </div>
+                <div>
+                    {first} {last}
+                </div>
             </div>
+            {/* <Profile
+                first={props.first}
+                last={props.last}
+                imgUrl={props.imgUrl}
+                // work out how to pass url of profile photo to grandchild Profile
+                profilePicUrl={props.imgUrl || "/default.jpg"}
+            /> */}
         </>
     );
 }

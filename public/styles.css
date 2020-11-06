@@ -1,11 +1,152 @@
-body {
-    background-color: whitesmoke;
-    font-family: "roboto", sans-serif;
+* {
+    box-sizing: border-box;
+    margin: 0;
 }
+
+body {
+    font-family: "roboto", sans-serif;
+    color: #383838;
+    background-color: whitesmoke;
+}
+
+/* LOGGED IN STATE */
+/* HEADER*/
+#app-header {
+    border-bottom: 2px tomato solid;
+    display: flex;
+    padding-bottom: 3px;
+    justify-content: space-between;
+    margin: 1%;
+}
+
+.logo-container {
+    height: 120px;
+    width: 100px;
+}
+.logo-image-container {
+    height: 100px;
+    width: 100px;
+}
+.logo-image {
+    height: 100%;
+    width: 100%;
+}
+
+.logo-image:hover {
+    filter: grayscale(100%);
+}
+
+.profile-container {
+    height: 120px;
+    width: 100px;
+    text-align: right;
+    cursor: pointer;
+}
+.profile-image-container {
+    height: 100px;
+    width: 100px;
+}
+
+.profile-image {
+    height: 100%;
+    width: 100%;
+    /* cursor: pointer; */
+}
+
+.profile-container:hover {
+    filter: blur(2px);
+}
+
+/* UPLOADER MODAL*/
+#upload-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.712);
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#upload-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 170px;
+    /* border-radius: 5px; */
+    background-color: whitesmoke;
+    z-index: 100;
+}
+#upload-modal-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 5%;
+    /* align-items: center; */
+    /* justify-items: space; */
+}
+
+#upload-modal-header {
+    /* border: 2px yellow solid; */
+    display: flex;
+    justify-content: space-between;
+}
+
+#upload-modal-title {
+    /* border: 2px blue solid; */
+    font-size: large;
+    padding: 8% 0;
+}
+
+#upload-modal-x {
+    /* border: 1px magenta solid; */
+    font-size: x-large;
+    color: dimgrey;
+    padding-right: 7px;
+    /* padding-top: 0px; */
+}
+
+#upload-modal-x:hover {
+    color: tomato;
+    cursor: pointer;
+}
+
+.button {
+    border-radius: 0;
+    border: none;
+    border: 1px solid #383838;
+    background-color: white;
+    font-family: inherit;
+    font-size: 90%;
+    cursor: pointer;
+    color: #383838;
+    width: 40%;
+}
+
+.button:hover {
+    background-color: #383838;
+    color: white;
+}
+
+#upload-title {
+    /* border: 1px red solid; */
+    padding: 10% 0 5% 0;
+    align-self: right;
+}
+#file {
+    /* border: 1px red solid; */
+    padding: 3% 0 8% 0;
+}
+/* LOGGED OUT STATE */
 
 #welcome-header {
     border: 2px #383838 solid;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,21 +226,4 @@ body {
     font-size: medium;
     /* color: royalblue; */
     text-shadow: 1px 1px 1px darkgrey;
-}
-
-.logo-container {
-    height: 100px;
-    width: 150px;
-}
-.logo-image {
-    height: 100%;
-    width: 100%;
-}
-.profile-container {
-    height: 100px;
-    width: 100px;
-}
-.profile-image {
-    height: 100%;
-    width: 100%;
 }
