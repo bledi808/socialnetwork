@@ -42,9 +42,6 @@ export default class Registration extends React.Component {
     }
 
     render() {
-        // console.log("this.state in after render()", this.state);
-        // console.log("this.state.error in after render()", this.state.error);
-
         return (
             <div className="main-container">
                 <p>Anti-socials unite! By giving us your details</p>

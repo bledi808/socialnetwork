@@ -16,6 +16,7 @@ export default class App extends React.Component {
         };
         //bind function
         this.methodInApp = this.methodInApp.bind(this);
+        this.updateBioInApp = this.updateBioInApp.bind(this);
     }
 
     componentDidMount() {
@@ -29,7 +30,9 @@ export default class App extends React.Component {
                         first: response.data.rows.first,
                         last: response.data.rows.last,
                         imgUrl: response.data.rows.url,
+                        bio: response.data.rows.bio,
                     });
+                    // console.log("this.state in App axios", this.state);
                 } else {
                     // this.state.error = true;
                     console.log(
@@ -53,6 +56,14 @@ export default class App extends React.Component {
         this.toggleUploader();
         // this.setState();
         this.setState({ imgUrl: arg });
+    }
+
+    updateBioInApp(arg) {
+        // this.setState({ bio: arg }),
+        this.setState({ bio: arg });
+        () => {
+            console.log("state in App after UpdateBioInApp", this.state);
+        };
     }
 
     render() {
@@ -80,7 +91,9 @@ export default class App extends React.Component {
                     first={this.state.first}
                     last={this.state.last}
                     imgUrl={this.state.imgUrl}
+                    bio={this.state.bio}
                     toggleUploader={() => this.toggleUploader()}
+                    updateBioInApp={this.updateBioInApp}
                 />
             </>
         );

@@ -42,9 +42,6 @@ export default class Uploader extends React.Component {
     }
 
     methodInUploader() {
-        // console.log(
-        //     "methodInUploader() clicked in Uploader > passing arg to methodInApp"
-        // );
         this.props.methodInApp(this.state.newImage);
     }
 

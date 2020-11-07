@@ -80,6 +80,10 @@ app.get("/user", (req, res) => {
             })
             .catch((err) => {
                 "err in GET /user with getPwByEmail()", err;
+                res.json({
+                    success: false,
+                    errorMsg: "Server error: Could not find user details",
+                });
             });
     } else {
         //user is not logged in
@@ -104,10 +108,36 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
                     "error in POST /upload with uploadProfilePic()",
                     err
                 );
+                res.json({
+                    success: false,
+                    errorMsg: "Server error: Could not upload profile picture",
+                });
             });
     } else {
-        res.json({ success: false });
+        res.json({
+            success: false,
+            errorMsg: "Please select a file",
+        });
     }
+});
+
+app.post("/bio", (req, res) => {
+    console.log("ACCESSED POST /bio route ");
+    const { userId } = req.session;
+    const { draftBio } = req.body;
+
+    db.updateBio(draftBio, userId)
+        .then(({ rows }) => {
+            console.log("POST /bio response", rows[0].bio);
+            res.json(rows[0].bio);
+        })
+        .catch((err) => {
+            console.log("error in POST /bio with uploadProfilePic()", err);
+            res.json({
+                success: false,
+                errorMsg: "Sever error: Unable to update bio succesfully",
+            });
+        });
 });
 
 //////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////
