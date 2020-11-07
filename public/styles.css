@@ -54,7 +54,8 @@ body {
 }
 
 .profile-container:hover {
-    filter: blur(2px);
+    /* filter: blur(2px); */
+    filter: grayscale(100%);
 }
 
 /* UPLOADER MODAL*/
@@ -175,7 +176,7 @@ body {
     /* border: 2px tomato solid; */
 }
 #bio {
-    border: 2px midnightblue solid;
+    border: 2px mediumblue solid;
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -191,6 +192,7 @@ body {
 #edit-button {
     width: 30%;
     height: 2em;
+    margin: 2px;
 }
 /* LOGGED OUT STATE */
 
@@ -257,17 +259,8 @@ body {
     padding: 2px 2% 0 2%;
     float: right;
 }
-#submit-reg:hover {
-    color: yellow;
-}
 #reg-actions {
     /* border: 1px green solid; */
     height: 2em;
     padding-top: 3%;
-}
-
-#already-reg {
-    font-size: medium;
-    /* color: royalblue; */
-    text-shadow: 1px 1px 1px darkgrey;
 }
