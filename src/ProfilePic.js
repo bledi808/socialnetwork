@@ -1,5 +1,5 @@
 import React from "react";
-import Profile from "./Profile";
+// import Profile from "./Profile";
 
 export default function ProfilePic({ first, last, imgUrl, toggleUploader }) {
     return (
@@ -17,13 +17,6 @@ export default function ProfilePic({ first, last, imgUrl, toggleUploader }) {
                     {first} {last}
                 </div>
             </div>
-            {/* <Profile
-                first={props.first}
-                last={props.last}
-                imgUrl={props.imgUrl}
-                // work out how to pass url of profile photo to grandchild Profile
-                profilePicUrl={props.imgUrl || "/default.jpg"}
-            /> */}
         </>
     );
 }

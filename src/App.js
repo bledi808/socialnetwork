@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "./Logo"; // create logo component
 import Uploader from "./Uploader";
 import ProfilePic from "./ProfilePic";
+import Profile from "./Profile";
 import axios from "./axios";
 
 export default class App extends React.Component {
@@ -11,8 +12,7 @@ export default class App extends React.Component {
             uploaderIsVisible: false,
             // first: "",
             // last: "",
-            // url: "",
-            // url: url,
+            // imgUrl: "",
         };
         //bind function
         this.methodInApp = this.methodInApp.bind(this);
@@ -76,6 +76,12 @@ export default class App extends React.Component {
                         />
                     )}
                 </div>
+                <Profile
+                    first={this.state.first}
+                    last={this.state.last}
+                    imgUrl={this.state.imgUrl}
+                    toggleUploader={() => this.toggleUploader()}
+                />
             </>
         );
     }

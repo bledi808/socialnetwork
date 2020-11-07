@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "./axios";
 
 export default class BioEditor extends Component {
     constructor(props) {
@@ -19,9 +20,15 @@ export default class BioEditor extends Component {
     render() {
         return (
             <>
-                <h1>I am the BioEditor comp</h1>
-                {this.state.editorIsVisible && <textarea />}
-                <button onClick={() => this.toggleEditor()}>
+                <p></p>
+                <div id="bio-textarea">
+                    {this.state.editorIsVisible && <textarea />}
+                </div>
+                <button
+                    className="button"
+                    id="edit-button"
+                    onClick={() => this.toggleEditor()}
+                >
                     Toggle Editor
                 </button>
             </>

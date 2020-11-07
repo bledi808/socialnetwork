@@ -66,11 +66,10 @@ app.use(function (req, res, next) {
 
 app.get("/user", (req, res) => {
     console.log("ACCESSED GET /user route ");
-    console.log("req.session at /welcome", req.body);
     console.log("req.body at /user", req.body);
     let { userId } = req.session;
     if (userId) {
-        console.log("user is logged in");
+        // console.log("user is logged in");
         db.getUserInfo(userId)
             .then(({ rows }) => {
                 console.log("rows in GET /user", rows);
