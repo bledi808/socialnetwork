@@ -184,15 +184,33 @@ body {
     justify-content: flex-end;
     /* margin: 5% 0 2% 0; */
 }
+
+#bio-text {
+    /* border: 1px tomato solid; */
+    /* width: 40px; */
+    /* height: 2em; */
+    text-align: justify;
+    margin: 5px 5px 0 5px;
+    /* padding: 1%; */
+    /* color: red; */
+}
+
 #bio-textarea {
     /* border: 2px tomato solid; */
     /* width: 40px; */
     /* height: 2em; */
+    margin: 5px 5px 0 5px;
 }
-#edit-button {
-    width: 30%;
-    height: 2em;
-    margin: 2px;
+#edit-bio-button {
+    width: 80px;
+    /* height: 2em; */
+    margin: 5px;
+}
+#save-bio-button {
+    width: 80px;
+    /* border: 2px tomato solid; */
+    /* height: 2em; */
+    margin: 5px;
 }
 /* LOGGED OUT STATE */
 
