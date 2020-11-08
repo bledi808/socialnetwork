@@ -176,7 +176,7 @@ body {
     /* border: 2px tomato solid; */
 }
 #bio {
-    /* border: 2px mediumblue solid; */
+    /* border: 1px mediumblue solid; */
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -189,16 +189,15 @@ body {
 #bio-text {
     /* border: 1px tomato solid; */
     /* width: 40px; */
-    /* height: 2em; */
+    height: 88px;
     text-align: justify;
-    margin-right: 5px;
+    margin-left: 2px;
+    padding: 2%;
 
     /* padding: 1%; */
     /* color: red; */
 }
 #bio-textarea-div {
-    margin-right: 5px;
-    /* border: 1px #383838 solid; */
     display: flex;
 }
 #bio-textarea {
@@ -209,6 +208,8 @@ body {
     font-family: "roboto", sans-serif;
     font-size: medium;
     padding: 2%;
+    text-align: justify;
+    color: darkcyan;
 }
 
 #edit-bio-button {
