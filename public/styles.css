@@ -234,7 +234,6 @@
     /* background-color: #fa7f72; */
     /* opacity: 0.5; *
     /* background-color: teal; */
-
     padding-top: 2%;
     /* box-shadow: 2px 2px 5px grey; */
 }
@@ -250,9 +249,11 @@ body {
     font-size: 30px;
     /* color: rgb(59, 79, 95); */
     color: #383838;
+    color: #f55e4d;
     width: 350px;
     text-align: right;
     /* border: 1px #383838 solid; */
+    text-shadow: 2px 2px 4px grey;
 }
 
 .main-container {
@@ -268,8 +269,14 @@ body {
     font-size: large;
     padding-top: 7%;
     margin-top: 3%;
-    background-color: #389393;
+    background-color: #389393d0;
     /* background-color: lightslategray; */
+}
+
+#register {
+    text-align: left;
+    /* border: 1px #383838 solid; */
+    width: 253px;
 }
 
 .form-layout {
@@ -306,12 +313,12 @@ body {
     /* margin: 10px; */
 }
 #submit-reg {
-    box-shadow: 4px 4px 3px 0px rgba(158, 158, 162, 0.5);
+    /* box-shadow: 4px 4px 3px 0px rgba(160, 160, 172, 0.5); */
     border: none;
     height: 1.5em;
-    background-color: rgb(51, 133, 51);
+    background-color: white;
     font-size: large;
-    color: white;
+    /* color: white; */
     /* margin-top: 2%; */
     padding: 2px 2% 0 2%;
     float: right;
