@@ -43,7 +43,7 @@ export default class Registration extends React.Component {
 
     render() {
         return (
-            <div className="main-container">
+            <div className="main-container" id="main-container-register">
                 <div id="register">
                     <p>Register with your details</p>
                 </div>
@@ -86,11 +86,18 @@ export default class Registration extends React.Component {
                             <button
                                 onClick={() => this.submit()}
                                 id="submit-reg"
+                                className="button"
                             >
                                 Register
                             </button>
                             <span id="already-reg">
-                                <Link to="/login">Log in</Link> instead
+                                <Link
+                                    to="/login"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <span id="link">Log in</span>
+                                </Link>{" "}
+                                instead
                             </span>
                         </div>
                     </div>

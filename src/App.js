@@ -68,7 +68,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <>
+            <div id="app-container">
                 <header id="app-header">
                     <Logo />
                     <ProfilePic
@@ -95,7 +95,7 @@ export default class App extends React.Component {
                     toggleUploader={() => this.toggleUploader()}
                     updateBioInApp={this.updateBioInApp}
                 />
-            </>
+            </div>
         );
     }
 }

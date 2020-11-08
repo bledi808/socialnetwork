@@ -45,38 +45,61 @@ export default class Login extends React.Component {
         // console.log("this.state in after render()", this.state);
         // console.log("this.state.error in after render()", this.state.error);
         return (
-            <div className="main-container">
-                <p>Anti-socials unite! By giving us your details</p>
+            <div className="main-container" id="main-container-login">
+                <div id="register">
+                    <p>Login in with your details</p>
+                </div>
                 {/* conditional rendering of error message */}
                 {this.state.error && (
                     <div>Opps somthing went wrong with registration</div>
                 )}
-                <input
-                    name="email"
-                    placeholder="Email"
-                    onChange={(e) => this.handleChange(e)}
-                    className="reg-input"
-                    autoComplete="off"
-                ></input>
-                <input
-                    name="password"
-                    placeholder="Password"
-                    type="password"
-                    onChange={(e) => this.handleChange(e)}
-                    className="reg-input"
-                    autoComplete="off"
-                ></input>
-                <div id="reg-actions">
-                    <button onClick={() => this.submit()} id="submit-reg">
-                        Log in
-                    </button>
-                    <span id="already-reg">
-                        <Link to="/">Register</Link> instead
-                    </span>
-                    <div>
-                        <span id="already-reg">
-                            <Link to="/reset">Forgot password</Link>!
-                        </span>
+                <div className="form-layout">
+                    <input
+                        name="email"
+                        placeholder="Email"
+                        onChange={(e) => this.handleChange(e)}
+                        className="reg-input"
+                        autoComplete="off"
+                    ></input>
+                    <input
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                        onChange={(e) => this.handleChange(e)}
+                        className="reg-input"
+                        autoComplete="off"
+                    ></input>
+                    <div id="reg-actions-login">
+                        <div>
+                            <div id="already-reg">
+                                <Link
+                                    to="/"
+                                    style={{
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    <span id="link">Register</span>
+                                </Link>{" "}
+                                instead
+                            </div>
+                            <div id="already-reg">
+                                <Link
+                                    to="/reset"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <span id="link">Reset</span>
+                                </Link>{" "}
+                                password
+                            </div>
+                        </div>
+                        <div id="already-reg">
+                            <button
+                                onClick={() => this.submit()}
+                                id="submit-reg"
+                            >
+                                Log in
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
