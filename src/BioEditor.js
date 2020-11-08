@@ -14,8 +14,8 @@ export default class BioEditor extends Component {
     toggleEditor() {
         this.setState({
             editorIsVisible: !this.state.editorIsVisible,
+            draftBio: this.props.bio,
         });
-        this.props.updateBioInApp(this.state.draftBio);
     }
 
     getCurrentDisplay() {
@@ -25,20 +25,36 @@ export default class BioEditor extends Component {
             // edit mode
             return (
                 <>
-                    <div
-                        id="bio-textarea"
-                        onChange={(e) => this.handleChange(e)}
-                    >
-                        <textarea />
+                    <div id="bio-textarea-div">
+                        <textarea
+                            id="bio-textarea"
+                            rows="4"
+                            cols="37"
+                            onChange={(e) => this.handleChange(e)}
+                            maxLength="200"
+                            value={this.state.draftBio}
+                        />
                     </div>
+
                     <div>
-                        <button
-                            className="button"
-                            id="save-bio-button"
-                            onClick={() => this.submit()}
-                        >
-                            Save
-                        </button>
+                        {!bio && (
+                            <button
+                                className="button"
+                                id="save-bio-button"
+                                onClick={() => this.submit()}
+                            >
+                                Save
+                            </button>
+                        )}
+                        {bio && (
+                            <button
+                                className="button"
+                                id="save-bio-button"
+                                onClick={() => this.submit()}
+                            >
+                                Update
+                            </button>
+                        )}
                     </div>
                 </>
             );
@@ -83,12 +99,20 @@ export default class BioEditor extends Component {
         );
     }
 
+    updateBio(arg) {
+        this.props.updateBioInApp(arg);
+    }
+
     submit() {
         console.log("BioEditor axios about to submit");
         axios
             .post("/bio", this.state)
-            .then(({}) => {
+            .then(({ data }) => {
                 // console.log("{data} in BioEditor submit() axios", data);
+                this.setState({
+                    draftBio: data,
+                });
+                this.updateBio(data);
                 this.toggleEditor();
             })
             .catch((err) => {
