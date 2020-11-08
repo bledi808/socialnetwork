@@ -44,7 +44,7 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div className="main-container">
-                <p>Anti-socials unite! By giving us your details</p>
+                <p>Register with your detials below</p>
                 {/* conditional rendering of error message */}
                 {this.state.error && (
                     <div>Opps somthing went wrong with registration</div>
