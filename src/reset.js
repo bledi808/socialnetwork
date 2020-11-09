@@ -25,54 +25,123 @@ export default class Reset extends React.Component {
         step = this.state.display;
         if (step == 1) {
             return (
-                <div>
-                    <p>Please enter the email address you registered with:</p>
-                    <input
-                        name="email"
-                        placeholder="Email"
-                        onChange={(e) => this.handleChange(e)}
-                        className="reg-input"
-                        autoComplete="off"
-                    ></input>
-                    <button onClick={() => this.next()} id="submit-reg">
-                        Next
-                    </button>
-                </div>
+                <>
+                    <div id="register">
+                        <p>Enter your email address:</p>
+                    </div>
+                    <div className="form-layout">
+                        <input
+                            name="email"
+                            placeholder="Email"
+                            onChange={(e) => this.handleChange(e)}
+                            className="reg-input"
+                            autoComplete="off"
+                        ></input>
+                        <div id="reg-actions">
+                            <div id="already-reg">
+                                <Link
+                                    to="/login"
+                                    style={{
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    <span className="link">❮ Back</span>
+                                </Link>{" "}
+                            </div>
+                            <div id="already-reg">
+                                <button
+                                    onClick={() => this.next()}
+                                    id="submit-reg"
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </>
             );
         } else if (step == 2) {
             console.log("SECOND step in the RESET process");
             return (
-                <div>
-                    <p>We found your email and sent you a code</p>
-                    <p>Please enter the code emailed to you:</p>
-                    <input
-                        name="code"
-                        placeholder="Code"
-                        onChange={(e) => this.handleChange(e)}
-                        className="reg-input"
-                        autoComplete="off"
-                    ></input>
-                    <p>Please enter a new password:</p>
-                    <input
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                        onChange={(e) => this.handleChange(e)}
-                        className="reg-input"
-                        autoComplete="off"
-                    ></input>
-                    <button onClick={() => this.submit()} id="submit-reg">
-                        Submit
-                    </button>
-                </div>
+                <>
+                    <div id="register">
+                        {/* <p>We found your email and sent you a code</p> */}
+                        <p>Enter the code emailed to you</p>
+                    </div>
+                    <div className="form-layout">
+                        <input
+                            name="code"
+                            placeholder="Code"
+                            onChange={(e) => this.handleChange(e)}
+                            className="reg-input"
+                            autoComplete="off"
+                        ></input>
+                        <p style={{ marginTop: "15px", marginBottom: "6px" }}>
+                            Enter a new password
+                        </p>
+                        <input
+                            style={{ textDecoration: "none" }}
+                            name="password"
+                            placeholder="Password"
+                            type="password"
+                            onChange={(e) => this.handleChange(e)}
+                            className="reg-input"
+                            autoComplete="off"
+                        ></input>
+                        <div id="reg-actions">
+                            <div id="already-reg">
+                                <Link
+                                    to="/login"
+                                    style={{
+                                        textDecoration: "none",
+                                        color: "blue",
+                                    }}
+                                >
+                                    <span className="link">❮ Back</span>
+                                </Link>
+                            </div>
+                            <div id="already-reg">
+                                <button
+                                    onClick={() => this.submit()}
+                                    id="submit-reg"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </>
             );
         } else {
             console.log("THIRD step in the RESET process");
             return (
-                <div>
-                    <p>Password reset successfully reset</p>
-                    <p>
-                        <Link to="/login">Log in</Link> with new password.
+                <div id="reset-success-div">
+                    <p
+                        style={{
+                            marginBottom: "16px",
+                            fontSize: "large",
+                            textAlign: "center",
+                        }}
+                    >
+                        Password successfully reset
+                    </p>
+                    <p
+                        style={{
+                            textDecoration: "none",
+                            fontSize: "large",
+                            textAlign: "center",
+                        }}
+                    >
+                        <Link
+                            to="/login"
+                            style={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            {" "}
+                            <span className="link">Log in</span>
+                        </Link>{" "}
+                        with new password
                     </p>
                 </div>
             );
@@ -131,6 +200,10 @@ export default class Reset extends React.Component {
     render() {
         // console.log("this.state in after render()", this.state);
         // console.log("this.state.error in after render()", this.state.error);
-        return <div className="main-container">{this.getCurrentDisplay()}</div>;
+        return (
+            <div className="main-container" id="main-container-reset">
+                {this.getCurrentDisplay()}
+            </div>
+        );
     }
 }

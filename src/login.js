@@ -69,36 +69,37 @@ export default class Login extends React.Component {
                         className="reg-input"
                         autoComplete="off"
                     ></input>
-                    <div id="reg-actions-login">
-                        <div>
-                            <div id="already-reg">
-                                <Link
-                                    to="/"
-                                    style={{
-                                        textDecoration: "none",
-                                    }}
-                                >
-                                    <span id="link">Register</span>
-                                </Link>{" "}
-                                instead
-                            </div>
-                            <div id="already-reg">
-                                <Link
-                                    to="/reset"
-                                    style={{ textDecoration: "none" }}
-                                >
-                                    <span id="link">Reset</span>
-                                </Link>{" "}
-                                password
-                            </div>
+                    <div id="reg-actions">
+                        <div id="already-reg">
+                            <Link
+                                to="/"
+                                style={{
+                                    textDecoration: "none",
+                                }}
+                            >
+                                <span className="link">Register</span>
+                            </Link>
                         </div>
                         <div id="already-reg">
                             <button
                                 onClick={() => this.submit()}
                                 id="submit-reg"
+                                // className="button"
                             >
                                 Log in
                             </button>
+                        </div>
+                    </div>
+                    <div id="reset-div">
+                        <div id="already-reg">
+                            <Link
+                                to="/reset"
+                                style={{ textDecoration: "none" }}
+                            >
+                                <span id="reset-link" className="link">
+                                    Forgot password?
+                                </span>
+                            </Link>{" "}
                         </div>
                     </div>
                 </div>

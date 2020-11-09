@@ -3,7 +3,9 @@ import Logo from "./Logo"; // create logo component
 import Uploader from "./Uploader";
 import ProfilePic from "./ProfilePic";
 import Profile from "./Profile";
+import OtherProfile from "./OtherProfile";
 import axios from "./axios";
+import { BrowserRouter, Route } from "react-router-dom";
 
 export default class App extends React.Component {
     constructor() {
@@ -68,34 +70,87 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div id="app-container">
-                <header id="app-header">
-                    <Logo />
-                    <ProfilePic
-                        first={this.state.first}
-                        last={this.state.last}
-                        imgUrl={this.state.imgUrl}
-                        toggleUploader={() => this.toggleUploader()}
-                    />
-                </header>
-                <div>
-                    {this.state.uploaderIsVisible && (
-                        <Uploader
-                            methodInApp={this.methodInApp}
+            <BrowserRouter>
+                <div id="app-container">
+                    <header id="app-header">
+                        <Logo />
+                        <ProfilePic
+                            first={this.state.first}
+                            last={this.state.last}
                             imgUrl={this.state.imgUrl}
-                            // toggleUploader={() => this.toggleUploader()}
+                            toggleUploader={() => this.toggleUploader()}
                         />
-                    )}
+                    </header>
+                    {/* Browser router to / Profile component */}
+                    <Route
+                        exact
+                        path="/"
+                        render={() => (
+                            <Profile
+                                first={this.state.first}
+                                last={this.state.last}
+                                imgUrl={this.state.imgUrl}
+                                bio={this.state.bio}
+                                toggleUploader={() => this.toggleUploader()}
+                                updateBioInApp={this.updateBioInApp}
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/user/:id"
+                        render={(props) => (
+                            <OtherProfile
+                                key={props.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
+                    <div>
+                        {this.state.uploaderIsVisible && (
+                            <Uploader
+                                methodInApp={this.methodInApp}
+                                imgUrl={this.state.imgUrl}
+                                // toggleUploader={() => this.toggleUploader()}
+                            />
+                        )}
+                    </div>
                 </div>
-                <Profile
-                    first={this.state.first}
-                    last={this.state.last}
-                    imgUrl={this.state.imgUrl}
-                    bio={this.state.bio}
-                    toggleUploader={() => this.toggleUploader()}
-                    updateBioInApp={this.updateBioInApp}
-                />
-            </div>
+            </BrowserRouter>
         );
     }
 }
+
+//     render() {
+//         return (
+//             <div id="app-container">
+//                 <header id="app-header">
+//                     <Logo />
+//                     <ProfilePic
+//                         first={this.state.first}
+//                         last={this.state.last}
+//                         imgUrl={this.state.imgUrl}
+//                         toggleUploader={() => this.toggleUploader()}
+//                     />
+//                 </header>
+//                 <div>
+//                     {this.state.uploaderIsVisible && (
+//                         <Uploader
+//                             methodInApp={this.methodInApp}
+//                             imgUrl={this.state.imgUrl}
+//                             // toggleUploader={() => this.toggleUploader()}
+//                         />
+//                     )}
+//                 </div>
+//                 <Profile
+//                     first={this.state.first}
+//                     last={this.state.last}
+//                     imgUrl={this.state.imgUrl}
+//                     bio={this.state.bio}
+//                     toggleUploader={() => this.toggleUploader()}
+//                     updateBioInApp={this.updateBioInApp}
+//                 />
+//             </div>
+//         );
+//     }
+// }

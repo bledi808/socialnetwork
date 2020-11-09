@@ -83,6 +83,14 @@ export default class Registration extends React.Component {
                             autoComplete="off"
                         ></input>
                         <div id="reg-actions">
+                            <span id="already-reg">
+                                <Link
+                                    to="/login"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <span className="link">Log in</span>
+                                </Link>
+                            </span>
                             <button
                                 onClick={() => this.submit()}
                                 id="submit-reg"
@@ -90,15 +98,6 @@ export default class Registration extends React.Component {
                             >
                                 Register
                             </button>
-                            <span id="already-reg">
-                                <Link
-                                    to="/login"
-                                    style={{ textDecoration: "none" }}
-                                >
-                                    <span id="link">Log in</span>
-                                </Link>{" "}
-                                instead
-                            </span>
                         </div>
                     </div>
                 </div>
