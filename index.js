@@ -79,7 +79,7 @@ app.get("/api/user", (req, res) => {
                 });
             })
             .catch((err) => {
-                "err in GET /user with getPwByEmail()", err;
+                "err in GET /user with getUserInfo()", err;
                 res.json({
                     success: false,
                     errorMsg: "Server error: Could not find user details",
@@ -121,11 +121,38 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     }
 });
 
-app.get("/user/:id", (req, res) => {
+app.get("/api/user/:id", (req, res) => {
     console.log("ACCESSED GET /user/:id route ");
     const { id } = req.params;
-    console.log("req.params in user/:id", req.params);
-    console.log("req.params in user/:id", req.params);
+    const { userId } = req.session;
+    console.log("{id} in user/:id:", id);
+
+    // if(user id exists in database) //add condition for non-existing users
+    db.getUserInfo(id)
+        .then(({ rows }) => {
+            if (rows[0]) {
+                console.log("rows[0] in GET /user/:id:", rows[0]);
+                res.json({
+                    success: true,
+                    userId: userId,
+                    rows: rows[0],
+                });
+            } else {
+                console.log("user does not exist");
+                res.json({
+                    success: false,
+                    errorMsg: "Server error: Could not find user details",
+                });
+            }
+        })
+        .catch((err) => {
+            "err in GET /user with getPwByEmail()", err;
+            res.json({
+                success: false,
+                errorMsg: "Server error: Could not find user details",
+            });
+        });
+
     // db.getImageById(id)
     //     .then(({ rows }) => {
     //         res.json(rows[0]);
