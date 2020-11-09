@@ -17,7 +17,7 @@ export default function Profile({
                     <h3>{first}'s Profile</h3>
                     <span>Edit your details here:</span>
                     <div id="picture-bio-layout">
-                        <div id="picture">
+                        <div id="picture" onClick={toggleUploader}>
                             <ProfilePic
                                 imgUrl={imgUrl}
                                 first={first}

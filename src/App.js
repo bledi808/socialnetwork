@@ -12,11 +12,8 @@ export default class App extends React.Component {
         super();
         this.state = {
             uploaderIsVisible: false,
-            // first: "",
-            // last: "",
-            // imgUrl: "",
         };
-        //bind function
+        //bind functions
         this.methodInApp = this.methodInApp.bind(this);
         this.updateBioInApp = this.updateBioInApp.bind(this);
     }
@@ -24,7 +21,7 @@ export default class App extends React.Component {
     componentDidMount() {
         // console.log("App just mounted");
         axios
-            .get("/user")
+            .get("api/user")
             .then((response) => {
                 // console.log("res in componentDidMount() App axios", response);
                 if (response.data.success) {

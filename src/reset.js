@@ -66,7 +66,7 @@ export default class Reset extends React.Component {
                 <>
                     <div id="register">
                         {/* <p>We found your email and sent you a code</p> */}
-                        <p>Enter the code emailed to you</p>
+                        <p>Enter code emailed to you</p>
                     </div>
                     <div className="form-layout">
                         <input
@@ -77,7 +77,7 @@ export default class Reset extends React.Component {
                             autoComplete="off"
                         ></input>
                         <p style={{ marginTop: "15px", marginBottom: "6px" }}>
-                            Enter a new password
+                            Enter new password
                         </p>
                         <input
                             style={{ textDecoration: "none" }}

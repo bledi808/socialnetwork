@@ -64,7 +64,7 @@ app.use(function (req, res, next) {
 
 //////////////////////////////////////// LOGGED IN ROUTES ///////////////////////////////////////
 
-app.get("/user", (req, res) => {
+app.get("/api/user", (req, res) => {
     console.log("ACCESSED GET /user route ");
     console.log("req.body at /user", req.body);
     let { userId } = req.session;
@@ -119,6 +119,20 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             errorMsg: "Please select a file",
         });
     }
+});
+
+app.get("/user/:id", (req, res) => {
+    console.log("ACCESSED GET /user/:id route ");
+    const { id } = req.params;
+    console.log("req.params in user/:id", req.params);
+    console.log("req.params in user/:id", req.params);
+    // db.getImageById(id)
+    //     .then(({ rows }) => {
+    //         res.json(rows[0]);
+    //     })
+    //     .catch((err) => {
+    //         console.log("error in GET /images with getImagesbyId()", err);
+    //     });
 });
 
 app.post("/bio", (req, res) => {
