@@ -351,3 +351,33 @@ body {
     margin-top: -7%;
     text-align: center;
 }
+
+/* Other Profile */
+#other-profile-container {
+    /* border: 1px solid blue; */
+    margin-top: 5%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    width: 305px;
+    justify-content: center;
+    align-items: center;
+}
+#other-profile {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5%;
+    /* border: 1px solid blue; */
+}
+#other-img-container {
+    height: 250px;
+    width: 250px;
+    text-align: right;
+    cursor: pointer;
+}
+
+#other-img {
+    height: 100%;
+    width: 100%;
+    /* cursor: pointer; */
+}

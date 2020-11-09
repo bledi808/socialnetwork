@@ -133,15 +133,15 @@ app.get("/api/user/:id", (req, res) => {
             if (rows[0]) {
                 console.log("rows[0] in GET /user/:id:", rows[0]);
                 res.json({
-                    success: true,
                     userId: userId,
                     rows: rows[0],
+                    success: true,
                 });
             } else {
                 console.log("user does not exist");
                 res.json({
+                    errorMsg: "User does not exist",
                     success: false,
-                    errorMsg: "Server error: Could not find user details",
                 });
             }
         })

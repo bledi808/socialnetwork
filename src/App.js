@@ -12,6 +12,7 @@ export default class App extends React.Component {
         super();
         this.state = {
             uploaderIsVisible: false,
+            // first: first,
         };
         //bind functions
         this.methodInApp = this.methodInApp.bind(this);
@@ -21,7 +22,7 @@ export default class App extends React.Component {
     componentDidMount() {
         // console.log("App just mounted");
         axios
-            .get("api/user")
+            .get("/api/user")
             .then((response) => {
                 // console.log("res in componentDidMount() App axios", response);
                 if (response.data.success) {
@@ -78,7 +79,6 @@ export default class App extends React.Component {
                             toggleUploader={() => this.toggleUploader()}
                         />
                     </header>
-                    {/* Browser router to / Profile component */}
                     <Route
                         exact
                         path="/"
@@ -117,37 +117,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-//     render() {
-//         return (
-//             <div id="app-container">
-//                 <header id="app-header">
-//                     <Logo />
-//                     <ProfilePic
-//                         first={this.state.first}
-//                         last={this.state.last}
-//                         imgUrl={this.state.imgUrl}
-//                         toggleUploader={() => this.toggleUploader()}
-//                     />
-//                 </header>
-//                 <div>
-//                     {this.state.uploaderIsVisible && (
-//                         <Uploader
-//                             methodInApp={this.methodInApp}
-//                             imgUrl={this.state.imgUrl}
-//                             // toggleUploader={() => this.toggleUploader()}
-//                         />
-//                     )}
-//                 </div>
-//                 <Profile
-//                     first={this.state.first}
-//                     last={this.state.last}
-//                     imgUrl={this.state.imgUrl}
-//                     bio={this.state.bio}
-//                     toggleUploader={() => this.toggleUploader()}
-//                     updateBioInApp={this.updateBioInApp}
-//                 />
-//             </div>
-//         );
-//     }
-// }
