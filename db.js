@@ -101,3 +101,15 @@ module.exports.findPeople = () => {
         `
     );
 };
+
+module.exports.findMatchingPeople = (str) => {
+    return db.query(
+        `
+        SELECT id, first, last, url FROM users
+        WHERE first ILIKE $1
+        ORDER BY first 
+        ASC LIMIT 5
+        `,
+        [str + "%"]
+    );
+};

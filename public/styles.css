@@ -57,6 +57,23 @@ body {
     /* cursor: pointer; */
 }
 
+.bigImage {
+    height: 120px;
+    width: 100px;
+    text-align: right;
+    cursor: pointer;
+}
+.profile-image-container {
+    height: 100px;
+    width: 100px;
+}
+
+.profile-image {
+    height: 100%;
+    width: 100%;
+    /* cursor: pointer; */
+}
+
 .profile-container:hover {
     /* filter: blur(2px); */
     filter: grayscale(100%);

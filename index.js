@@ -65,14 +65,12 @@ app.use(function (req, res, next) {
 //////////////////////////////////////// LOGGED IN ROUTES ///////////////////////////////////////
 
 app.get("/api/user", (req, res) => {
-    console.log("ACCESSED GET /user route ");
-    console.log("req.body at /user", req.body);
+    console.log("ACCESSED GET /api/user route ");
     let { userId } = req.session;
     if (userId) {
-        // console.log("user is logged in");
         db.getUserInfo(userId)
             .then(({ rows }) => {
-                console.log("rows in GET /user", rows);
+                // console.log("rows in GET /user", rows);
                 res.json({
                     success: true,
                     rows: rows[0],
@@ -186,6 +184,31 @@ app.get("/api/users", (req, res) => {
         })
         .catch((err) => {
             console.log("err in /api/:users with findPeople()", err);
+        });
+});
+
+app.get(`/api/users/:search`, (req, res) => {
+    console.log("ACCESSED GET /api/:search route");
+    console.log("req.params in api/search", req.params);
+    const { search } = req.params;
+
+    db.findMatchingPeople(search)
+        .then(({ rows }) => {
+            if (rows.length != 0) {
+                console.log("res from findMatchingPeople()", rows);
+                res.json({
+                    success: true,
+                    rows,
+                });
+            } else {
+                res.json({
+                    success: false,
+                    error: "No users found",
+                });
+            }
+        })
+        .catch((err) => {
+            console.log("err in /api/:users with findMatchingPeople()", err);
         });
 });
 
