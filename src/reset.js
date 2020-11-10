@@ -9,16 +9,14 @@ export default class Reset extends React.Component {
         this.state = {
             display: 1,
         };
-        // this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
-        // console.log("e.target.value", e.target.value);
         this.setState(
             {
                 [e.target.name]: e.target.value,
-            }
-            // () => console.log("this.state in the callback: ")
+            },
+            () => console.log("this.state in the callback: ")
         );
     }
     getCurrentDisplay(step) {
@@ -70,6 +68,7 @@ export default class Reset extends React.Component {
                     </div>
                     <div className="form-layout">
                         <input
+                            key="code"
                             name="code"
                             placeholder="Code"
                             onChange={(e) => this.handleChange(e)}
@@ -80,7 +79,6 @@ export default class Reset extends React.Component {
                             Enter new password
                         </p>
                         <input
-                            style={{ textDecoration: "none" }}
                             name="password"
                             placeholder="Password"
                             type="password"
@@ -150,22 +148,20 @@ export default class Reset extends React.Component {
 
     next() {
         console.log("Axios in next()");
-        // const me = this;
         axios
-            // .post("/reset/:${start}", this.state)
             .post("/reset/start", this.state)
             .then((response) => {
                 console.log("response in next() axios", response);
                 if (response.data.success) {
-                    console.log("successful response in reset/start axios");
-                    this.setState({ display: this.state.display + 1 });
-                    // console.log("this.state after response in axios", this.state);
+                    // console.log("successful response in reset/start axios");
+                    this.setState({
+                        display: this.state.display + 1,
+                        errorStart: false,
+                    });
                 } else {
-                    // this.state.error = true;
-                    console.log(
-                        "error with email submission in Password reset"
-                    );
-                    //here setStake{display:X} which can be used to conditionally render an error
+                    this.setState({
+                        errorStart: response.data.errorStart,
+                    });
                 }
             })
             .catch((err) => {
@@ -174,22 +170,20 @@ export default class Reset extends React.Component {
     }
     submit() {
         console.log("Axios in submit()");
-        // const me = this;
         axios
-            // .post("/reset/:${start}", this.state)
             .post("/reset/verify", this.state)
             .then((response) => {
                 console.log("response in submit() axios", response);
                 if (response.data.success) {
-                    console.log("successful response in reset/verify axios");
-                    this.setState({ display: this.state.display + 1 });
-                    // console.log("this.state after response in axios", this.state);
+                    // console.log("successful response in reset/verify axios");
+                    this.setState({
+                        display: this.state.display + 1,
+                        errorVerify: false,
+                    });
                 } else {
-                    // this.state.error = true;
-                    console.log(
-                        "error with email submission in Password reset"
-                    );
-                    //here setState{display:X} which can be used to conditionally render an error
+                    this.setState({
+                        errorVerify: response.data.errorVerify,
+                    });
                 }
             })
             .catch((err) => {
@@ -198,12 +192,18 @@ export default class Reset extends React.Component {
     }
 
     render() {
-        // console.log("this.state in after render()", this.state);
-        // console.log("this.state.error in after render()", this.state.error);
         return (
-            <div className="main-container" id="main-container-reset">
-                {this.getCurrentDisplay()}
-            </div>
+            <>
+                <div className="main-container" id="main-container-reset">
+                    {this.getCurrentDisplay()}
+                </div>
+                {this.state.errorStart && (
+                    <p className="error-msg">{this.state.errorStart}</p>
+                )}
+                {this.state.errorVerify && (
+                    <p className="error-msg">{this.state.errorVerify}</p>
+                )}
+            </>
         );
     }
 }

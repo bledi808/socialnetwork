@@ -274,38 +274,36 @@ app.post("/login", (req, res) => {
                         if (match) {
                             req.session.userId = rows[0].id;
                             res.json({ success: true });
-                            console.log(
-                                "server-side: login successful",
-                                rows[0]
-                            );
-                            console.log(
-                                "req.session.userId = rows[0].id",
-                                (req.session.userId = rows[0].id)
-                            );
                         } else {
-                            console.log("Incorrect email and/or password ");
-                            //conditionally render error message: "Incorrect email and/or password"
-                            // res.json({ success: false }); // confirm this should go here
-                            //render login page page again?
+                            console.log("Incorrect email and/or password");
+                            res.json({
+                                success: false,
+                                error:
+                                    "Incorrect credentials, please try again",
+                            });
                         }
                     })
                     .catch((err) => {
                         console.log("err in POST /login compare", err);
-                        //conditionally render error message: "Incorrect email and/or password"
-                        // res.json({ success: false }); // confirm this should go here
-                        //render login page again?
+                        res.json({
+                            success: false,
+                            error: "Incorrect credentials, please try again",
+                        });
                     });
             })
             .catch((err) => {
                 console.log("err in POST /login with getPwByEmail()", err);
-                //conditionally render error message: "Incorrect email and/or password "
-                // res.json({ success: false }); // confirm this should go here
-                //render login page again?
+                res.json({
+                    success: false,
+                    error: "Incorrect credentials, please try again",
+                });
             });
     } else {
         console.log("all input fields must be populated");
-        // res.json({ success: false }); // confirm this should go here
-        //render login page again?
+        res.json({
+            success: false,
+            error: "Incorrect credentials, please try again",
+        });
     }
 });
 
@@ -313,55 +311,50 @@ app.post("/reset/start", (req, res) => {
     console.log("ACCESSED POST /reset/start route ");
     const { email } = req.body;
 
-    if (email !== "") {
-        db.getPwByEmail(email)
-            .then(({ rows }) => {
-                if (rows.length === 1) {
-                    // generate random resetCode
-                    const resetCode = cryptoRandomString({
-                        length: 6,
-                    });
-                    // insert resetCode + email into database
-                    db.addResetCode(resetCode, email)
-                        .then(() => {
-                            // send Email to user containing the code
-                            let recipient = email;
-                            let message = `Please navigate back to our site and use the code ${resetCode} to reset you password`;
-                            let subject = `${resetCode}: Your Password Reset Code`;
-                            ses.sendEmail(recipient, message, subject)
-                                .then(() => {
-                                    res.json({
-                                        success: true,
-                                    });
-                                })
-                                .catch((err) => {
-                                    console.log(
-                                        "error in POST /reset/start with ses.sendEmail()",
-                                        err
-                                    );
+    db.getPwByEmail(email)
+        .then(({ rows }) => {
+            if (rows.length === 1) {
+                // generate random resetCode
+                const resetCode = cryptoRandomString({
+                    length: 6,
+                });
+                // insert resetCode + email into database
+                db.addResetCode(resetCode, email)
+                    .then(() => {
+                        // send Email to user containing the code
+                        let recipient = email;
+                        let message = `Please navigate back to our site and use the code ${resetCode} to reset you password`;
+                        let subject = `${resetCode}: Your Password Reset Code`;
+                        ses.sendEmail(recipient, message, subject)
+                            .then(() => {
+                                res.json({
+                                    success: true,
                                 });
-                            //send reponse to clientside
-                        })
-                        .catch((err) => {
-                            console.log(
-                                "error in POST /reset/start with addSecretCode()",
-                                err
-                            );
-                        });
-                } else {
-                    console.log("this email does not exist");
-                    // res.json({ error: true });// render error msg here
-                }
-            })
-            .catch((err) => {
-                console.log(
-                    "error in POST /reset/start with getPwByEmail()",
-                    err
-                );
-            });
-    } else {
-        console.log("email must be populated");
-    }
+                            })
+                            .catch((err) => {
+                                console.log(
+                                    "error in POST /reset/start with ses.sendEmail()",
+                                    err
+                                );
+                            });
+                    })
+                    .catch((err) => {
+                        console.log(
+                            "error in POST /reset/start with addSecretCode()",
+                            err
+                        );
+                    });
+            } else {
+                console.log("Please enter a valid email");
+                res.json({
+                    success: false,
+                    errorStart: "Please enter a valid email",
+                });
+            }
+        })
+        .catch((err) => {
+            console.log("error in POST /reset/start with getPwByEmail()", err);
+        });
 });
 
 app.post("/reset/verify", (req, res) => {
@@ -387,7 +380,11 @@ app.post("/reset/verify", (req, res) => {
                                         "error with updatePassword() in POST /reset/verify",
                                         err
                                     );
-                                    // res.json({ error: true }); // confirm this should go here
+                                    res.json({
+                                        success: false,
+                                        errorVerify:
+                                            "Unable to update password, please try again",
+                                    });
                                 });
                         })
                         .catch((err) => {
@@ -395,13 +392,13 @@ app.post("/reset/verify", (req, res) => {
                                 "error with hashingPw() in POST /register",
                                 err
                             );
-                            // res.json({ error: true }); // confirm this should go here
                         });
                 } else {
-                    console.log(
-                        "the code you entered does not match the one we emailed"
-                    );
-                    // res.json({ error: true }); // confirm this should go here
+                    res.json({
+                        success: false,
+                        errorVerify:
+                            "Unable to update password, please try again",
+                    });
                 }
             })
             .catch((err) => {
@@ -411,33 +408,11 @@ app.post("/reset/verify", (req, res) => {
                 );
             });
     } else {
-        console.log("code and email fields must be populated");
+        res.json({
+            success: false,
+            errorVerify: "Unable to update password, please try again",
+        });
     }
-
-    // If the code in the database and the one in the request body are the same, hash the password and update the user's row in the users table
-    // Send response indicating success or error
-
-    //     db.getPwByEmail(email)
-    //         .then(({ rows }) => {
-    //             console.log(
-    //                 " rows in POST /reset/start from getPwByEmail()",
-    //                 rows
-    //             );
-    //             if (rows.length === 1) {
-    //                 res.json({ success: true });
-    //             } else {
-    //                 res.json({ success: false });
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.log(
-    //                 "error in POST /reset/start with getPwByEmail()",
-    //                 err
-    //             );
-    //         });
-    // } else {
-    //     console.log("email must be populated");
-    // }
 });
 
 //it is important that the * route is the LAST GET route

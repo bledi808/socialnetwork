@@ -29,7 +29,6 @@ export default class Registration extends React.Component {
                 } else {
                     this.setState({
                         error: response.data.error,
-                        // here we can do conditional rendering for error message (i.e.have an error message appear based on error: true)
                     });
                 }
             })
