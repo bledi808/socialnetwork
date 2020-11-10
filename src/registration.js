@@ -10,7 +10,6 @@ export default class Registration extends React.Component {
     }
 
     handleChange(e) {
-        // console.log("e.target.value", e.target.value);
         this.setState(
             {
                 [e.target.name]: e.target.value,
@@ -26,12 +25,10 @@ export default class Registration extends React.Component {
             .then((response) => {
                 console.log("response in submit axios", response);
                 if (response.data.success) {
-                    // then we redirect the user to our social network
-                    location.replace("/"); // this does the redirect...
-                    // console.log("successssss");
+                    location.replace("/");
                 } else {
                     this.setState({
-                        error: true,
+                        error: response.data.error,
                         // here we can do conditional rendering for error message (i.e.have an error message appear based on error: true)
                     });
                 }
@@ -43,65 +40,66 @@ export default class Registration extends React.Component {
 
     render() {
         return (
-            <div className="main-container" id="main-container-register">
-                <div id="register">
-                    <p>Register with your details</p>
-                </div>
-                {/* conditional rendering of error message */}
-                {this.state.error && (
-                    <div>Opps somthing went wrong with registration</div>
-                )}
-                <div className="form-layout">
-                    <div className="input-fields">
-                        <input
-                            name="first"
-                            placeholder="Name"
-                            onChange={(e) => this.handleChange(e)} // instead of binding
-                            className="reg-input"
-                            autoComplete="off"
-                        ></input>
-                        <input
-                            name="last"
-                            placeholder="Surname"
-                            onChange={(e) => this.handleChange(e)}
-                            className="reg-input"
-                            autoComplete="off"
-                        ></input>
-                        <input
-                            name="email"
-                            placeholder="Email"
-                            onChange={(e) => this.handleChange(e)}
-                            className="reg-input"
-                            autoComplete="off"
-                        ></input>
-                        <input
-                            name="password"
-                            placeholder="Password"
-                            type="password"
-                            onChange={(e) => this.handleChange(e)}
-                            className="reg-input"
-                            autoComplete="off"
-                        ></input>
-                        <div id="reg-actions">
-                            <span id="already-reg">
-                                <Link
-                                    to="/login"
-                                    style={{ textDecoration: "none" }}
+            <>
+                <div className="main-container" id="main-container-register">
+                    <div id="register">
+                        <p>Register with your details</p>
+                    </div>
+                    <div className="form-layout">
+                        <div className="input-fields">
+                            <input
+                                name="first"
+                                placeholder="Name"
+                                onChange={(e) => this.handleChange(e)} // instead of binding
+                                className="reg-input"
+                                autoComplete="off"
+                            ></input>
+                            <input
+                                name="last"
+                                placeholder="Surname"
+                                onChange={(e) => this.handleChange(e)}
+                                className="reg-input"
+                                autoComplete="off"
+                            ></input>
+                            <input
+                                name="email"
+                                placeholder="Email"
+                                onChange={(e) => this.handleChange(e)}
+                                className="reg-input"
+                                autoComplete="off"
+                            ></input>
+                            <input
+                                name="password"
+                                placeholder="Password"
+                                type="password"
+                                onChange={(e) => this.handleChange(e)}
+                                className="reg-input"
+                                autoComplete="off"
+                            ></input>
+                            <div id="reg-actions">
+                                <span id="already-reg">
+                                    <Link
+                                        to="/login"
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <span className="link">Log in</span>
+                                    </Link>
+                                </span>
+                                <button
+                                    onClick={() => this.submit()}
+                                    id="submit-reg"
+                                    className="button"
                                 >
-                                    <span className="link">Log in</span>
-                                </Link>
-                            </span>
-                            <button
-                                onClick={() => this.submit()}
-                                id="submit-reg"
-                                className="button"
-                            >
-                                Register
-                            </button>
+                                    Register
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                {this.state.error && (
+                    <p className="error-msg">{this.state.error}</p>
+                )}
+            </>
         );
     }
 }

@@ -213,16 +213,16 @@ app.post("/register", (req, res) => {
                                     );
                                     req.session.userId = rows[0].id;
                                     res.json({ success: true });
-                                    // console.log("req.session.userId", req.session.userId);
-                                    // console.log("rows.id", rows[0].id);
                                 })
                                 .catch((err) => {
                                     console.log(
                                         "error with createUser() in POST /register",
                                         err
                                     );
-                                    //render registration page again
-                                    // res.json({ success: false }); // confirm this should go here
+                                    res.json({
+                                        success: false,
+                                        error: "Please fill in all fields",
+                                    });
                                 });
                         })
                         .catch((err) => {
@@ -230,24 +230,31 @@ app.post("/register", (req, res) => {
                                 "error with hasingPw() in POST /register",
                                 err
                             );
-                            //render registration page again
-                            // res.json({ success: false }); // confirm this should go here
+                            res.json({
+                                success: false,
+                                error: "Please fill in all fields",
+                            });
                         });
                 } else {
-                    console.log("email address is already being used");
-                    //render registration page again
-                    // res.json({ success: false }); // confirm this should go here
+                    res.json({
+                        success: false,
+                        error: "Email already in use, try another",
+                    });
                 }
             })
             .catch((err) => {
                 console.log("error in /register with getPwByEmail()", err);
+                res.json({
+                    success: false,
+                    error: "Error, please try again",
+                });
             });
-        //render registration page again
-        // res.json({ success: false }); // confirm this should go here
     } else {
         console.log("all input fields must be populated");
-        res.json({ success: false }); // confirm this should go here
-        //render registration page again???
+        res.json({
+            success: false,
+            error: "Please fill in all fields",
+        });
     }
 });
 
