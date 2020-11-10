@@ -121,6 +121,25 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     }
 });
 
+app.post("/bio", (req, res) => {
+    console.log("ACCESSED POST /bio route ");
+    const { userId } = req.session;
+    const { draftBio } = req.body;
+
+    db.updateBio(draftBio, userId)
+        .then(({ rows }) => {
+            console.log("POST /bio response", rows[0].bio);
+            res.json(rows[0].bio);
+        })
+        .catch((err) => {
+            console.log("error in POST /bio with uploadProfilePic()", err);
+            res.json({
+                success: false,
+                errorMsg: "Sever error: Unable to update bio succesfully",
+            });
+        });
+});
+
 app.get("/api/user/:id", (req, res) => {
     console.log("ACCESSED GET /user/:id route ");
     const { id } = req.params;
@@ -152,32 +171,21 @@ app.get("/api/user/:id", (req, res) => {
                 errorMsg: "Server error: Could not find user details",
             });
         });
-
-    // db.getImageById(id)
-    //     .then(({ rows }) => {
-    //         res.json(rows[0]);
-    //     })
-    //     .catch((err) => {
-    //         console.log("error in GET /images with getImagesbyId()", err);
-    //     });
 });
 
-app.post("/bio", (req, res) => {
-    console.log("ACCESSED POST /bio route ");
-    const { userId } = req.session;
-    const { draftBio } = req.body;
+app.get("/api/users", (req, res) => {
+    console.log("ACCESSED GET /api/users route");
 
-    db.updateBio(draftBio, userId)
+    db.findPeople()
         .then(({ rows }) => {
-            console.log("POST /bio response", rows[0].bio);
-            res.json(rows[0].bio);
+            console.log("res from findPeople()", rows);
+            res.json({
+                success: true,
+                rows,
+            });
         })
         .catch((err) => {
-            console.log("error in POST /bio with uploadProfilePic()", err);
-            res.json({
-                success: false,
-                errorMsg: "Sever error: Unable to update bio succesfully",
-            });
+            console.log("err in /api/:users with findPeople()", err);
         });
 });
 

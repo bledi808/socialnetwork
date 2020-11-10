@@ -4,6 +4,7 @@ import Uploader from "./Uploader";
 import ProfilePic from "./ProfilePic";
 import Profile from "./Profile";
 import OtherProfile from "./OtherProfile";
+import FindPeople from "./FindPeople";
 import axios from "./axios";
 import { BrowserRouter, Route } from "react-router-dom";
 
@@ -103,6 +104,7 @@ export default class App extends React.Component {
                             />
                         )}
                     />
+                    <Route path="/users" render={() => <FindPeople />} />
                     <div>
                         {this.state.uploaderIsVisible && (
                             <Uploader

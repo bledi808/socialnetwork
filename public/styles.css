@@ -249,6 +249,7 @@ body {
     font-size: 30px;
     color: #383838;
     color: #f55e4d;
+    /* color: #FA7F72; */
     width: 350px;
     text-align: right;
 }
@@ -380,4 +381,11 @@ body {
     height: 100%;
     width: 100%;
     /* cursor: pointer; */
+}
+
+.error-msg {
+    color: white;
+    font-size: large;
+    /* border: 1px solid whitesmoke; */
+    margin-top: 1%;
 }

@@ -90,3 +90,14 @@ module.exports.updateBio = (bio, userId) => {
         [bio, userId]
     );
 };
+
+//Find people - returns last 3 users to sign up
+module.exports.findPeople = () => {
+    return db.query(
+        `
+        SELECT id, first, last, url FROM users 
+        ORDER BY id 
+        DESC LIMIT 3
+        `
+    );
+};
