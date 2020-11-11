@@ -214,7 +214,6 @@ app.get(`/api/users/:search`, (req, res) => {
 
 app.get(`/api/friendStatus/:otherId`, (req, res) => {
     console.log("ACCESSED GET /api/friendStatus/:otherId route");
-    console.log("req.params in /api/friendStatus/:otherId", req.params);
     const { otherId } = req.params;
     const { userId } = req.session;
     db.checkFriendStatus(userId, otherId)
@@ -244,6 +243,71 @@ app.get(`/api/friendStatus/:otherId`, (req, res) => {
                 err
             );
         });
+});
+
+app.post(`/api/friendStatus/button`, (req, res) => {
+    console.log("ACCESSED POST /api/friendStatus/button route");
+    let { buttonText, otherId } = req.body;
+    let { userId } = req.session;
+    if (buttonText == "Send Friend Request") {
+        db.sendFriendRequest(userId, otherId)
+            .then(() => {
+                // console.log()
+                res.json({
+                    success: true,
+                    status: "Cancel Friend Request",
+                });
+            })
+            .catch((err) => {
+                console.log(
+                    "err in POST friendStatus/button with sendFriendRequest",
+                    err
+                );
+            });
+    } else if (buttonText == "Cancel Friend Request") {
+        db.cancelFriendRequest(userId, otherId)
+            .then(() => {
+                res.json({
+                    success: true,
+                    status: "Send Friend Request",
+                });
+            })
+            .catch((err) => {
+                console.log(
+                    "err in POST friendStatus/button with cancelFriendRequest",
+                    err
+                );
+            });
+    } else if (buttonText == "Accept Friend Request") {
+        db.acceptFriendRequest(userId, otherId)
+            .then(() => {
+                res.json({
+                    success: true,
+                    status: "Remove Friend",
+                });
+            })
+            .catch((err) => {
+                console.log(
+                    "err in POST friendStatus/button with acceptFriendRequest",
+                    err
+                );
+            });
+    } else if (buttonText == "Remove Friend") {
+        db.removeFriend(userId, otherId)
+            .then(() => {
+                // console.log()
+                res.json({
+                    success: true,
+                    status: "Send Friend Request",
+                });
+            })
+            .catch((err) => {
+                console.log(
+                    "err in POST friendStatus/button with removeFriend",
+                    err
+                );
+            });
+    }
 });
 
 app.get("/delete/image", (req, res) => {
@@ -338,7 +402,7 @@ app.post("/register", (req, res) => {
 
 app.post("/login", (req, res) => {
     console.log("ACCESSED  POST /login route");
-    console.log("req.body at POST /login", req.session);
+    // console.log("req.session at POST /login", req.session);
 
     const { email, password } = req.body;
     console.log("req.session at POST /login", req.session);

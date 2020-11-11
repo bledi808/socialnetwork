@@ -127,6 +127,50 @@ module.exports.checkFriendStatus = (userId, otherId) => {
     );
 };
 
+//INSERT - runs when you send a friend request
+module.exports.sendFriendRequest = (userId, otherId) => {
+    return db.query(
+        `
+        INSERT INTO friendships 
+        (sender_id, recipient_id) 
+        VALUES($1, $2);
+        `,
+        [userId, otherId]
+    );
+};
+
+module.exports.cancelFriendRequest = (userId, otherId) => {
+    return db.query(
+        `
+        DELETE FROM friendships 
+        WHERE sender_id=$1 AND recipient_id=$2
+        `,
+        [userId, otherId]
+    );
+};
+
+module.exports.acceptFriendRequest = (userId, otherId) => {
+    return db.query(
+        `
+        UPDATE friendships 
+        SET accepted=true
+        WHERE sender_id=$2 AND recipient_id=$1
+        `,
+        [userId, otherId]
+    );
+};
+
+module.exports.removeFriend = (userId, otherId) => {
+    return db.query(
+        `
+        DELETE FROM friendships 
+        WHERE sender_id=$1 AND recipient_id=$2 
+        OR sender_id=$2 AND recipient_id=$1 
+        `,
+        [userId, otherId]
+    );
+};
+
 // delete profile image
 module.exports.deleteImage = (userId) => {
     return db.query(
