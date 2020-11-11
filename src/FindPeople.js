@@ -61,15 +61,24 @@ export default function FindPeople() {
                         <div
                             key={user.id}
                             className="profile-container"
-                            style={{ marginBottom: "10%" }}
+                            style={{ margin: "10%" }}
                         >
-                            <Link to={`/user/${user.id}`}>
+                            <Link
+                                to={`/user/${user.id}`}
+                                style={{
+                                    textDecoration: "none",
+                                }}
+                            >
                                 <div id="profile-image-container">
                                     <img
                                         className="profile-image"
                                         src={user.url || "/default.jpg"}
                                     />
-                                    <p>
+                                    <p
+                                        style={{
+                                            color: "blue",
+                                        }}
+                                    >
                                         {user.first} {user.last}
                                     </p>
                                 </div>

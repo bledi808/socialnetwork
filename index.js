@@ -218,7 +218,7 @@ app.get(`/api/friendStatus/:otherId`, (req, res) => {
     const { userId } = req.session;
     db.checkFriendStatus(userId, otherId)
         .then(({ rows }) => {
-            console.log("friendship status rows", rows);
+            // console.log("friendship status rows", rows);
             if (rows.length == 0) {
                 res.json({
                     status: "Send Friend Request",

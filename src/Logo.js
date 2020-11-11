@@ -12,7 +12,13 @@ export default function Logo() {
                         className="logo-image"
                     />
                 </div>
-                <div>The Network</div>
+                <div
+                    style={{
+                        color: "midnightblue",
+                    }}
+                >
+                    The Network
+                </div>
             </div>
         </>
     );

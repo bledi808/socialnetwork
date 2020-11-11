@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
 import axios from "./axios";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 export default class App extends React.Component {
     constructor() {
@@ -91,7 +91,14 @@ export default class App extends React.Component {
             <BrowserRouter>
                 <div id="app-container">
                     <header id="app-header">
-                        <Logo />
+                        <Link
+                            to="/"
+                            style={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            <Logo />
+                        </Link>
                         <button
                             onClick={() => this.logOut()}
                             // id="submit-reg"
@@ -100,6 +107,16 @@ export default class App extends React.Component {
                         >
                             Log out
                         </button>
+                        <Link
+                            to="/users"
+                            style={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            <button className="button" id="log-out-button">
+                                Search
+                            </button>
+                        </Link>
                         <ProfilePic
                             first={this.state.first}
                             last={this.state.last}
