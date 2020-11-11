@@ -9,13 +9,9 @@ export default class Uploader extends React.Component {
         };
     }
 
-    componentDidMount() {
-        // console.log("Uploader just mounted");
-        // console.log("this.props in Uploader", this.props); // props include the methodInApp from App and ImgUrl
-    }
+    componentDidMount() {}
 
     handleChange(e) {
-        // console.log("e.target.files[0]", e.target.files[0]);
         this.setState({
             [e.target.name]: e.target.files[0],
             newImage: e.target.files[0].name,
@@ -43,6 +39,21 @@ export default class Uploader extends React.Component {
 
     methodInUploader() {
         this.props.methodInApp(this.state.newImage);
+    }
+
+    deleteImage() {
+        axios
+            .get("/delete/image")
+            .then((response) => {
+                console.log("response.data in deleteImage()", response);
+                this.setState({
+                    newImage: "",
+                });
+                this.methodInUploader();
+            })
+            .catch(function (err) {
+                console.log("error in axios POST /upload", err);
+            });
     }
 
     render() {
@@ -74,12 +85,20 @@ export default class Uploader extends React.Component {
                                 placeholder="image/*"
                                 className="input-file"
                             />
-                            <button
-                                onClick={() => this.uploadImage()}
-                                className="button"
-                            >
-                                Upload image
-                            </button>
+                            <div id="uploader-buttons-div">
+                                <button
+                                    onClick={() => this.uploadImage()}
+                                    className="button"
+                                >
+                                    Upload image
+                                </button>
+                                <button
+                                    onClick={() => this.deleteImage()}
+                                    className="button"
+                                >
+                                    Remove image
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

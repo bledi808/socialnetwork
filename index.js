@@ -212,6 +212,19 @@ app.get(`/api/users/:search`, (req, res) => {
         });
 });
 
+app.get("/delete/image", (req, res) => {
+    console.log("ACCESSED POST /delete/image route");
+    const { userId } = req.session;
+    db.deleteImage(userId)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((err) => {
+            console.log("error in /delete/image with deleteImage()", err);
+            res.json({ success: false, error: "Image could not be removed" });
+        });
+});
+
 //////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////
 
 app.get("/welcome", (req, res) => {
@@ -444,6 +457,29 @@ app.post("/reset/verify", (req, res) => {
             errorVerify: "Unable to update password, please try again",
         });
     }
+});
+
+app.get("/api/logout", (req, res) => {
+    req.session = null;
+    res.redirect("*");
+});
+
+app.get("/api/delete/account", (req, res) => {
+    console.log("ACCESSED POST /delete/account route");
+    const { userId } = req.session;
+    db.deleteAccount(userId)
+        .then(() => {
+            // res.json({ success: true });
+            req.session = null;
+            res.redirect("*");
+        })
+        .catch((err) => {
+            console.log("error in /delete/image with deleteAccount()", err);
+            res.json({
+                success: false,
+                error: "Account could not be , try again",
+            });
+        });
 });
 
 //it is important that the * route is the LAST GET route

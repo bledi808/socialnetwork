@@ -113,3 +113,26 @@ module.exports.findMatchingPeople = (str) => {
         [str + "%"]
     );
 };
+
+// delete profile image
+module.exports.deleteImage = (userId) => {
+    return db.query(
+        `
+        UPDATE users
+        SET url = null
+        WHERE id=$1
+        `,
+        [userId]
+    );
+};
+
+// delete account
+module.exports.deleteAccount = (userId) => {
+    return db.query(
+        `
+        DELETE FROM users
+        WHERE id=$1
+        `,
+        [userId]
+    );
+};

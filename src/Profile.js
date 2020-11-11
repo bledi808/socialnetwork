@@ -1,6 +1,8 @@
 import React from "react";
 import ProfilePic from "./ProfilePic";
 import BioEditor from "./BioEditor";
+// import { deleteAccount } from "../db";
+import axios from "./axios";
 
 export default function Profile({
     first,
@@ -9,6 +11,7 @@ export default function Profile({
     toggleUploader,
     bio,
     updateBioInApp,
+    deleteAccount,
 }) {
     return (
         <>
@@ -30,6 +33,7 @@ export default function Profile({
                             <BioEditor
                                 bio={bio}
                                 updateBioInApp={updateBioInApp}
+                                deleteAccount={deleteAccount}
                             />
                         </div>
                     </div>

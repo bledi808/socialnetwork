@@ -63,25 +63,42 @@ export default class BioEditor extends Component {
                 //display mode; bio exists in database
                 <>
                     <span id="bio-text">{this.props.bio}</span>
+                    <div id="bio-buttons-div">
+                        <button
+                            onClick={this.props.deleteAccount}
+                            id="delete-account-button"
+                            className="button"
+                        >
+                            Delete Account
+                        </button>
+                        <button
+                            className="button"
+                            id="edit-bio-button"
+                            onClick={() => this.toggleEditor()}
+                        >
+                            {" "}
+                            Edit Bio
+                        </button>
+                    </div>
+                </>
+            );
+        } else {
+            // display mode; no bio to display
+            return (
+                <div id="bio-buttons-div">
+                    <button
+                        onClick={this.props.deleteAccount}
+                        id="delete-account-button"
+                        className="button"
+                    >
+                        Delete Account
+                    </button>
                     <button
                         className="button"
                         id="edit-bio-button"
                         onClick={() => this.toggleEditor()}
                     >
                         {" "}
-                        Edit Bio
-                    </button>
-                </>
-            );
-        } else {
-            // display mode; no bio to display
-            return (
-                <div>
-                    <button
-                        className="button"
-                        id="edit-bio-button"
-                        onClick={() => this.toggleEditor()}
-                    >
                         Add Bio
                     </button>
                 </div>

@@ -18,6 +18,7 @@ export default class App extends React.Component {
         //bind functions
         this.methodInApp = this.methodInApp.bind(this);
         this.updateBioInApp = this.updateBioInApp.bind(this);
+        // this.deleteAccount = this.deleteAccount.bind(this);
     }
 
     componentDidMount() {
@@ -66,6 +67,24 @@ export default class App extends React.Component {
             console.log("state in App after UpdateBioInApp", this.state);
         };
     }
+    logOut() {
+        console.log("logout clicked");
+        axios.get("/api/logout").then(() => {
+            location.replace("/welcome#/login");
+        });
+    }
+
+    deleteAccount() {
+        console.log("delete Acct clicked");
+        axios
+            .get("/api/delete/account")
+            .then(() => {
+                location.replace("/");
+            })
+            .catch(function (err) {
+                console.log("error in axios POST /upload", err);
+            });
+    }
 
     render() {
         return (
@@ -73,6 +92,14 @@ export default class App extends React.Component {
                 <div id="app-container">
                     <header id="app-header">
                         <Logo />
+                        <button
+                            onClick={() => this.logOut()}
+                            // id="submit-reg"
+                            id="log-out-button"
+                            className="button"
+                        >
+                            Log out
+                        </button>
                         <ProfilePic
                             first={this.state.first}
                             last={this.state.last}
@@ -91,6 +118,7 @@ export default class App extends React.Component {
                                 bio={this.state.bio}
                                 toggleUploader={() => this.toggleUploader()}
                                 updateBioInApp={this.updateBioInApp}
+                                deleteAccount={this.deleteAccount}
                             />
                         )}
                     />
