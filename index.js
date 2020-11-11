@@ -212,6 +212,40 @@ app.get(`/api/users/:search`, (req, res) => {
         });
 });
 
+app.get(`/api/friendStatus/:otherId`, (req, res) => {
+    console.log("ACCESSED GET /api/friendStatus/:otherId route");
+    console.log("req.params in /api/friendStatus/:otherId", req.params);
+    const { otherId } = req.params;
+    const { userId } = req.session;
+    db.checkFriendStatus(userId, otherId)
+        .then(({ rows }) => {
+            console.log("friendship status rows", rows);
+            if (rows.length == 0) {
+                res.json({
+                    status: "Send Friend Request",
+                });
+            } else if (!rows[0].accepted && rows[0].sender_id == userId) {
+                res.json({
+                    status: "Cancel Friend Request",
+                });
+            } else if (!rows[0].accepted && rows[0].sender_id == otherId) {
+                res.json({
+                    status: "Accept Friend Request",
+                });
+            } else if (rows[0].accepted) {
+                res.json({
+                    status: "Remove Friend",
+                });
+            }
+        })
+        .catch((err) => {
+            console.log(
+                "err in /api/friendStatus/:otherId with checkFriendStatus",
+                err
+            );
+        });
+});
+
 app.get("/delete/image", (req, res) => {
     console.log("ACCESSED POST /delete/image route");
     const { userId } = req.session;

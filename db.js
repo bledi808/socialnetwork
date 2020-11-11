@@ -102,6 +102,7 @@ module.exports.findPeople = () => {
     );
 };
 
+//Find people matching serach query text
 module.exports.findMatchingPeople = (str) => {
     return db.query(
         `
@@ -111,6 +112,18 @@ module.exports.findMatchingPeople = (str) => {
         ASC LIMIT 5
         `,
         [str + "%"]
+    );
+};
+
+//check friendship status
+module.exports.checkFriendStatus = (userId, otherId) => {
+    return db.query(
+        `
+        SELECT * FROM friendships
+        WHERE (recipient_id = $1 AND sender_id = $2)
+        OR (recipient_id = $2 AND sender_id = $1)
+        `,
+        [userId, otherId]
     );
 };
 
