@@ -22,13 +22,11 @@ DROP TABLE IF EXISTS friendships CASCADE;
 
    CREATE TABLE friendships(
    id SERIAL PRIMARY KEY,
-   sender_id INT REFERENCES users(id) NOT NULL,
-   recipient_id INT REFERENCES users(id) NOT NULL,
+   sender_id INT REFERENCES users(id) ON DELETE CASCADE,
+   recipient_id INT REFERENCES users(id) ON DELETE CASCADE,
    accepted BOOLEAN DEFAULT false
  );
 
-INSERT INTO friendships (sender_id, recipient_id) VALUES(2,1);
--- //pending friendship
 
 
 
