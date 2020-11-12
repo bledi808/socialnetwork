@@ -212,101 +212,71 @@ app.get(`/api/users/:search`, (req, res) => {
         });
 });
 
-app.get(`/api/friendStatus/:otherId`, (req, res) => {
+app.get(`/api/friendStatus/:otherId`, async (req, res) => {
     console.log("ACCESSED GET /api/friendStatus/:otherId route");
     const { otherId } = req.params;
     const { userId } = req.session;
-    db.checkFriendStatus(userId, otherId)
-        .then(({ rows }) => {
-            // console.log("friendship status rows", rows);
-            if (rows.length == 0) {
-                res.json({
-                    status: "Send Friend Request",
-                });
-            } else if (!rows[0].accepted && rows[0].sender_id == userId) {
-                res.json({
-                    status: "Cancel Friend Request",
-                });
-            } else if (!rows[0].accepted && rows[0].sender_id == otherId) {
-                res.json({
-                    status: "Accept Friend Request",
-                });
-            } else if (rows[0].accepted) {
-                res.json({
-                    status: "Remove Friend",
-                });
-            }
-        })
-        .catch((err) => {
-            console.log(
-                "err in /api/friendStatus/:otherId with checkFriendStatus",
-                err
-            );
-        });
+
+    try {
+        let { rows } = await db.checkFriendStatus(userId, otherId);
+        if (rows.length == 0) {
+            res.json({
+                status: "Send Friend Request",
+            });
+        } else if (!rows[0].accepted && rows[0].sender_id == userId) {
+            res.json({
+                status: "Cancel Friend Request",
+            });
+        } else if (!rows[0].accepted && rows[0].sender_id == otherId) {
+            res.json({
+                status: "Accept Friend Request",
+            });
+        } else if (rows[0].accepted) {
+            res.json({
+                status: "Remove Friend",
+            });
+        }
+    } catch (err) {
+        console.log(
+            "err in /api/friendStatus/:otherId with checkFriendStatus",
+            err
+        );
+    }
 });
 
-app.post(`/api/friendStatus/button`, (req, res) => {
+app.post(`/api/friendStatus/button`, async (req, res) => {
     console.log("ACCESSED POST /api/friendStatus/button route");
     let { buttonText, otherId } = req.body;
     let { userId } = req.session;
+
     if (buttonText == "Send Friend Request") {
-        db.sendFriendRequest(userId, otherId)
-            .then(() => {
-                // console.log()
-                res.json({
-                    success: true,
-                    status: "Cancel Friend Request",
-                });
-            })
-            .catch((err) => {
-                console.log(
-                    "err in POST friendStatus/button with sendFriendRequest",
-                    err
-                );
-            });
+        try {
+            await db.sendFriendRequest(userId, otherId);
+            res.json({ status: "Cancel Friend Request" });
+        } catch (err) {
+            console.log("err in POST .../button with sendFriendRequest", err);
+        }
     } else if (buttonText == "Cancel Friend Request") {
-        db.cancelFriendRequest(userId, otherId)
-            .then(() => {
-                res.json({
-                    success: true,
-                    status: "Send Friend Request",
-                });
-            })
-            .catch((err) => {
-                console.log(
-                    "err in POST friendStatus/button with cancelFriendRequest",
-                    err
-                );
-            });
+        try {
+            await db.cancelFriendRequest(userId, otherId);
+            res.json({ status: "Send Friend Request" });
+        } catch (err) {
+            console.log("err in POST .../button with cancelFriendRequest", err);
+        }
     } else if (buttonText == "Accept Friend Request") {
-        db.acceptFriendRequest(userId, otherId)
-            .then(() => {
-                res.json({
-                    success: true,
-                    status: "Remove Friend",
-                });
-            })
-            .catch((err) => {
-                console.log(
-                    "err in POST friendStatus/button with acceptFriendRequest",
-                    err
-                );
-            });
+        try {
+            await db.acceptFriendRequest(userId, otherId);
+            res.json({ status: "Remove Friend" });
+        } catch (err) {
+            console.log("err in POST .../button with acceptFriendRequest", err);
+        }
     } else if (buttonText == "Remove Friend") {
-        db.removeFriend(userId, otherId)
-            .then(() => {
-                // console.log()
-                res.json({
-                    success: true,
-                    status: "Send Friend Request",
-                });
-            })
-            .catch((err) => {
-                console.log(
-                    "err in POST friendStatus/button with removeFriend",
-                    err
-                );
-            });
+        try {
+            await db.removeFriend(userId, otherId);
+            res.json({ status: "Send Friend Request" });
+        } catch (err) {
+            console.log("err in POST .../button with removeFriend", err);
+        }
     }
 });
 

@@ -11,17 +11,18 @@ export default function FindPeople() {
 
     useEffect(() => {
         console.log("useEffect 1 is running");
-        axios.get("/api/users").then(({ data }) => {
-            console.log("data in userEffect() 1", data);
-            setUsers(data.rows);
-        });
+        async () => {
+            try {
+                let { data } = await axios.get("/api/users");
+                setUsers(data.rows);
+            } catch (err) {
+                console.log("err in useEffect() axios /api/users", err);
+            }
+        };
     }, []);
-
-    //
 
     useEffect(() => {
         console.log("useEffect 2 is running");
-
         let abort;
         axios.get(`/api/users/${search}`).then(({ data }) => {
             console.log("data in userEffect() 2", data);
