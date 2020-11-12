@@ -12,7 +12,7 @@ export default function Profile({
     bio,
     updateBioInApp,
     deleteAccount,
-    imgClass,
+    profileImgClass,
 }) {
     return (
         <>
@@ -22,7 +22,7 @@ export default function Profile({
                     <span>Edit your details here:</span>
                     <div id="picture-bio-layout">
                         <div
-                            id="big-picture-container"
+                            id="profile-image-container"
                             onClick={toggleUploader}
                         >
                             <ProfilePic

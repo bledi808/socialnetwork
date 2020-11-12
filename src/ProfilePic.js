@@ -15,7 +15,6 @@ export default function ProfilePic({
 
     return (
         <>
-            {/* <div className="profile-container"> */}
             <div className={imgClass}>
                 <img
                     src={imgUrl || "/default.jpg"}
@@ -27,7 +26,6 @@ export default function ProfilePic({
             <div>
                 {first} {last}
             </div>
-            {/* </div> */}
         </>
     );
 }

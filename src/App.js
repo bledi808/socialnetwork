@@ -15,13 +15,10 @@ export default class App extends React.Component {
             uploaderIsVisible: false,
             headerImgClass: "header-image-container",
             profileImgClass: "big-image-container",
-
-            // first: first,
         };
         //bind functions
         this.methodInApp = this.methodInApp.bind(this);
         this.updateBioInApp = this.updateBioInApp.bind(this);
-        // this.deleteAccount = this.deleteAccount.bind(this);
     }
 
     componentDidMount() {
@@ -139,7 +136,7 @@ export default class App extends React.Component {
                                 last={this.state.last}
                                 imgUrl={this.state.imgUrl}
                                 bio={this.state.bio}
-                                imgClass={this.state.profileImgClass}
+                                profileImgClass={this.state.profileImgClass}
                                 toggleUploader={() => this.toggleUploader()}
                                 updateBioInApp={this.updateBioInApp}
                                 deleteAccount={this.deleteAccount}
