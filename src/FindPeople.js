@@ -42,50 +42,48 @@ export default function FindPeople() {
 
     return (
         <>
-            <div
-                id="search-users"
-                id="other-profile-container"
-                style={{ marginTop: "1%" }}
-            >
-                <input
-                    className="reg-input"
-                    autoComplete="off"
-                    placeholder="Search People"
-                    onChange={(e) => setSearch(e.target.value)}
-                    defaultValue={search}
-                ></input>
-                {error && <p>{error}</p>}
-            </div>
-            <div id="other-profile-container" style={{ marginTop: "1%" }}>
-                {users &&
-                    users.map((user) => (
-                        <div
-                            key={user.id}
-                            className="profile-container"
-                            style={{ margin: "10%" }}
-                        >
-                            <Link
-                                to={`/user/${user.id}`}
-                                style={{
-                                    textDecoration: "none",
-                                }}
+            <div id="profile">
+                <div id="search-users">
+                    <input
+                        className="reg-input"
+                        autoComplete="off"
+                        placeholder="Search People"
+                        onChange={(e) => setSearch(e.target.value)}
+                        defaultValue={search}
+                    ></input>
+                    {error && <p>{error}</p>}
+                </div>
+                <div id="other-profile-container" style={{ marginTop: "1%" }}>
+                    {users &&
+                        users.map((user) => (
+                            <div
+                                key={user.id}
+                                className="profile-container"
+                                style={{ margin: "10%" }}
                             >
-                                <div id="profile-image-container">
-                                    <img
-                                        className="profile-image"
-                                        src={user.url || "/default.jpg"}
-                                    />
-                                    <p
-                                        style={{
-                                            color: "blue",
-                                        }}
-                                    >
-                                        {user.first} {user.last}
-                                    </p>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
+                                <Link
+                                    to={`/user/${user.id}`}
+                                    style={{
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    <div id="profile-image-container">
+                                        <img
+                                            className="profile-image"
+                                            src={user.url || "/default.jpg"}
+                                        />
+                                        <p
+                                            style={{
+                                                color: "blue",
+                                            }}
+                                        >
+                                            {user.first} {user.last}
+                                        </p>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                </div>
             </div>
         </>
     );

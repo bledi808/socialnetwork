@@ -5,6 +5,7 @@ import ProfilePic from "./ProfilePic";
 import Profile from "./Profile";
 import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
+import NavBar from "./NavBar";
 import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -26,7 +27,6 @@ export default class App extends React.Component {
         axios
             .get("/api/user")
             .then((response) => {
-                // console.log("res in componentDidMount() App axios", response);
                 if (response.data.success) {
                     this.setState({
                         first: response.data.rows.first,
@@ -34,13 +34,10 @@ export default class App extends React.Component {
                         imgUrl: response.data.rows.url,
                         bio: response.data.rows.bio,
                     });
-                    // console.log("this.state in App axios", this.state);
                 } else {
-                    // this.state.error = true;
                     console.log(
                         "error with email submission in Password reset"
                     );
-                    //here setState{display:X} which can be used to conditionally render an error
                 }
             })
             .catch((err) => {
@@ -56,26 +53,24 @@ export default class App extends React.Component {
 
     methodInApp(arg) {
         this.toggleUploader();
-        // this.setState();
         this.setState({ imgUrl: arg });
     }
 
     updateBioInApp(arg) {
-        // this.setState({ bio: arg }),
         this.setState({ bio: arg });
         () => {
-            console.log("state in App after UpdateBioInApp", this.state);
+            // console.log("state in App after UpdateBioInApp", this.state);
         };
     }
     logOut() {
-        console.log("logout clicked");
+        // console.log("logout clicked");
         axios.get("/api/logout").then(() => {
             location.replace("/welcome#/login");
         });
     }
 
     deleteAccount() {
-        console.log("delete Acct clicked");
+        // console.log("delete Acct clicked");
         axios
             .get("/api/delete/account")
             .then(() => {
@@ -99,24 +94,6 @@ export default class App extends React.Component {
                         >
                             <Logo />
                         </Link>
-                        <button
-                            onClick={() => this.logOut()}
-                            // id="submit-reg"
-                            id="log-out-button"
-                            className="button"
-                        >
-                            Log out
-                        </button>
-                        <Link
-                            to="/users"
-                            style={{
-                                textDecoration: "none",
-                            }}
-                        >
-                            <button className="button" id="log-out-button">
-                                Search
-                            </button>
-                        </Link>
                         <div className="profile-container">
                             <ProfilePic
                                 first={this.state.first}
@@ -127,41 +104,53 @@ export default class App extends React.Component {
                             />
                         </div>
                     </header>
-                    <Route
-                        exact
-                        path="/"
-                        render={() => (
-                            <Profile
-                                first={this.state.first}
-                                last={this.state.last}
-                                imgUrl={this.state.imgUrl}
-                                bio={this.state.bio}
-                                profileImgClass={this.state.profileImgClass}
-                                toggleUploader={() => this.toggleUploader()}
-                                updateBioInApp={this.updateBioInApp}
-                                deleteAccount={this.deleteAccount}
+                    <div id="app-body">
+                        <NavBar logoutButton={() => this.logOut()} />
+                        <div id="app-content">
+                            <Route
+                                exact
+                                path="/"
+                                render={() => (
+                                    <Profile
+                                        first={this.state.first}
+                                        last={this.state.last}
+                                        imgUrl={this.state.imgUrl}
+                                        bio={this.state.bio}
+                                        profileImgClass={
+                                            this.state.profileImgClass
+                                        }
+                                        toggleUploader={() =>
+                                            this.toggleUploader()
+                                        }
+                                        updateBioInApp={this.updateBioInApp}
+                                        deleteAccount={this.deleteAccount}
+                                    />
+                                )}
                             />
-                        )}
-                    />
-                    <Route
-                        path="/user/:id"
-                        render={(props) => (
-                            <OtherProfile
-                                key={props.url}
-                                match={props.match}
-                                history={props.history}
+                            <Route
+                                path="/user/:id"
+                                render={(props) => (
+                                    <OtherProfile
+                                        key={props.url}
+                                        match={props.match}
+                                        history={props.history}
+                                    />
+                                )}
                             />
-                        )}
-                    />
-                    <Route path="/users" render={() => <FindPeople />} />
-                    <div>
-                        {this.state.uploaderIsVisible && (
-                            <Uploader
-                                methodInApp={this.methodInApp}
-                                imgUrl={this.state.imgUrl}
-                                // toggleUploader={() => this.toggleUploader()}
+                            <Route
+                                path="/users"
+                                render={() => <FindPeople />}
                             />
-                        )}
+                            <div>
+                                {this.state.uploaderIsVisible && (
+                                    <Uploader
+                                        methodInApp={this.methodInApp}
+                                        imgUrl={this.state.imgUrl}
+                                        // toggleUploader={() => this.toggleUploader()}
+                                    />
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </BrowserRouter>

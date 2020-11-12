@@ -16,24 +16,17 @@ export default function Profile({
 }) {
     return (
         <>
-            <div id="profile-container">
-                <div id="profile">
-                    <h3>{first}'s Profile</h3>
-                    <span>Edit your details here:</span>
-                    <div id="picture-bio-layout">
-                        <div
-                            id="profile-image-container"
-                            onClick={toggleUploader}
-                        >
-                            <ProfilePic
-                                imgUrl={imgUrl}
-                                first={first}
-                                last={last}
-                            />
-                        </div>
-                        {/* here we insert the existing component ProfilePic; work out how to render this diffierently (bigger size than in App component) here
-                    Clue: we pass props to it again below (maybe have 2 different URLs of the imafge that we pass down to it?*/}
-                        <div id="bio">
+            {/* <div id="profile-container"> */}
+            <div id="profile">
+                <div id="picture-bio-layout">
+                    <div id="profile-image-container" onClick={toggleUploader}>
+                        <ProfilePic imgUrl={imgUrl} />
+                    </div>
+                    <div id="bio">
+                        <h2 id="bio-name">
+                            {first} {last}
+                        </h2>
+                        <div id="bio-bio">
                             <BioEditor
                                 bio={bio}
                                 updateBioInApp={updateBioInApp}
@@ -43,6 +36,7 @@ export default function Profile({
                     </div>
                 </div>
             </div>
+            {/* </div> */}
         </>
     );
 }

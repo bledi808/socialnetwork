@@ -31,7 +31,7 @@ export default class BioEditor extends Component {
                             rows="4"
                             cols="38"
                             onChange={(e) => this.handleChange(e)}
-                            maxLength="200"
+                            maxLength="255"
                             value={this.state.draftBio}
                         />
                     </div>
@@ -66,7 +66,7 @@ export default class BioEditor extends Component {
                     <div id="bio-buttons-div">
                         <button
                             onClick={this.props.deleteAccount}
-                            id="delete-account-button"
+                            // id="delete-account-button"
                             className="button"
                         >
                             Delete Account

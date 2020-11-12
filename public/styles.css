@@ -14,6 +14,8 @@ body {
 #app-container {
     background-color: #ebebeb;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 #app-header {
     border-bottom: 2px tomato solid;
@@ -21,7 +23,62 @@ body {
     padding-bottom: 3px;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 1%;
+    padding: 0 3%;
+    height: 20%;
+}
+#app-body {
+    /* border-bottom: 2px tomato solid; */
+    display: flex;
+    height: 80%;
+
+    /* padding-bottom: 3px; */
+    /* justify-content: space-between; */
+    /* align-items: flex-end; */
+    /* padding: 1%; */
+}
+#app-navbar {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px tomato solid;
+    background-color: whitesmoke;
+    align-items: flex-end;
+    padding-top: 8%;
+}
+
+.navbar-buttons {
+    border-radius: 0;
+    border: none;
+    border: 2px solid transparent;
+    /* border-right: 2px solid #ebebeb; */
+    background-color: transparent;
+    margin: 25px 0;
+    margin-right: -2px;
+    padding-right: 20px;
+    font-family: inherit;
+    font-size: larger;
+    text-align: right;
+    cursor: pointer;
+    color: #383838;
+    width: 100px;
+}
+
+.navbar-buttons:hover {
+    border: 2px solid tomato;
+    border-right: 2px solid #ebebeb;
+    background-color: #ebebeb;
+    transition: 1s;
+}
+.navbar-buttons:focus {
+    color: tomato;
+    border-right: 2px solid #ebebeb;
+    background-color: #ebebeb;
+}
+
+#app-content {
+    width: 85%;
+    border: 1px blue solid;
+    margin: 1%;
 }
 
 .logo-container {
@@ -164,20 +221,15 @@ body {
 
 /* Profile */
 
-#profile-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #profile {
-    border-top: 2px tomato solid;
-    border-left: 2px tomato solid;
-    margin-top: 5%;
-    padding: 1%;
-    width: 60%;
-    height: 60vh;
-    text-align: center;
+    border: 1px magenta solid;
+    /* border-left: 2px tomato solid; */
+    /* margin-top: 5%; */
+    /* margin: 1%; */
+    /* padding: 1%; */
+    /* width: ; */
+    height: 100%;
+    /* text-align: center; */
     background-color: white;
     /* display: flex;
     justify-content: center;
@@ -185,15 +237,19 @@ body {
 }
 #picture-bio-layout {
     display: flex;
-    justify-content: space-between;
-    /* border: 1px blue solid; */
-    margin: 2% 0 2% 0;
+    justify-content: center;
+    /* border: 2px green solid; */
+    margin-top: 5%;
+    padding: 5px;
+    width: auto;
+    /* height: 80%; */
 }
 #profile-image-container {
     width: 300px;
-    height: 310px;
-    /* border: 2px blue solid; */
+    height: 300px;
+    /* border: 1px #383838 solid; */
     overflow: hidden;
+    /* margin-right: 10px; */
     cursor: pointer;
     font-size: 20px;
     color: teal;
@@ -203,36 +259,39 @@ body {
     filter: grayscale(100%);
 }
 
-/* .big-image-container {
-    height: 100px;
-    width: 100px;
-    border: 2px red solid;
-} */
-
+#bio-name {
+    margin-bottom: 4%;
+}
+#bio-bio {
+    /* border: 2px yellow solid; */
+}
 #bio {
-    /* border: 1px mediumblue solid; */
+    border: 1px #383838 solid;
+    border-left: 1px transparent solid;
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 400px;
     align-items: flex-end;
     justify-content: flex-end;
     font-size: medium;
-    /* margin: 5% 0 2% 0; */
+    padding: 0 1%;
+    text-align: justify;
 }
 
 #bio-text {
     /* border: 1px tomato solid; */
     /* width: 40px; */
     height: 88px;
-    text-align: justify;
-    margin-left: 2px;
-    padding: 3%;
+    /* text-align: justify; */
+    /* margin-left: 2px;
+    padding: 3%; */
 
     /* padding: 1%; */
     /* color: red; */
 }
 #bio-textarea-div {
     display: flex;
+    /* border: 1px tomato solid; */
 }
 #bio-textarea {
     border: 1px #383838 solid;
@@ -242,17 +301,21 @@ body {
     font-family: "roboto", sans-serif;
     font-size: medium;
     padding: 2%;
-    text-align: justify;
+    /* text-align: justify; */
     color: darkcyan;
 }
 
 #edit-bio-button {
-    width: 80px;
-    margin: 5px;
+    width: 100px;
+    height: 30px;
 }
 #save-bio-button {
-    width: 80px;
-    margin: 5px;
+    width: 100px;
+    height: 30px;
+}
+#bio-buttons-div {
+    margin-top: 3%;
+    border: 1px tomato solid;
 }
 
 /* LOGGED OUT STATE */
@@ -433,7 +496,8 @@ body {
 
 #delete-account-button {
     width: 120px;
-    margin: 5px 5px 5px 10px;
+    height: 30px;
+    /* margin: 5px 5px 5px 10px; */
 }
 #friend-button {
     margin: 2% 0 0 1px;
