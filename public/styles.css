@@ -47,7 +47,7 @@ body {
     text-align: right;
     cursor: pointer;
 }
-.profile-image-container {
+.header-image-container {
     height: 100px;
     width: 100px;
 }
@@ -58,22 +58,10 @@ body {
     /* cursor: pointer; */
 }
 
-/* .bigImage {
-    height: 120px;
-    width: 100px;
-    text-align: right;
-    cursor: pointer;
-} */
-
-.profile-image-container {
-    height: 100px;
-    width: 100px;
-}
-
-.profile-image {
-    height: 100%;
-    width: 100%;
-    /* cursor: pointer; */
+#big-picture-container {
+    border: 2px tomato solid;
+    height: 150px;
+    width: 150px;
 }
 
 .profile-container:hover {
@@ -202,9 +190,18 @@ body {
     /* border: 1px blue solid; */
     margin: 5% 0 2% 0;
 }
-#picture {
-    /* border: 2px tomato solid; */
+#big-picture-container {
+    border: 2px tomato solid;
+    height: 470px;
+    width: 450px;
 }
+
+.profile-image-container {
+    height: 450px;
+    width: 450px;
+    border: 2px blue solid;
+}
+
 #bio {
     /* border: 1px mediumblue solid; */
     display: flex;

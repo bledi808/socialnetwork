@@ -13,6 +13,9 @@ export default class App extends React.Component {
         super();
         this.state = {
             uploaderIsVisible: false,
+            headerImgClass: "header-image-container",
+            profileImgClass: "big-image-container",
+
             // first: first,
         };
         //bind functions
@@ -117,12 +120,15 @@ export default class App extends React.Component {
                                 Search
                             </button>
                         </Link>
-                        <ProfilePic
-                            first={this.state.first}
-                            last={this.state.last}
-                            imgUrl={this.state.imgUrl}
-                            toggleUploader={() => this.toggleUploader()}
-                        />
+                        <div className="profile-container">
+                            <ProfilePic
+                                first={this.state.first}
+                                last={this.state.last}
+                                imgUrl={this.state.imgUrl}
+                                toggleUploader={() => this.toggleUploader()}
+                                imgClass={this.state.headerImgClass}
+                            />
+                        </div>
                     </header>
                     <Route
                         exact
@@ -133,6 +139,7 @@ export default class App extends React.Component {
                                 last={this.state.last}
                                 imgUrl={this.state.imgUrl}
                                 bio={this.state.bio}
+                                imgClass={this.state.profileImgClass}
                                 toggleUploader={() => this.toggleUploader()}
                                 updateBioInApp={this.updateBioInApp}
                                 deleteAccount={this.deleteAccount}

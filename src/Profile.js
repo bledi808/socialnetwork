@@ -12,6 +12,7 @@ export default function Profile({
     bio,
     updateBioInApp,
     deleteAccount,
+    imgClass,
 }) {
     return (
         <>
@@ -20,7 +21,10 @@ export default function Profile({
                     <h3>{first}'s Profile</h3>
                     <span>Edit your details here:</span>
                     <div id="picture-bio-layout">
-                        <div id="picture" onClick={toggleUploader}>
+                        <div
+                            id="big-picture-container"
+                            onClick={toggleUploader}
+                        >
                             <ProfilePic
                                 imgUrl={imgUrl}
                                 first={first}
