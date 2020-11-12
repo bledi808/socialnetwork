@@ -58,11 +58,11 @@ body {
     /* cursor: pointer; */
 }
 
-#big-picture-container {
+/* #big-picture-container {
     border: 2px tomato solid;
     height: 150px;
     width: 150px;
-}
+} */
 
 .profile-container:hover {
     /* filter: blur(2px); */
