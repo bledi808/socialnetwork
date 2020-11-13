@@ -34,31 +34,40 @@ export default class OtherProfile extends React.Component {
 
     render() {
         return (
-            <>
-                {this.state.error && (
+            <div id="profile">
+                {/* {this.state.error && (
                     <h3 id="other-profile-container">
                         this user does not exist
                     </h3>
-                )}
+                )} */}
                 {!this.state.error && (
-                    <div id="other-profile-container">
-                        <div id="other-profile">
-                            <h3>
-                                Other Profile: {this.state.first}{" "}
-                                {this.state.last}
-                            </h3>
-                            {this.state.bio && <p>Bio: {this.state.bio}</p>}
+                    <div id="picture-bio-layout">
+                        <div id="picture-bio-layout">
+                            <div id="other-image-container">
+                                <img
+                                    className="profile-image"
+                                    src={this.state.imgUrl || "/default.jpg"}
+                                />
+                            </div>
                         </div>
-                        <div id="other-img-container">
-                            <img
-                                id="other-img"
-                                src={this.state.imgUrl || "/default.jpg"}
-                            />
+                        <div id="bio">
+                            <h2 id="bio-name">
+                                {this.state.first} {this.state.last}
+                            </h2>
+                            <div id="bio-bio">
+                                {this.state.bio && (
+                                    <div id="bio-text">{this.state.bio}</div>
+                                )}
+                                <div id="bio-buttons-div">
+                                    <FriendButton
+                                        otherId={this.props.match.params.id}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                        <FriendButton otherId={this.props.match.params.id} />
                     </div>
                 )}
-            </>
+            </div>
         );
     }
 }

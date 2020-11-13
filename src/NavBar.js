@@ -20,6 +20,14 @@ export default function NavBar({ logoutButton }) {
             >
                 <button className="navbar-buttons">Search</button>
             </Link>
+            <Link
+                to="/friends"
+                style={{
+                    textDecoration: "none",
+                }}
+            >
+                <button className="navbar-buttons">Friends</button>
+            </Link>
             <button onClick={logoutButton} className="navbar-buttons">
                 Log out
             </button>
