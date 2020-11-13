@@ -53,7 +53,7 @@ export default function FindPeople() {
                     ></input>
                     {error && <p>{error}</p>}
                 </div>
-                <div id="other-profile-container" style={{ marginTop: "1%" }}>
+                <div id="other-profile-container">
                     {users &&
                         users.map((user) => (
                             <div

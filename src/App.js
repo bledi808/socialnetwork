@@ -6,6 +6,7 @@ import Profile from "./Profile";
 import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
 import NavBar from "./NavBar";
+import Friends from "./Friends";
 import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -141,6 +142,7 @@ export default class App extends React.Component {
                                 path="/users"
                                 render={() => <FindPeople />}
                             />
+                            <Route path="/friends" render={() => <Friends />} />
                             <div>
                                 {this.state.uploaderIsVisible && (
                                     <Uploader

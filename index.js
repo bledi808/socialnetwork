@@ -287,6 +287,10 @@ app.get(`/api/getFriends`, async (req, res) => {
 
     try {
         let { rows } = await db.getFriends(userId);
+        res.json({
+            success: true,
+            rows,
+        });
         console.log("rows in getFriends", rows);
     } catch (err) {
         console.log("err in /api/getFriends with getFriends", err);
