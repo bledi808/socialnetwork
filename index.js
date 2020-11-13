@@ -280,6 +280,19 @@ app.post(`/api/friendStatus/button`, async (req, res) => {
     }
 });
 
+app.get(`/api/getFriends`, async (req, res) => {
+    console.log("ACCESSED GET /api/getFriends route");
+    // const { otherId } = req.params;
+    const { userId } = req.session;
+
+    try {
+        let { rows } = await db.getFriends(userId);
+        console.log("rows in getFriends", rows);
+    } catch (err) {
+        console.log("err in /api/getFriends with getFriends", err);
+    }
+});
+
 app.get("/delete/image", (req, res) => {
     console.log("ACCESSED POST /delete/image route");
     const { userId } = req.session;

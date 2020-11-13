@@ -10,7 +10,7 @@ body {
 }
 
 /* LOGGED IN STATE */
-/* HEADER*/
+/* MAIN STRUCTURE: LAYOUT OF HEADER / NAVBAR / CONTENT*/
 #app-container {
     background-color: #ebebeb;
     height: 100vh;
@@ -46,6 +46,8 @@ body {
     padding-top: 8%;
 }
 
+/* NAVBAR*/
+
 .navbar-buttons {
     border-radius: 0;
     border: none;
@@ -77,17 +79,20 @@ body {
 
 #app-content {
     width: 85%;
-    border: 1px blue solid;
-    margin: 1%;
+    /* border: 1px tomato solid; */
+    margin: 2%;
 }
 
+/* HEADER */
 .logo-container {
     height: 120px;
     width: 100px;
 }
 .logo-image-container {
     height: 100px;
-    width: 100px;
+    /* width: 100px; */
+    border-radius: 100px;
+    overflow: hidden;
 }
 .logo-image {
     height: 100%;
@@ -100,13 +105,17 @@ body {
 
 .profile-container {
     height: 120px;
-    width: 100px;
-    text-align: right;
+    /* width: 100px; */
+    text-align: center;
     cursor: pointer;
+    /* border: red 1px solid; */
+    color: teal;
 }
 .header-image-container {
     height: 100px;
+    overflow: hidden;
     width: 100px;
+    border-radius: 50px;
 }
 
 .profile-image {
@@ -222,24 +231,19 @@ body {
 /* Profile */
 
 #profile {
-    border: 1px magenta solid;
-    /* border-left: 2px tomato solid; */
-    /* margin-top: 5%; */
-    /* margin: 1%; */
-    /* padding: 1%; */
-    /* width: ; */
+    /* border: 1px magenta solid; */
     height: 100%;
     /* text-align: center; */
     background-color: white;
-    /* display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
 }
 #picture-bio-layout {
     display: flex;
     justify-content: center;
     /* border: 2px green solid; */
-    margin-top: 5%;
+    /* margin-top: 5%; */
     padding: 5px;
     width: auto;
     /* height: 80%; */

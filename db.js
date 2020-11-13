@@ -171,6 +171,25 @@ module.exports.removeFriend = (userId, otherId) => {
     );
 };
 
+// Get Firends and Friend Requests
+// Users that you've sent a friend request to will NOT show up in this query - add this as BONUS
+////////BONUS PART ////// ON (accepted = false AND sender_id = $1 AND recipient_id = users.id) - added
+
+module.exports.getFriends = (userId) => {
+    return db.query(
+        `
+        SELECT users.id, first, last, url, accepted
+        FROM friendships
+        JOIN users
+        ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+        OR (accepted = false AND sender_id = $1 AND recipient_id = users.id)
+        OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = $1 AND recipient_id = users.id)
+        `,
+        [userId]
+    );
+};
+
 // delete profile image
 module.exports.deleteImage = (userId) => {
     return db.query(

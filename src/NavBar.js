@@ -21,7 +21,7 @@ export default function NavBar({ logoutButton }) {
                 <button className="navbar-buttons">Search</button>
             </Link>
             <Link
-                to="/friends"
+                to="/api/getFriends"
                 style={{
                     textDecoration: "none",
                 }}
