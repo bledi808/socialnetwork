@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { receiveFriends } from "./actions";
+import { receiveFriends, acceptFriend } from "./actions";
 
 export default function Friends() {
     const dispatch = useDispatch();
-    // console.log("this.state", state);
-    // const friendsList = useSelector((state) => state.friendsList);
+    const allFriends = useSelector(
+        (state) => state.friendsList && state.friendsList.filter((user) => user)
+    );
     const friends = useSelector(
         (state) =>
             state.friendsList &&
@@ -22,13 +23,17 @@ export default function Friends() {
         dispatch(receiveFriends());
     }, []);
 
-    // if (!friends) {
-    //     return null;
-    // }
+    // console.log("allFriends: ", allFriends);
+    // console.log("friends: ", friends);
+    // console.log("friendRequests: ", friendRequests);
+
+    if (!allFriends) {
+        return <p>No friends yet...</p>;
+    }
 
     return (
         <>
-            <span>FRIENDS</span>
+            {friends && <span>Your Friends</span>}
             <div id="friends-layout">
                 {friends &&
                     friends.map((user) => (
@@ -56,7 +61,7 @@ export default function Friends() {
                         </div>
                     ))}
             </div>
-            <span>REQUESTS</span>
+            {friendRequests && <span>Your Friend Requests</span>}
             <div id="friends-layout">
                 {friendRequests &&
                     friendRequests.map((user) => (
@@ -81,6 +86,14 @@ export default function Friends() {
                                     {user.first} {user.last}
                                 </p>
                             </Link>
+                            <button
+                                onClick={(e) => dispatch(acceptFriend(user.id))}
+                                id="submit-reg"
+                                id="friend-button"
+                                className="button"
+                            >
+                                Accept
+                            </button>
                         </div>
                     ))}
             </div>

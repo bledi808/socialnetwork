@@ -266,7 +266,7 @@ app.post(`/api/friendStatus/button`, async (req, res) => {
     } else if (buttonText == "Accept Friend Request") {
         try {
             await db.acceptFriendRequest(userId, otherId);
-            res.json({ status: "Remove Friend" });
+            res.json({ status: "Remove Friend", id: otherId });
         } catch (err) {
             console.log("err in POST .../button with acceptFriendRequest", err);
         }
@@ -289,7 +289,6 @@ app.get(`/api/getFriends`, async (req, res) => {
         res.json({
             rows,
         });
-        console.log("rows in getFriends", rows);
     } catch (err) {
         console.log("err in /api/getFriends with getFriends", err);
     }
