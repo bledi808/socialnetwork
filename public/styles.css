@@ -512,31 +512,38 @@ body {
     padding: 0 1%;
     background-color: white;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 2%;
 }
 
 #friends-container {
-    width: 180px;
-    height: 200px;
-    border: 1px #383838 solid;
+    width: 130px;
+    height: 150px;
+    /* border: 1px #383838 solid; */
     overflow: hidden;
-    /* margin-right: 10px; */
     cursor: pointer;
-    /* font-size: 20px; */
-    /* color: teal; */
-    text-align: left;
+    color: teal;
+    text-align: right;
     margin: 1% 1% 0 0;
 }
 #friends-image-container {
-    width: 180px;
-    height: 180px;
+    width: 130px;
+    height: 130px;
     /* border: 1px red solid; */
-    /* overflow: hidden; */
-
-    /* margin-right: 10px; */
+    overflow: hidden;
     cursor: pointer;
-    /* font-size: 20px; */
-    /* color: teal; */
+    color: teal;
     /* text-align: left; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    /* text-align: end; */
+}
+.friends-image {
+    width: 130px;
+    /* height: 130px; */
 }

@@ -27,8 +27,6 @@ DROP TABLE IF EXISTS friendships CASCADE;
    accepted BOOLEAN DEFAULT false
  );
 
-INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,2,true);
-INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,3,true);
-INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,4,true);
-INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,5,true);
-INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,6,true);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(7,1,false);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(8,1,false);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(9,1,false);

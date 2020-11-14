@@ -12,47 +12,78 @@ export default function Friends() {
             state.friendsList &&
             state.friendsList.filter((user) => user.accepted)
     );
-    // const friendRequests = useSelector(
-    //     (state) =>
-    //         state.users && state.users.filter((user) => user.accepted == false)
-    // );
+    const friendRequests = useSelector(
+        (state) =>
+            state.friendsList &&
+            state.friendsList.filter((user) => user.accepted == false)
+    );
 
     useEffect(() => {
         dispatch(receiveFriends());
     }, []);
 
-    if (!friends) {
-        return null;
-    }
+    // if (!friends) {
+    //     return null;
+    // }
 
     return (
-        <div id="friends-layout">
-            FRIENDS, dear, SWEET Friends!
-            {friends &&
-                friends.map((user) => (
-                    <div key={user.id} id="friends-container">
-                        <Link
-                            to={`/user/${user.id}`}
-                            style={{
-                                textDecoration: "none",
-                            }}
-                        >
-                            <div id="friends-image-container">
-                                <img
-                                    className="profile-image"
-                                    src={user.url || "/default.jpg"}
-                                />
-                            </div>
-                            <p
+        <>
+            <span>FRIENDS</span>
+            <div id="friends-layout">
+                {friends &&
+                    friends.map((user) => (
+                        <div key={user.id} id="friends-container">
+                            <Link
+                                to={`/user/${user.id}`}
                                 style={{
-                                    color: "blue",
+                                    textDecoration: "none",
                                 }}
                             >
-                                {user.first} {user.last}
-                            </p>
-                        </Link>
-                    </div>
-                ))}
-        </div>
+                                <div id="friends-image-container">
+                                    <img
+                                        className="friends-image"
+                                        src={user.url || "/default.jpg"}
+                                    />
+                                </div>
+                                <p
+                                    style={{
+                                        color: "green",
+                                    }}
+                                >
+                                    {user.first} {user.last}
+                                </p>
+                            </Link>
+                        </div>
+                    ))}
+            </div>
+            <span>REQUESTS</span>
+            <div id="friends-layout">
+                {friendRequests &&
+                    friendRequests.map((user) => (
+                        <div key={user.id} id="friends-container">
+                            <Link
+                                to={`/user/${user.id}`}
+                                style={{
+                                    textDecoration: "none",
+                                }}
+                            >
+                                <div id="friends-image-container">
+                                    <img
+                                        className="friends-image"
+                                        src={user.url || "/default.jpg"}
+                                    />
+                                </div>
+                                <p
+                                    style={{
+                                        color: "orange",
+                                    }}
+                                >
+                                    {user.first} {user.last}
+                                </p>
+                            </Link>
+                        </div>
+                    ))}
+            </div>
+        </>
     );
 }

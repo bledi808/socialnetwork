@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Welcome from "./Welcome";
+import Welcome from "./welcome";
 import App from "./App";
 
 import { createStore, applyMiddleware } from "redux";

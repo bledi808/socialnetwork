@@ -1,4 +1,4 @@
-export default function reducer(state = {}, action) {
+export default function (state = {}, action) {
     // here we will be updating the new state (state{} sets state to empty obj first time we call reducer)
     // action:
 
@@ -6,8 +6,10 @@ export default function reducer(state = {}, action) {
         state = Object.assign({}, state, {
             friendsList: action.friends,
         });
+        console.log("state in IF reducer", state);
+    } else {
+        console.log("state in else reducer", state);
     }
-    console.log("stateatataat", state);
 
     return state;
 }

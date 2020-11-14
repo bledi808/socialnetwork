@@ -97,7 +97,7 @@ module.exports.findPeople = () => {
         `
         SELECT id, first, last, url FROM users 
         ORDER BY id 
-        DESC LIMIT 3
+        DESC LIMIT 10
         `
     );
 };
@@ -109,7 +109,7 @@ module.exports.findMatchingPeople = (str) => {
         SELECT id, first, last, url FROM users
         WHERE first ILIKE $1
         ORDER BY first 
-        ASC LIMIT 5
+        ASC LIMIT 10
         `,
         [str + "%"]
     );
