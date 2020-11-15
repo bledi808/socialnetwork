@@ -2,6 +2,21 @@
 
 import axios from "./axios";
 
+// export async function receiveFriends() {
+//     try {
+//         let { data } = await axios.get(`/api/getFriends`);
+//         console.log("{data in receiveFriends() action axios", data);
+//         if (data.rows.accepted == true) {
+//             return {
+//                 type: "RECEIVE_FRIENDS",
+//                 friends: data.rows,
+//             };
+//         }
+//     } catch (err) {
+//         console.log("err in receiveFriends() action axios", err);
+//     }
+// }
+
 export async function receiveFriends() {
     try {
         let { data } = await axios.get(`/api/getFriends`);
@@ -9,6 +24,7 @@ export async function receiveFriends() {
         return {
             type: "RECEIVE_FRIENDS",
             friends: data.rows,
+            id: data.userId,
         };
     } catch (err) {
         console.log("err in receiveFriends() action axios", err);
@@ -51,23 +67,24 @@ export async function removeFriend(otherId) {
     } catch (err) {
         console.log("err in removeFriend() action axios", err);
     }
-
-    
-
-    export async function rejectRequest(otherId) {
-    console.log("rejectRequest dispatch clicked for user id: ", otherId);
-
-    let buttonText = "Remove Friend";
-    try {
-        let { data } = await axios.post(`/api/friendStatus/button`, {
-            buttonText,
-            otherId,
-        });
-        return {
-            type: "REMOVE_FRIEND",
-            id: data.id,
-        };
-    } catch (err) {
-        console.log("err in removeFriend() action axios", err);
-    }
 }
+
+// export async function rejectRequest(otherId) {
+//     console.log("rejectRequest dispatch clicked for user id: ", otherId);
+
+//     // let buttonText = "Remove Friend";
+//     try {
+//         let { data } = await axios.post(`/api/friendStatus/button`, {
+//             buttonText,
+//             otherId,
+//         });
+//         console.log("{data} in acceptFriend() action axios", data);
+
+//         //     return {
+//         //         type: "REMOVE_FRIEND",
+//         //         id: data.id,
+//         //     };
+//     } catch (err) {
+//         console.log("err in removeFriend() action axios", err);
+//     }
+// }

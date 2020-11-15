@@ -507,7 +507,7 @@ body {
 #friends-layout {
     border: 1px magenta solid;
     /* height: 100%; */
-    width: 1000px;
+    /* width: 1000px; */
     /* text-align: center; */
     padding: 0 1%;
     background-color: white;
@@ -521,7 +521,7 @@ body {
 
 #friends-container {
     width: 130px;
-    height: 190px;
+    height: 250px;
     /* border: 1px #383838 solid; */
     overflow: hidden;
     cursor: pointer;

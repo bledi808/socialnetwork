@@ -19,6 +19,16 @@ export default function Friends() {
             state.friendsList.filter((user) => user.accepted == false)
     );
 
+    // const sentRequests = useSelector(
+    //     (state) =>
+    //         state &&
+    //         state.filter(
+    //             (user) =>
+    //                 user.friendsList.accepted == false &&
+    //                 user.friendsList.sender_id == user.loggedInUser
+    //         )
+    // );
+
     useEffect(() => {
         dispatch(receiveFriends());
     }, []);
@@ -69,6 +79,51 @@ export default function Friends() {
                         </div>
                     ))}
             </div>
+            {friendRequests && <span>Your Pending Requests</span>}
+            {/* <div id="friends-layout">
+                {sentRequests &&
+                    sentRequests.map((user) => (
+                        <div key={user.id} id="friends-container">
+                            <Link
+                                to={`/user/${user.id}`}
+                                style={{
+                                    textDecoration: "none",
+                                }}
+                            >
+                                <div id="friends-image-container">
+                                    <img
+                                        className="friends-image"
+                                        src={user.url || "/default.jpg"}
+                                    />
+                                </div>
+                                <p
+                                    style={{
+                                        color: "orange",
+                                    }}
+                                >
+                                    {user.first} {user.last}
+                                </p>
+                            </Link>
+                            <button
+                                onClick={() => dispatch(acceptFriend(user.id))}
+                                id="submit-reg"
+                                id="friend-button"
+                                className="button"
+                            >
+                                Accept
+                            </button>
+
+                            <button
+                                onClick={() => dispatch(removeFriend(user.id))}
+                                id="submit-reg"
+                                id="friend-button"
+                                className="button"
+                            >
+                                Reject
+                            </button>
+                        </div>
+                    ))}
+            </div> */}
             {friendRequests && <span>Your Friend Requests</span>}
             <div id="friends-layout">
                 {friendRequests &&
@@ -100,13 +155,16 @@ export default function Friends() {
                                 id="friend-button"
                                 className="button"
                             >
+                                Accept
+                            </button>
+
                             <button
-                                onClick={() => dispatch(rejectRequest(user.id))}
+                                onClick={() => dispatch(removeFriend(user.id))}
                                 id="submit-reg"
                                 id="friend-button"
                                 className="button"
                             >
-                                Accept
+                                Reject
                             </button>
                         </div>
                     ))}

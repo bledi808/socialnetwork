@@ -1,22 +1,41 @@
 export default function (state = {}, action) {
-    // here we will be updating the new state (state{} sets state to empty obj first time we call reducer)
-    // action:
+    // if (action.type == "RECEIVE_FRIENDS") {
+    //     state = Object.assign({}, state, {
+    //         friendsList: action.friends,
+    //     });
+    // }
 
     if (action.type == "RECEIVE_FRIENDS") {
-        state = Object.assign({}, state, {
-            friendsList: action.friends,
-            // friendRequests: action.friendRequests,
-        });
-        // console.log("state in IF reducer", state);
-        // console.log("state in else reducer", state);
+        state = {
+            ...action.friends,
+            loggedInUser: action.id,
+        };
+        // return (friendsWithId = {
+        //     ...state.friendsList,
+        //     loggedInUser: action.id,
+        // });
     }
+    // if (action.type == "RECEIVE_FRIENDS") {
+    //     state = Object.assign({}, state, {
+    //         friendsList: action.friends,
+    //         // loggedInUser: action.id,
+    //     });
+    //     state = {
+    //         ...state,
+    //         friendsList: state.friendsList.map((user) => {
+    //             console.log("IF state ACCEPT", state);
+    //             return {
+    //                 ...user,
+    //                 loggedInUser: action.id,
+    //             };
+    //             // console.log("state in IF reducer", state);
+    //         }),
 
-    // ACCEPT_FRIEND_REQUEST -
-    //clones the global state.
-    // The clone should have ALL the properties of the old state but one of the objects inside the friendsWannabes array should have their accepted property set to true.
-    // Do it immutably - use MAP method
+    //         // console.log("state in else reducer", state);
+    //     };
+    // }
 
-    // START WORK FROM HERE
+    // updates state with ACCEPT friend
     if (action.type == "ACCEPT_FRIEND") {
         state = {
             ...state,
@@ -35,6 +54,7 @@ export default function (state = {}, action) {
         };
     }
 
+    //updates state with REMOVE friend; REJECT firend request; CANCEL sent request
     if (action.type == "REMOVE_FRIEND") {
         state = {
             ...state,

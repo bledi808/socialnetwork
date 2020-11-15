@@ -283,11 +283,14 @@ app.post(`/api/friendStatus/button`, async (req, res) => {
 app.get(`/api/getFriends`, async (req, res) => {
     console.log("ACCESSED GET /api/getFriends route");
     const { userId } = req.session;
+    console.log("userId", userId);
 
     try {
         let { rows } = await db.getFriends(userId);
+        console.log("rows in GET /api/getFriends route", rows);
         res.json({
             rows,
+            userId: userId,
         });
     } catch (err) {
         console.log("err in /api/getFriends with getFriends", err);
