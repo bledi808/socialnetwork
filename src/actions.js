@@ -51,4 +51,23 @@ export async function removeFriend(otherId) {
     } catch (err) {
         console.log("err in removeFriend() action axios", err);
     }
+
+    
+
+    export async function rejectRequest(otherId) {
+    console.log("rejectRequest dispatch clicked for user id: ", otherId);
+
+    let buttonText = "Remove Friend";
+    try {
+        let { data } = await axios.post(`/api/friendStatus/button`, {
+            buttonText,
+            otherId,
+        });
+        return {
+            type: "REMOVE_FRIEND",
+            id: data.id,
+        };
+    } catch (err) {
+        console.log("err in removeFriend() action axios", err);
+    }
 }

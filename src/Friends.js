@@ -100,6 +100,12 @@ export default function Friends() {
                                 id="friend-button"
                                 className="button"
                             >
+                            <button
+                                onClick={() => dispatch(rejectRequest(user.id))}
+                                id="submit-reg"
+                                id="friend-button"
+                                className="button"
+                            >
                                 Accept
                             </button>
                         </div>
