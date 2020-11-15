@@ -505,17 +505,18 @@ body {
 /* Friends */
 
 #friends-layout {
-    /* border: 1px magenta solid; */
+    border: 1px magenta solid;
     /* height: 100%; */
-    /* width: 180px; */
+    width: 1000px;
     /* text-align: center; */
     padding: 0 1%;
     background-color: white;
     display: flex;
     /* justify-content: center; */
     align-items: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     margin-bottom: 2%;
+    overflow: scroll;
 }
 
 #friends-container {
@@ -527,6 +528,7 @@ body {
     color: teal;
     text-align: right;
     margin: 1% 1% 0 0;
+    /* overflow-x: auto; */
 }
 #friends-image-container {
     width: 130px;

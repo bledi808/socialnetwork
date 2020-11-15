@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { receiveFriends, acceptFriend } from "./actions";
+import { receiveFriends, acceptFriend, removeFriend } from "./actions";
 
 export default function Friends() {
     const dispatch = useDispatch();
@@ -58,6 +58,14 @@ export default function Friends() {
                                     {user.first} {user.last}
                                 </p>
                             </Link>
+                            <button
+                                onClick={() => dispatch(removeFriend(user.id))}
+                                id="submit-reg"
+                                id="friend-button"
+                                className="button"
+                            >
+                                Remove
+                            </button>
                         </div>
                     ))}
             </div>
@@ -87,7 +95,7 @@ export default function Friends() {
                                 </p>
                             </Link>
                             <button
-                                onClick={(e) => dispatch(acceptFriend(user.id))}
+                                onClick={() => dispatch(acceptFriend(user.id))}
                                 id="submit-reg"
                                 id="friend-button"
                                 className="button"

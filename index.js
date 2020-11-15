@@ -273,7 +273,7 @@ app.post(`/api/friendStatus/button`, async (req, res) => {
     } else if (buttonText == "Remove Friend") {
         try {
             await db.removeFriend(userId, otherId);
-            res.json({ status: "Send Friend Request" });
+            res.json({ status: "Send Friend Request", id: otherId });
         } catch (err) {
             console.log("err in POST .../button with removeFriend", err);
         }

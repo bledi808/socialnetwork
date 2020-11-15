@@ -15,9 +15,9 @@ export async function receiveFriends() {
     }
 }
 
-// acceptFriend - makes a POST request to the server to accept the friendship. The function should return an object with a type property and the id of the user whose friendship was accepted.
+// return an object with a type property and the id of the user whose friendship was accepted.
 export async function acceptFriend(otherId) {
-    console.log("acceptFriend dispatch clicked for user id: ", otherId);
+    // console.log("acceptFriend dispatch clicked for user id: ", otherId);
     let buttonText = "Accept Friend Request";
     try {
         let { data } = await axios.post(`/api/friendStatus/button`, {
@@ -35,13 +35,18 @@ export async function acceptFriend(otherId) {
 }
 
 // unfriend - makes a POST request to the server to end the friendship. It should return an object with a type property and the id of the user whose friendship was ended.
-export async function removeFriend() {
+export async function removeFriend(otherId) {
+    console.log("removeFriend dispatch clicked for user id: ", otherId);
+
+    let buttonText = "Remove Friend";
     try {
-        let { data } = await axios.post(`/api/friendStatus/button`);
-        console.log("{data in removeFriend() action axios", data);
+        let { data } = await axios.post(`/api/friendStatus/button`, {
+            buttonText,
+            otherId,
+        });
         return {
             type: "REMOVE_FRIEND",
-            friends: data.rows,
+            id: data.id,
         };
     } catch (err) {
         console.log("err in removeFriend() action axios", err);
