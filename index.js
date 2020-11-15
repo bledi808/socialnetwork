@@ -283,14 +283,25 @@ app.post(`/api/friendStatus/button`, async (req, res) => {
 app.get(`/api/getFriends`, async (req, res) => {
     console.log("ACCESSED GET /api/getFriends route");
     const { userId } = req.session;
-    console.log("userId", userId);
 
     try {
         let { rows } = await db.getFriends(userId);
-        console.log("rows in GET /api/getFriends route", rows);
+        let receivedRequests = rows.filter(function (user) {
+            return !user.accepted && user.sender_id != userId;
+        });
+        let sentRequests = rows.filter(function (user) {
+            return !user.accepted && user.sender_id == userId;
+        });
+
+        // console.log("sentRequests in GET /api/getFriends route", sentRequests);
+        // console.log(
+        //     "receivedRequests in GET /api/getFriends route",
+        //     receivedRequests
+        // );
         res.json({
             rows,
-            userId: userId,
+            sentRequests,
+            receivedRequests,
         });
     } catch (err) {
         console.log("err in /api/getFriends with getFriends", err);

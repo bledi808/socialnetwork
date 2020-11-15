@@ -1,21 +1,4 @@
-//action creator - a function that returns an object (which we call ACTION)
-
 import axios from "./axios";
-
-// export async function receiveFriends() {
-//     try {
-//         let { data } = await axios.get(`/api/getFriends`);
-//         console.log("{data in receiveFriends() action axios", data);
-//         if (data.rows.accepted == true) {
-//             return {
-//                 type: "RECEIVE_FRIENDS",
-//                 friends: data.rows,
-//             };
-//         }
-//     } catch (err) {
-//         console.log("err in receiveFriends() action axios", err);
-//     }
-// }
 
 export async function receiveFriends() {
     try {
@@ -24,7 +7,8 @@ export async function receiveFriends() {
         return {
             type: "RECEIVE_FRIENDS",
             friends: data.rows,
-            id: data.userId,
+            receivedRequests: data.receivedRequests,
+            sentRequests: data.sentRequests,
         };
     } catch (err) {
         console.log("err in receiveFriends() action axios", err);

@@ -8,26 +8,27 @@ export default function Friends() {
     const allFriends = useSelector(
         (state) => state.friendsList && state.friendsList.filter((user) => user)
     );
+
     const friends = useSelector(
         (state) =>
             state.friendsList &&
             state.friendsList.filter((user) => user.accepted)
     );
-    const friendRequests = useSelector(
-        (state) =>
-            state.friendsList &&
-            state.friendsList.filter((user) => user.accepted == false)
-    );
-
-    // const sentRequests = useSelector(
+    // const friendRequests = useSelector(
     //     (state) =>
-    //         state &&
-    //         state.filter(
-    //             (user) =>
-    //                 user.friendsList.accepted == false &&
-    //                 user.friendsList.sender_id == user.loggedInUser
-    //         )
+    //         state.friendsList &&
+    //         state.friendsList.filter((user) => user.accepted == false)
     // );
+
+    const receivedRequests = useSelector(
+        (state) =>
+            state.receivedRequests &&
+            state.receivedRequests.filter((user) => user)
+    );
+    const sentRequests = useSelector(
+        (state) =>
+            state.sentRequests && state.sentRequests.filter((user) => user)
+    );
 
     useEffect(() => {
         dispatch(receiveFriends());
@@ -79,10 +80,10 @@ export default function Friends() {
                         </div>
                     ))}
             </div>
-            {friendRequests && <span>Your Pending Requests</span>}
-            {/* <div id="friends-layout">
-                {sentRequests &&
-                    sentRequests.map((user) => (
+            {receivedRequests && <span>Your Pending Requests</span>}
+            <div id="friends-layout">
+                {receivedRequests &&
+                    receivedRequests.map((user) => (
                         <div key={user.id} id="friends-container">
                             <Link
                                 to={`/user/${user.id}`}
@@ -123,11 +124,11 @@ export default function Friends() {
                             </button>
                         </div>
                     ))}
-            </div> */}
-            {friendRequests && <span>Your Friend Requests</span>}
+            </div>
+            {sentRequests && <span>Your Pending Requests</span>}
             <div id="friends-layout">
-                {friendRequests &&
-                    friendRequests.map((user) => (
+                {sentRequests &&
+                    sentRequests.map((user) => (
                         <div key={user.id} id="friends-container">
                             <Link
                                 to={`/user/${user.id}`}
@@ -150,21 +151,12 @@ export default function Friends() {
                                 </p>
                             </Link>
                             <button
-                                onClick={() => dispatch(acceptFriend(user.id))}
-                                id="submit-reg"
-                                id="friend-button"
-                                className="button"
-                            >
-                                Accept
-                            </button>
-
-                            <button
                                 onClick={() => dispatch(removeFriend(user.id))}
                                 id="submit-reg"
                                 id="friend-button"
                                 className="button"
                             >
-                                Reject
+                                Cancel
                             </button>
                         </div>
                     ))}

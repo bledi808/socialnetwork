@@ -1,41 +1,13 @@
 export default function (state = {}, action) {
-    // if (action.type == "RECEIVE_FRIENDS") {
-    //     state = Object.assign({}, state, {
-    //         friendsList: action.friends,
-    //     });
-    // }
-
     if (action.type == "RECEIVE_FRIENDS") {
-        state = {
-            ...action.friends,
-            loggedInUser: action.id,
-        };
-        // return (friendsWithId = {
-        //     ...state.friendsList,
-        //     loggedInUser: action.id,
-        // });
+        state = Object.assign({}, state, {
+            friendsList: action.friends,
+            receivedRequests: action.receivedRequests,
+            sentRequests: action.sentRequests,
+        });
     }
-    // if (action.type == "RECEIVE_FRIENDS") {
-    //     state = Object.assign({}, state, {
-    //         friendsList: action.friends,
-    //         // loggedInUser: action.id,
-    //     });
-    //     state = {
-    //         ...state,
-    //         friendsList: state.friendsList.map((user) => {
-    //             console.log("IF state ACCEPT", state);
-    //             return {
-    //                 ...user,
-    //                 loggedInUser: action.id,
-    //             };
-    //             // console.log("state in IF reducer", state);
-    //         }),
 
-    //         // console.log("state in else reducer", state);
-    //     };
-    // }
-
-    // updates state with ACCEPT friend
+    // updates state with ACCEPT friend (adds user to Accepted friendList and removes from receivedRequests)
     if (action.type == "ACCEPT_FRIEND") {
         state = {
             ...state,
@@ -50,23 +22,41 @@ export default function (state = {}, action) {
                     return user;
                 }
             }),
-            // console.log("IF state ACCEPT", state);
-        };
-    }
-
-    //updates state with REMOVE friend; REJECT firend request; CANCEL sent request
-    if (action.type == "REMOVE_FRIEND") {
-        state = {
-            ...state,
-            friendsList: state.friendsList.filter((user) => {
+            receivedRequests: state.receivedRequests.filter((user) => {
                 if (user.id == action.id) {
-                    // console.log("IF state ACCEPT", state);
                     return;
                 } else {
                     return user;
                 }
             }),
-            // console.log("IF state ACCEPT", state);
+        };
+    }
+
+    //updates state with REMOVE friend; REJECT friend request; CANCEL sent request
+    if (action.type == "REMOVE_FRIEND") {
+        state = {
+            ...state,
+            friendsList: state.friendsList.filter((user) => {
+                if (user.id == action.id) {
+                    return;
+                } else {
+                    return user;
+                }
+            }),
+            receivedRequests: state.receivedRequests.filter((user) => {
+                if (user.id == action.id) {
+                    return;
+                } else {
+                    return user;
+                }
+            }),
+            sentRequests: state.sentRequests.filter((user) => {
+                if (user.id == action.id) {
+                    return;
+                } else {
+                    return user;
+                }
+            }),
         };
     }
 

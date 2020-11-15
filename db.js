@@ -171,9 +171,7 @@ module.exports.removeFriend = (userId, otherId) => {
     );
 };
 
-// Get Firends and Friend Requests
-// Users that you've sent a friend request to will NOT show up in this query - add this as BONUS
-////////BONUS PART ////// ON (accepted = false AND sender_id = $1 AND recipient_id = users.id) - added
+// Get Friends, receivedRequests and sentRequests
 
 module.exports.getFriends = (userId) => {
     return db.query(
