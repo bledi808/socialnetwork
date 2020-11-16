@@ -12,6 +12,8 @@ const uidSafe = require("uid-safe");
 const path = require("path");
 const s3 = require("./s3");
 const s3Url = "https://s3.amazonaws.com/pimento-imgboard/";
+const server = require("http").Server(app);
+const io = require("socket.io")(server, { origins: "localhost:8080" });
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -42,7 +44,6 @@ app.use(
 app.use(compression());
 app.use(express.json());
 app.use(express.static("./public"));
-// app.use(express.static("public"));
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -590,8 +591,38 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(8080, function () {
+server.listen(8080, function () {
     console.log(
         "<><><><><><><><><><><><><><><>| social network listenting |<><><><><><><><><><><><><><><>"
     );
+});
+
+// all socket code goes below this comment; above s http code (N.B. )
+io.on("connection", (socket) => {
+    // console.log(`socket with id ${socket.id} just connected!`);
+    //sending msgs to client from server - sends msg only to connected user
+    // any emitted events must be listened for/received in client (socket.js)
+    // we send data in second arg variable (this can be any data type - here it is an obj)
+    // socket.emit("welcome", {
+    //     name: "bledi",
+    // });
+    //io.emit - another way of sending a msg with sockets
+    //EMITS TO EVERY USER LOGGED IN to our website
+    // io.emit("msgSentWithIoEmit", {
+    //     id: socket.id,
+    // });
+    //socket.broadcast.emit
+    //EMITS TO EVERY USER LOGGED IN EXCEPT THE USER WHO JUST CONNECTED
+    // socket.broadcast.emit("msgSentWithBroadcastEmit", {
+    //     id: socket.id,
+    // });
+    //listen for event emitted from client
+    // socket.on("msgFromClient", (data) => {
+    //     console.log("msg sent from client: ", data);
+    // });
+    //how to listen for users disconnecting (logging out / closing tab or browers)
+    //disconnect is a built in event
+    // socket.on("disconnect", () => {
+    // console.log("user " + socket.id + " has disconnected");
+    // });
 });

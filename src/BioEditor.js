@@ -35,7 +35,6 @@ export default class BioEditor extends Component {
                             value={this.state.draftBio}
                         />
                     </div>
-
                     <div>
                         {!bio && (
                             <button

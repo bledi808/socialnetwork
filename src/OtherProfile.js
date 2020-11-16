@@ -35,17 +35,12 @@ export default class OtherProfile extends React.Component {
     render() {
         return (
             <div id="profile">
-                {/* {this.state.error && (
-                    <h3 id="other-profile-container">
-                        this user does not exist
-                    </h3>
-                )} */}
                 {!this.state.error && (
                     <div id="picture-bio-layout">
                         <div id="picture-bio-layout">
                             <div id="other-image-container">
                                 <img
-                                    className="profile-image"
+                                    className="other-profile-image"
                                     src={this.state.imgUrl || "/default.jpg"}
                                 />
                             </div>

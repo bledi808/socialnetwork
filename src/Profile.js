@@ -12,7 +12,7 @@ export default function Profile({
     bio,
     updateBioInApp,
     deleteAccount,
-    profileImgClass,
+    // profileImgClass,
 }) {
     return (
         <>

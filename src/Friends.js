@@ -8,13 +8,11 @@ export default function Friends() {
     const allFriends = useSelector(
         (state) => state.friendsList && state.friendsList.filter((user) => user)
     );
-
     const friends = useSelector(
         (state) =>
             state.friendsList &&
             state.friendsList.filter((user) => user.accepted)
     );
-
     const receivedRequests = useSelector(
         (state) =>
             state.receivedRequests &&
@@ -35,13 +33,16 @@ export default function Friends() {
 
     return (
         <>
-            <div id="containerrr">
-                <div id="containerrr1">
+            <div id="main-friends-container">
+                <div id="friends-subcontainer1">
                     <h3 id="friends-heading">Friends</h3>
                     <div id="friends-layout">
                         {friends &&
                             friends.map((user) => (
-                                <div key={user.id} id="friends-container">
+                                <div
+                                    key={user.id}
+                                    id="friends-component-container"
+                                >
                                     <Link
                                         to={`/user/${user.id}`}
                                         style={{
@@ -49,7 +50,7 @@ export default function Friends() {
                                         }}
                                     >
                                         <div
-                                            class="received-friends-name"
+                                            className="friends-name"
                                             style={{
                                                 color: "green",
                                             }}
@@ -78,7 +79,7 @@ export default function Friends() {
                             ))}
                     </div>
                 </div>
-                <div id="pending-friends-div" style={{}}>
+                <div id="friends-subcontainer2" style={{}}>
                     <div>
                         <h3 id="friends-heading">Received Friend Requests</h3>
                         <div>
@@ -94,7 +95,7 @@ export default function Friends() {
                                     receivedRequests.map((user) => (
                                         <div
                                             key={user.id}
-                                            id="friends-container"
+                                            id="friends-component-container"
                                         >
                                             <Link
                                                 to={`/user/${user.id}`}
@@ -103,9 +104,9 @@ export default function Friends() {
                                                 }}
                                             >
                                                 <div
-                                                    class="received-friends-name"
+                                                    className="friends-name"
                                                     style={{
-                                                        color: "midnightBlue",
+                                                        color: "royalblue",
                                                     }}
                                                 >
                                                     {user.first} {user.last}
@@ -154,7 +155,7 @@ export default function Friends() {
                         </div>
                     </div>
                     <div>
-                        <h3 id="friends-heading">Sent Friend Requests</h3>
+                        <h2 id="friends-heading">Sent Friend Requests</h2>
                         <div>
                             <div
                                 id="friends-layout"
@@ -168,7 +169,7 @@ export default function Friends() {
                                     sentRequests.map((user) => (
                                         <div
                                             key={user.id}
-                                            id="friends-container"
+                                            id="friends-component-container"
                                         >
                                             <Link
                                                 to={`/user/${user.id}`}
@@ -177,9 +178,9 @@ export default function Friends() {
                                                 }}
                                             >
                                                 <div
-                                                    class="received-friends-name"
+                                                    className="friends-name"
                                                     style={{
-                                                        color: "darkRed",
+                                                        color: "#fa7f72",
                                                     }}
                                                 >
                                                     {user.first} {user.last}

@@ -60,7 +60,7 @@ export default function (state = {}, action) {
         };
     }
 
-    console.log("OUTSIDE IF state ACCEPT", state);
+    // console.log("OUTSIDE IF state ACCEPT", state);
 
     return state;
 }

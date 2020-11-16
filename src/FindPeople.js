@@ -42,37 +42,34 @@ export default function FindPeople() {
 
     return (
         <>
-            <div id="search-users">
+            <div id="search-input-div">
                 <input
                     className="reg-input"
+                    id="search-input"
                     autoComplete="off"
-                    placeholder="Search People"
+                    placeholder="Find People"
                     onChange={(e) => setSearch(e.target.value)}
                     defaultValue={search}
                 ></input>
                 {error && <p>{error}</p>}
             </div>
-            <div id="search-friends-layout">
+            <div id="search-layout">
                 {users &&
                     users.map((user) => (
-                        <div key={user.id} id="search-friends-container">
+                        <div key={user.id} id="search-container">
                             <Link
                                 to={`/user/${user.id}`}
                                 style={{
                                     textDecoration: "none",
                                 }}
                             >
-                                <div id="friends-image-container">
+                                <div id="search-image-container">
                                     <img
-                                        className="profile-image"
+                                        className="search-image"
                                         src={user.url || "/default.jpg"}
                                     />
                                 </div>
-                                <p
-                                    style={{
-                                        color: "blue",
-                                    }}
-                                >
+                                <p id="search-name">
                                     {user.first} {user.last}
                                 </p>
                             </Link>

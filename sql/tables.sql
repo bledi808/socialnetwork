@@ -46,9 +46,12 @@ INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,17,false);
 INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,18,false);
 INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(19,1,false);
 
-INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,2,true);
-INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,3,true);
-INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,4,true);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,22,true);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,32,true);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,42,true);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,34,true);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,35,true);
+INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,46,true);
 INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(7,1,false);
 INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(8,1,false);
 INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(9,1,false);
