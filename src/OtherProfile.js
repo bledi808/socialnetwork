@@ -36,14 +36,12 @@ export default class OtherProfile extends React.Component {
         return (
             <div id="profile">
                 {!this.state.error && (
-                    <div id="picture-bio-layout">
-                        <div id="picture-bio-layout">
-                            <div id="other-image-container">
-                                <img
-                                    className="other-profile-image"
-                                    src={this.state.imgUrl || "/default.jpg"}
-                                />
-                            </div>
+                    <div id="other-bio-layout">
+                        <div id="other-image-container">
+                            <img
+                                className="other-profile-image"
+                                src={this.state.imgUrl || "/default.jpg"}
+                            />
                         </div>
                         <div id="bio">
                             <h2 id="bio-name">
@@ -51,9 +49,11 @@ export default class OtherProfile extends React.Component {
                             </h2>
                             <div id="bio-bio">
                                 {this.state.bio && (
-                                    <div id="bio-text">{this.state.bio}</div>
+                                    <div id="other-bio-text">
+                                        {this.state.bio}
+                                    </div>
                                 )}
-                                <div id="bio-buttons-div">
+                                <div>
                                     <FriendButton
                                         otherId={this.props.match.params.id}
                                     />

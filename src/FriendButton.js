@@ -36,7 +36,7 @@ export default function FriendButton({ otherId }) {
         <>
             <button
                 onClick={() => submit()}
-                id="submit-reg"
+                // id="submit-reg"
                 id="friend-button"
                 className="button"
             >

@@ -276,7 +276,7 @@ body {
     /* border: 2px yellow solid; */
 }
 #bio {
-    border: 1px #383838 solid;
+    /* border: 1px #383838 solid; */
     border-left: 1px transparent solid;
     display: flex;
     flex-direction: column;
@@ -456,24 +456,55 @@ body {
 }
 
 /* Other Profile */
+#other-bio-layout {
+    display: flex;
+}
+
 #other-image-container {
-    /* width: 300px; */
-    /* max-height: 300px; */
+    width: 300px;
+    max-height: 450px;
     border: 1px #383838 solid;
     overflow: hidden;
     justify-content: flex-end;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-
-    /* margin-right: 10px; */
 }
 
 .other-profile-image {
-    /* max-width: 300px; */
-    min-width: 200px;
+    width: 300px;
+}
 
-    /* max-height: 300px; */
+#bio-name {
+    /* background-color: royalblue; */
+    color: #383838;
+    margin-bottom: 10px;
+    /* padding: 2px 5px; */
+    /* border: 2px blue solid; */
+}
+
+#other-bio-text {
+    /* border: 1px #383838 solid; */
+    padding: 2%;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 5px grey;
+    width: 385px;
+    background-color: lightgoldenrodyellow;
+}
+
+#friend-button {
+    width: 385px;
+    height: 2em;
+    font-size: medium;
+    box-shadow: 2px 2px 5px grey;
+    border: none;
+    margin-bottom: 3px;
+    background-color: whitesmoke;
+}
+
+#friend-button:hover {
+    color: blue;
+    /* background-color: royalblue; */
 }
 
 .error-msg {
@@ -501,8 +532,8 @@ body {
     /* margin: 5px 5px 5px 10px; */
 }
 #friend-button {
-    margin: 2% 0 0 1px;
-    width: 82%;
+    /* margin: 2% 0 0 1px; */
+    /* width: 82%; */
     height: 2em;
     font-size: medium;
     /* margin: 5px 5px 5px 10px; */
