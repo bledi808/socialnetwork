@@ -14,11 +14,6 @@ export default function Friends() {
             state.friendsList &&
             state.friendsList.filter((user) => user.accepted)
     );
-    // const friendRequests = useSelector(
-    //     (state) =>
-    //         state.friendsList &&
-    //         state.friendsList.filter((user) => user.accepted == false)
-    // );
 
     const receivedRequests = useSelector(
         (state) =>
@@ -34,132 +29,192 @@ export default function Friends() {
         dispatch(receiveFriends());
     }, []);
 
-    // console.log("allFriends: ", allFriends);
-    // console.log("friends: ", friends);
-    // console.log("friendRequests: ", friendRequests);
-
     if (!allFriends) {
         return <p>No friends yet...</p>;
     }
 
     return (
         <>
-            {friends && <span>Your Friends</span>}
-            <div id="friends-layout">
-                {friends &&
-                    friends.map((user) => (
-                        <div key={user.id} id="friends-container">
-                            <Link
-                                to={`/user/${user.id}`}
+            <div id="containerrr">
+                <div id="containerrr1">
+                    <h3 id="friends-heading">Friends</h3>
+                    <div id="friends-layout">
+                        {friends &&
+                            friends.map((user) => (
+                                <div key={user.id} id="friends-container">
+                                    <Link
+                                        to={`/user/${user.id}`}
+                                        style={{
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        <div
+                                            class="received-friends-name"
+                                            style={{
+                                                color: "green",
+                                            }}
+                                        >
+                                            {user.first} {user.last}
+                                        </div>
+                                        <div id="friends-image-container">
+                                            <img
+                                                className="friends-image"
+                                                src={user.url || "/default.jpg"}
+                                            />
+                                        </div>
+                                    </Link>
+                                    <div id="received-buttons-layout">
+                                        <button
+                                            onClick={() =>
+                                                dispatch(removeFriend(user.id))
+                                            }
+                                            id="sent-button"
+                                            className="button"
+                                        >
+                                            ✘
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
+                </div>
+                <div id="pending-friends-div" style={{}}>
+                    <div>
+                        <h3 id="friends-heading">Received Friend Requests</h3>
+                        <div>
+                            <div
+                                id="friends-layout"
                                 style={{
-                                    textDecoration: "none",
+                                    width: "483px",
+                                    flexWrap: "wrap",
+                                    justifyContent: "center",
                                 }}
                             >
-                                <div id="friends-image-container">
-                                    <img
-                                        className="friends-image"
-                                        src={user.url || "/default.jpg"}
-                                    />
-                                </div>
-                                <p
-                                    style={{
-                                        color: "green",
-                                    }}
-                                >
-                                    {user.first} {user.last}
-                                </p>
-                            </Link>
-                            <button
-                                onClick={() => dispatch(removeFriend(user.id))}
-                                id="submit-reg"
-                                id="friend-button"
-                                className="button"
-                            >
-                                Remove
-                            </button>
+                                {receivedRequests &&
+                                    receivedRequests.map((user) => (
+                                        <div
+                                            key={user.id}
+                                            id="friends-container"
+                                        >
+                                            <Link
+                                                to={`/user/${user.id}`}
+                                                style={{
+                                                    textDecoration: "none",
+                                                }}
+                                            >
+                                                <div
+                                                    class="received-friends-name"
+                                                    style={{
+                                                        color: "midnightBlue",
+                                                    }}
+                                                >
+                                                    {user.first} {user.last}
+                                                </div>
+                                                <div id="friends-image-container">
+                                                    <img
+                                                        className="friends-image"
+                                                        src={
+                                                            user.url ||
+                                                            "/default.jpg"
+                                                        }
+                                                    />
+                                                </div>
+                                            </Link>
+                                            <div id="received-buttons-layout">
+                                                <button
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            removeFriend(
+                                                                user.id
+                                                            )
+                                                        )
+                                                    }
+                                                    id="reject-received-button"
+                                                    className="button"
+                                                >
+                                                    ✘
+                                                </button>
+                                                <button
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            acceptFriend(
+                                                                user.id
+                                                            )
+                                                        )
+                                                    }
+                                                    id="accept-received-button"
+                                                    className="button"
+                                                >
+                                                    ✔
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                            </div>
                         </div>
-                    ))}
-            </div>
-            {receivedRequests && <span>Your Pending Requests</span>}
-            <div id="friends-layout">
-                {receivedRequests &&
-                    receivedRequests.map((user) => (
-                        <div key={user.id} id="friends-container">
-                            <Link
-                                to={`/user/${user.id}`}
+                    </div>
+                    <div>
+                        <h3 id="friends-heading">Sent Friend Requests</h3>
+                        <div>
+                            <div
+                                id="friends-layout"
                                 style={{
-                                    textDecoration: "none",
+                                    width: "483px",
+                                    flexWrap: "wrap",
+                                    justifyContent: "center",
                                 }}
                             >
-                                <div id="friends-image-container">
-                                    <img
-                                        className="friends-image"
-                                        src={user.url || "/default.jpg"}
-                                    />
-                                </div>
-                                <p
-                                    style={{
-                                        color: "orange",
-                                    }}
-                                >
-                                    {user.first} {user.last}
-                                </p>
-                            </Link>
-                            <button
-                                onClick={() => dispatch(acceptFriend(user.id))}
-                                id="submit-reg"
-                                id="friend-button"
-                                className="button"
-                            >
-                                Accept
-                            </button>
-
-                            <button
-                                onClick={() => dispatch(removeFriend(user.id))}
-                                id="submit-reg"
-                                id="friend-button"
-                                className="button"
-                            >
-                                Reject
-                            </button>
+                                {sentRequests &&
+                                    sentRequests.map((user) => (
+                                        <div
+                                            key={user.id}
+                                            id="friends-container"
+                                        >
+                                            <Link
+                                                to={`/user/${user.id}`}
+                                                style={{
+                                                    textDecoration: "none",
+                                                }}
+                                            >
+                                                <div
+                                                    class="received-friends-name"
+                                                    style={{
+                                                        color: "darkRed",
+                                                    }}
+                                                >
+                                                    {user.first} {user.last}
+                                                </div>
+                                                <div id="friends-image-container">
+                                                    <img
+                                                        className="friends-image"
+                                                        src={
+                                                            user.url ||
+                                                            "/default.jpg"
+                                                        }
+                                                    />
+                                                </div>
+                                            </Link>
+                                            <div id="received-buttons-layout">
+                                                <button
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            removeFriend(
+                                                                user.id
+                                                            )
+                                                        )
+                                                    }
+                                                    id="sent-button"
+                                                    className="button"
+                                                >
+                                                    ✘
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                            </div>
                         </div>
-                    ))}
-            </div>
-            {sentRequests && <span>Your Pending Requests</span>}
-            <div id="friends-layout">
-                {sentRequests &&
-                    sentRequests.map((user) => (
-                        <div key={user.id} id="friends-container">
-                            <Link
-                                to={`/user/${user.id}`}
-                                style={{
-                                    textDecoration: "none",
-                                }}
-                            >
-                                <div id="friends-image-container">
-                                    <img
-                                        className="friends-image"
-                                        src={user.url || "/default.jpg"}
-                                    />
-                                </div>
-                                <p
-                                    style={{
-                                        color: "orange",
-                                    }}
-                                >
-                                    {user.first} {user.last}
-                                </p>
-                            </Link>
-                            <button
-                                onClick={() => dispatch(removeFriend(user.id))}
-                                id="submit-reg"
-                                id="friend-button"
-                                className="button"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    ))}
+                    </div>
+                </div>
             </div>
         </>
     );

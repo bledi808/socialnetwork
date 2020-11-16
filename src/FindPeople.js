@@ -52,10 +52,10 @@ export default function FindPeople() {
                 ></input>
                 {error && <p>{error}</p>}
             </div>
-            <div id="friends-layout">
+            <div id="search-friends-layout">
                 {users &&
                     users.map((user) => (
-                        <div key={user.id} id="friends-container">
+                        <div key={user.id} id="search-friends-container">
                             <Link
                                 to={`/user/${user.id}`}
                                 style={{

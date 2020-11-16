@@ -505,6 +505,33 @@ body {
 /* Friends */
 
 #friends-layout {
+    /* border: 1px magenta solid; */
+    height: 210px;
+    width: 990px;
+    padding: 0 1%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+}
+#containerrr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#pending-friends-div {
+    /* border: 1px red solid; */
+    width: 990px;
+    margin-top: 1.5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#friends-heading {
+    text-orientation: upright;
+}
+#search-friends-layout {
     border: 1px magenta solid;
     /* height: 100%; */
     /* width: 1000px; */
@@ -514,21 +541,32 @@ body {
     display: flex;
     /* justify-content: center; */
     align-items: center;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     margin-bottom: 2%;
-    overflow: scroll;
+    overflow-x: scroll;
 }
 
 #friends-container {
     width: 130px;
-    height: 250px;
+    /* height: 250px; */
     /* border: 1px #383838 solid; */
-    overflow: hidden;
+    /* overflow: hidden; */
+    cursor: pointer;
+    color: teal;
+    text-align: right;
+    margin: 0px 10px 14px 0;
+    /* overflow-x: scroll; */
+}
+#search-friends-container {
+    width: 130px;
+    height: 200px;
+    /* border: 1px #383838 solid; */
+    /* overflow: hidden; */
     cursor: pointer;
     color: teal;
     text-align: right;
     margin: 1% 1% 0 0;
-    /* overflow-x: auto; */
+    /* overflow-x: scroll; */
 }
 #friends-image-container {
     width: 130px;
@@ -537,15 +575,52 @@ body {
     overflow: hidden;
     cursor: pointer;
     color: teal;
-    /* text-align: left; */
     display: flex;
     justify-content: center;
     align-items: flex-end;
     flex-wrap: wrap;
 
-    /* text-align: end; */
+    text-align: end;
 }
 .friends-image {
     width: 130px;
     /* height: 130px; */
+}
+
+.received-friends-name {
+    /* border: 1px solid red; */
+    height: 2.5em;
+    font-size: medium;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#received-buttons-layout {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1px;
+}
+#accept-received-button {
+    width: 49.5%;
+}
+#accept-received-button:hover {
+    border: 1px green solid;
+    background-color: green;
+}
+
+#reject-received-button {
+    width: 49.5%;
+}
+#reject-received-button:hover {
+    border: 1px tomato solid;
+    background-color: tomato;
+}
+#sent-button {
+    width: 100%;
+}
+#sent-button:hover {
+    border: 1px tomato solid;
+    background-color: tomato;
 }
