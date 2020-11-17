@@ -192,16 +192,25 @@ module.exports.getFriends = (userId) => {
 module.exports.getChatHistory = () => {
     return db.query(
         `
-        SELECT users.id AS user_id, first, last, url, chat.id AS chat_id, message, sender_id
+        SELECT users.id AS user_id, first, last, url, chat.id AS chat_id, message, sender_id, chat.timestamp
         FROM chat 
         JOIN users
         ON (sender_id=users.id)
         ORDER BY chat.id DESC
-        LIMIT 2;
+        LIMIT 10;
         `
     );
 };
 
+// insert new message to chat history
+module.exports.insertMessage = (message, senderId) => {
+    return db.query(
+        `
+        INSERT INTO chat (message, sender_id) VALUES($1,$2);
+        `,
+        [message, senderId]
+    );
+};
 // delete profile image
 module.exports.deleteImage = (userId) => {
     return db.query(

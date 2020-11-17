@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { socket } from "./socket";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Chat() {
     const chatMessages = useSelector((state) => state.chatMessages);
@@ -20,7 +21,7 @@ export default function Chat() {
     }, []);
 
     const keyCheck = (e) => {
-        // console.log("key pressed", e.target);
+        // console.log("key pressed", e.target.value);
         if (e.key === "Enter") {
             console.log("user wants to send mesage");
             e.preventDefault();
@@ -36,7 +37,24 @@ export default function Chat() {
             <div className="chat-display-msgs" ref={elemRef}>
                 {chatMessages &&
                     chatMessages.map((chat) => (
-                        <div key={chat.id} id="friends-component-container">
+                        <div
+                            key={chat.chat_id}
+                            id="friends-component-container"
+                        >
+                            <Link
+                                to={`/user/${chat.id}`}
+                                style={{
+                                    textDecoration: "none",
+                                }}
+                            >
+                                <div id="chat-image-container">
+                                    <img
+                                        className="chat-image"
+                                        src={chat.url || "/default.jpg"}
+                                    />
+                                </div>
+                                <p>{chat.first}</p>
+                            </Link>
                             <p>{chat.message}</p>
                         </div>
                     ))}

@@ -60,10 +60,18 @@ export default function (state = {}, action) {
         };
     }
 
+    //updates state with chat history
     if (action.type == "GET_HISTORY") {
         state = Object.assign({}, state, {
             chatMessages: action.chatMessages,
         });
+    }
+    //updates state with chat history
+    if (action.type == "ADD_MESSAGE") {
+        state = {
+            ...state,
+            chatMessages: action.message,
+        };
     }
 
     console.log("global state", state);

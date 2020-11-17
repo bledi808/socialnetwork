@@ -619,41 +619,55 @@ io.on("connection", (socket) => {
     });
 
     // receiving a new message from a connected user
-
     socket.on("newMessage", (newMsg) => {
-        // add this message to te hdb table
-        console.log("received new msg from client", newMsg);
-
-        //we want to find out who sent the msg
+        console.log("received new msg from client: ", newMsg);
         console.log("author of the new msg is user with userId: ", userId);
-        //retrieve the author info (first, last, url from users table)
+        // inserting new message into chat table
+        db.insertMessage(newMsg, userId).then(() => {
+            //retrieving user info of sender
+            db.getUserInfo(userId).then(({ rows }) => {
+                console.log("userInfo in socket: ", rows);
+                let payload = [
+                    {
+                        message: newMsg,
+                        id: rows[0].id,
+                        first: rows[0].first,
+                        last: rows[0].last,
+                        url: rows[0].url,
+                    },
+                ];
+                // console.log("newMsgObj: ", newMsg);
 
-        io.emit("addToHistory", newMsg);
+                socket.emit("addToHistory", payload);
+            });
+        });
     });
-
-    //sending msgs to client from server - sends msg only to connected user
-    // any emitted events must be listened for/received in client (socket.js)
-    // we send data in second arg variable (this can be any data type - here it is an obj)
-    // socket.emit("welcome", {
-    //     name: "bledi",
-    // });
-    //io.emit - another way of sending a msg with sockets
-    //EMITS TO EVERY USER LOGGED IN to our website
-    // io.emit("msgSentWithIoEmit", {
-    //     id: socket.id,
-    // });
-    //socket.broadcast.emit
-    //EMITS TO EVERY USER LOGGED IN EXCEPT THE USER WHO JUST CONNECTED
-    // socket.broadcast.emit("msgSentWithBroadcastEmit", {
-    //     id: socket.id,
-    // });
-    //listen for event emitted from client
-    // socket.on("msgFromClient", (data) => {
-    //     console.log("msg sent from client: ", data);
-    // });
-    //how to listen for users disconnecting (logging out / closing tab or browers)
-    //disconnect is a built in event
-    // socket.on("disconnect", () => {
-    // console.log("user " + socket.id + " has disconnected");
-    // });
 });
+
+// FROM ENCOUNTER
+
+//sending msgs to client from server - sends msg only to connected user
+// any emitted events must be listened for/received in client (socket.js)
+// we send data in second arg variable (this can be any data type - here it is an obj)
+// socket.emit("welcome", {
+//     name: "bledi",
+// });
+//io.emit - another way of sending a msg with sockets
+//EMITS TO EVERY USER LOGGED IN to our website
+// io.emit("msgSentWithIoEmit", {
+//     id: socket.id,
+// });
+//socket.broadcast.emit
+//EMITS TO EVERY USER LOGGED IN EXCEPT THE USER WHO JUST CONNECTED
+// socket.broadcast.emit("msgSentWithBroadcastEmit", {
+//     id: socket.id,
+// });
+//listen for event emitted from client
+// socket.on("msgFromClient", (data) => {
+//     console.log("msg sent from client: ", data);
+// });
+//how to listen for users disconnecting (logging out / closing tab or browers)
+//disconnect is a built in event
+// socket.on("disconnect", () => {
+// console.log("user " + socket.id + " has disconnected");
+// });

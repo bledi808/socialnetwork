@@ -705,3 +705,37 @@ body {
     border: 1px red solid;
     color: red;
 }
+
+/* Chat */
+.chat-display-msgs {
+    width: 600px;
+    height: 400px;
+    overflow: auto;
+    padding: 1%;
+
+    border: 1px black solid;
+}
+.chat-component-container {
+    height: 120px;
+    /* width: 100px; */
+    text-align: center;
+    cursor: pointer;
+    /* border: red 1px solid; */
+    color: teal;
+}
+#chat-image-container {
+    height: 50px;
+    overflow: hidden;
+    width: 50px;
+    border-radius: 50px;
+}
+
+.chat-image {
+    height: 100%;
+    width: 100%;
+    /* cursor: pointer; */
+}
+
+.chat-container:hover {
+    filter: grayscale(100%);
+}

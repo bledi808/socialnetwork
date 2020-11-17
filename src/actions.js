@@ -1,10 +1,17 @@
 import axios from "./axios";
 
 export async function getChatHistory(history) {
-    console.log("payload received from socket.js", history);
+    // console.log("getChatHistory payload received from socket.js", history);
     return {
         type: "GET_HISTORY",
         chatMessages: history,
+    };
+}
+export async function addNewMessage(newMsg) {
+    // console.log("addNewMessage payload received from socket.js", newMsg);
+    return {
+        type: "ADD_MESSAGE",
+        message: newMsg,
     };
 }
 
@@ -59,23 +66,3 @@ export async function removeFriend(otherId) {
         console.log("err in removeFriend() action axios", err);
     }
 }
-
-// export async function rejectRequest(otherId) {
-//     console.log("rejectRequest dispatch clicked for user id: ", otherId);
-
-//     // let buttonText = "Remove Friend";
-//     try {
-//         let { data } = await axios.post(`/api/friendStatus/button`, {
-//             buttonText,
-//             otherId,
-//         });
-//         console.log("{data} in acceptFriend() action axios", data);
-
-//         //     return {
-//         //         type: "REMOVE_FRIEND",
-//         //         id: data.id,
-//         //     };
-//     } catch (err) {
-//         console.log("err in removeFriend() action axios", err);
-//     }
-// }
