@@ -34,12 +34,17 @@ const uploader = multer({
 });
 
 //////////////////////////////////////// MIDDLEWARE ////////////////////////////////////////
-app.use(
-    cookieSession({
-        secret: "whatever I want my secret to be",
-        maxAge: 1000 * 60 * 60 * 24 * 14,
-    })
-);
+
+//session cookie used to see the cookie om the site
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(compression());
 app.use(express.json());
@@ -599,7 +604,36 @@ server.listen(8080, function () {
 
 // all socket code goes below this comment; above s http code (N.B. )
 io.on("connection", (socket) => {
-    // console.log(`socket with id ${socket.id} just connected!`);
+    console.log(`socket with id ${socket.id} just connected!`);
+
+    const userId = socket.request.session.userId;
+
+    if (!userId) {
+        return socket.disconnect(true);
+    } // adds additional layer if protection to ensure only users with right cookie are recognised as connected sockets
+
+    //retrieve chat history
+    // 1. get chat history from the db
+    // 2. then we emit the chats to all our clients
+    /////////ie. db.getChatHistory.then({data}) => {res.json...} / io.socket.emit()
+
+    io.emit(
+        "chatHistory",
+        "here we will send a bunch of objects inside an array tha twe git from the db - i.e. last 10msgs(smth like: data.rows.reverse())"
+    );
+
+    // receiving a new message from a connected user
+
+    socket.on("newMessage", (newMsg) => {
+        // add this message to te hdb table
+        console.log("received new msg from client", newMsg);
+
+        //we want to find out who sent the msg
+        console.log("author of the new msg is user with userId: ", userId);
+        //retrieve the author info (first, last, url from users table)
+
+        io.emit("addToHistory", newMsg);
+    });
     //sending msgs to client from server - sends msg only to connected user
     // any emitted events must be listened for/received in client (socket.js)
     // we send data in second arg variable (this can be any data type - here it is an obj)

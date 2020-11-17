@@ -7,6 +7,7 @@ import OtherProfile from "./OtherProfile";
 import FindPeople from "./FindPeople";
 import NavBar from "./NavBar";
 import Friends from "./Friends";
+import Chat from "./Chat";
 import axios from "./axios";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -152,6 +153,8 @@ export default class App extends React.Component {
                                     />
                                 )}
                             </div>
+                            <Route path="/chat" component={Chat} />
+                            {/* <Route path="/chat" render={() => <Chat />} /> */}
                         </div>
                     </div>
                 </div>
