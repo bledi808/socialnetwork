@@ -7,12 +7,14 @@ export default function Chat() {
     console.log("chat messages: ", chatMessages); // undefined until redux steps completed
 
     const elemRef = useRef();
+
     useEffect(() => {
-        console.log("chat just mounted");
-        console.log("elemRef", elemRef);
-        console.log("scroll top", elemRef.current.scrollTop);
-        console.log("client height", elemRef.current.clientHeight);
-        console.log("scroll height", elemRef.current.scrollHeight);
+        // console.log("chat just mounted");
+        // console.log("elemRef", elemRef);
+        // console.log("scroll top", elemRef.current.scrollTop);
+        // console.log("client height", elemRef.current.clientHeight);
+        // console.log("scroll height", elemRef.current.scrollHeight);
+        //ensures that chat mounts scrolled down to bottom
         elemRef.current.scrollTop =
             elemRef.current.scrollHeight - elemRef.current.clientHeight;
     }, []);
@@ -32,12 +34,12 @@ export default function Chat() {
         <>
             <h1>Chat Component</h1>
             <div className="chat-display-msgs" ref={elemRef}>
-                <p>chat message goes here</p>
-                <p>chat message goes here</p>
-                <p>chat message goes here</p>
-                <p>chat message goes here</p>
-                <p>chat message goes here</p>
-                <p>chat message goes here</p>
+                {chatMessages &&
+                    chatMessages.map((chat) => (
+                        <div key={chat.id} id="friends-component-container">
+                            <p>{chat.message}</p>
+                        </div>
+                    ))}
             </div>
             <textarea
                 onKeyDown={keyCheck}

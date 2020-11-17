@@ -188,6 +188,20 @@ module.exports.getFriends = (userId) => {
     );
 };
 
+//chatHistory - get last 10 chat messages
+module.exports.getChatHistory = () => {
+    return db.query(
+        `
+        SELECT users.id AS user_id, first, last, url, chat.id AS chat_id, message, sender_id
+        FROM chat 
+        JOIN users
+        ON (sender_id=users.id)
+        ORDER BY chat.id DESC
+        LIMIT 2;
+        `
+    );
+};
+
 // delete profile image
 module.exports.deleteImage = (userId) => {
     return db.query(

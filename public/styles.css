@@ -649,19 +649,26 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    color: #383838;
 }
 
 #friends-image-container {
     width: 130px;
     height: 130px;
     overflow: hidden;
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     flex-wrap: wrap;
     text-align: end;
 }
+#friends-image-container:hover {
+    filter: grayscale(100%);
+}
+.friends-name:hover {
+    color: royalblue;
+}
+
 .friends-image {
     width: 130px;
 }
@@ -674,32 +681,27 @@ body {
 }
 #accept-received-button {
     width: 49.5%;
-    color: mediumseagreen;
+    /* color: mediumseagreen; */
     background-color: white;
 }
 #accept-received-button:hover {
-    border: 1px mediumseagreen solid;
-    background-color: mediumseagreen;
-    color: white;
+    border: 1px green solid;
+    color: green;
 }
 
 #reject-received-button {
     width: 49.5%;
-    color: tomato;
     background-color: white;
 }
 #reject-received-button:hover {
-    border: 1px tomato solid;
-    background-color: tomato;
-    color: white;
+    border: 1px red solid;
+    color: red;
 }
 #sent-button {
     width: 100%;
-    color: tomato;
     background-color: white;
 }
 #sent-button:hover {
-    border: 1px tomato solid;
-    background-color: tomato;
-    color: white;
+    border: 1px red solid;
+    color: red;
 }

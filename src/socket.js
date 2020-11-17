@@ -1,5 +1,5 @@
 import * as io from "socket.io-client";
-// import { chatMessages, chatMessage } from "./actions"; // add these later
+import { getChatHistory, chatMessage } from "./actions"; // add these later
 
 export let socket;
 
@@ -7,10 +7,9 @@ export const init = (store) => {
     if (!socket) {
         socket = io.connect();
 
-        socket.on("chatHistory", (chatMsgs) => {
-            //log chat - here we would retrive it from DB
-            console.log("last 10 messages");
-            //dispatch an action that adds the history to the global state
+        socket.on("chatHistory", (rows) => {
+            console.log("last 2 messages", rows);
+            store.dispatch(getChatHistory(rows));
         });
 
         socket.on("addToHistory", (newMsg) => {

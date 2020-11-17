@@ -613,14 +613,10 @@ io.on("connection", (socket) => {
     } // adds additional layer if protection to ensure only users with right cookie are recognised as connected sockets
 
     //retrieve chat history
-    // 1. get chat history from the db
-    // 2. then we emit the chats to all our clients
-    /////////ie. db.getChatHistory.then({data}) => {res.json...} / io.socket.emit()
-
-    io.emit(
-        "chatHistory",
-        "here we will send a bunch of objects inside an array tha twe git from the db - i.e. last 10msgs(smth like: data.rows.reverse())"
-    );
+    db.getChatHistory().then(({ rows }) => {
+        console.log("get chatHistory() rows: ", rows);
+        socket.emit("chatHistory", rows);
+    });
 
     // receiving a new message from a connected user
 
@@ -634,6 +630,7 @@ io.on("connection", (socket) => {
 
         io.emit("addToHistory", newMsg);
     });
+
     //sending msgs to client from server - sends msg only to connected user
     // any emitted events must be listened for/received in client (socket.js)
     // we send data in second arg variable (this can be any data type - here it is an obj)

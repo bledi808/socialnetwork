@@ -27,6 +27,25 @@ DROP TABLE IF EXISTS friendships CASCADE;
    accepted BOOLEAN DEFAULT false
  );
 
+DROP TABLE IF EXISTS chat CASCADE;
+
+CREATE TABLE chat(
+    id SERIAL PRIMARY KEY,
+    message VARCHAR NOT NULL,
+    sender_id INT REFERENCES users(id) ON DELETE CASCADE,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO chat (message, sender_id) VALUES('hey long time no speak',1);
+INSERT INTO chat (message, sender_id) VALUES('is it?',2);
+INSERT INTO chat (message, sender_id) VALUES('well, its been 17 weeks',3);
+INSERT INTO chat (message, sender_id) VALUES('lol get the hint bro',4);
+INSERT INTO chat (message, sender_id) VALUES('ouch :(',5);
+
+
+
+
+
 INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,2,true);
 INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,3,true);
 INSERT INTO friendships (sender_id, recipient_id, accepted) VALUES(1,4,true);

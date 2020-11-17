@@ -1,5 +1,13 @@
 import axios from "./axios";
 
+export async function getChatHistory(history) {
+    console.log("payload received from socket.js", history);
+    return {
+        type: "GET_HISTORY",
+        chatMessages: history,
+    };
+}
+
 export async function receiveFriends() {
     try {
         let { data } = await axios.get(`/api/getFriends`);
@@ -37,7 +45,6 @@ export async function acceptFriend(otherId) {
 // unfriend - makes a POST request to the server to end the friendship. It should return an object with a type property and the id of the user whose friendship was ended.
 export async function removeFriend(otherId) {
     // console.log("removeFriend dispatch clicked for user id: ", otherId);
-
     let buttonText = "Remove Friend";
     try {
         let { data } = await axios.post(`/api/friendStatus/button`, {

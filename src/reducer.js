@@ -60,7 +60,13 @@ export default function (state = {}, action) {
         };
     }
 
-    // console.log("OUTSIDE IF state ACCEPT", state);
+    if (action.type == "GET_HISTORY") {
+        state = Object.assign({}, state, {
+            chatMessages: action.chatMessages,
+        });
+    }
+
+    console.log("global state", state);
 
     return state;
 }

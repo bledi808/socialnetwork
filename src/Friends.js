@@ -35,7 +35,7 @@ export default function Friends() {
         <>
             <div id="main-friends-container">
                 <div id="friends-subcontainer1">
-                    <h3 id="friends-heading">Friends</h3>
+                    <h3 id="friends-heading">My Friends</h3>
                     <div id="friends-layout">
                         {friends &&
                             friends.map((user) => (
@@ -49,12 +49,7 @@ export default function Friends() {
                                             textDecoration: "none",
                                         }}
                                     >
-                                        <div
-                                            className="friends-name"
-                                            style={{
-                                                color: "green",
-                                            }}
-                                        >
+                                        <div className="friends-name">
                                             {user.first} {user.last}
                                         </div>
                                         <div id="friends-image-container">
@@ -72,7 +67,7 @@ export default function Friends() {
                                             id="sent-button"
                                             className="button"
                                         >
-                                            ✘
+                                            Remove
                                         </button>
                                     </div>
                                 </div>
@@ -103,12 +98,7 @@ export default function Friends() {
                                                     textDecoration: "none",
                                                 }}
                                             >
-                                                <div
-                                                    className="friends-name"
-                                                    style={{
-                                                        color: "royalblue",
-                                                    }}
-                                                >
+                                                <div className="friends-name">
                                                     {user.first} {user.last}
                                                 </div>
                                                 <div id="friends-image-container">
@@ -177,12 +167,7 @@ export default function Friends() {
                                                     textDecoration: "none",
                                                 }}
                                             >
-                                                <div
-                                                    className="friends-name"
-                                                    style={{
-                                                        color: "#fa7f72",
-                                                    }}
-                                                >
+                                                <div className="friends-name">
                                                     {user.first} {user.last}
                                                 </div>
                                                 <div id="friends-image-container">
@@ -207,7 +192,7 @@ export default function Friends() {
                                                     id="sent-button"
                                                     className="button"
                                                 >
-                                                    ✘
+                                                    Cancel
                                                 </button>
                                             </div>
                                         </div>
