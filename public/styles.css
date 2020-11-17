@@ -463,7 +463,7 @@ body {
 #other-image-container {
     width: 300px;
     max-height: 450px;
-    border: 1px #383838 solid;
+    /* border: 1px #383838 solid; */
     overflow: hidden;
     justify-content: flex-end;
     display: flex;
@@ -505,6 +505,13 @@ body {
 #friend-button:hover {
     color: blue;
     /* background-color: royalblue; */
+    background-color: darken(1.5%);
+    border: 1px solid rgba(#000, 0.05);
+    box-shadow: 1px 1px 2px rgba(#fff, 0.2);
+    /* color: lighten($red, 18%); */
+    text-decoration: none;
+    /* text-shadow: -1px -1px 0 darken($red, 9.5%); */
+    transition: all 250ms linear;
 }
 
 .error-msg {
@@ -570,18 +577,25 @@ body {
     height: 190px;
     overflow: hidden;
     display: flex;
-    justify-content: center;
     align-items: flex-end;
     flex-wrap: wrap;
     text-align: end;
+    /* padding-bottom: 3px; */
 }
 
 #search-container:hover {
-    filter: grayscale(100%);
+    filter: grayscale(50%);
+    /* border: 1px solid teal; */
 }
 
 .search-image {
     width: 190px;
+    /* max-height: 185px; */
+    /* box-shadow: -2px -2px 5px grey; */
+    border: 1px solid transparent;
+}
+.search-image:hover {
+    border: 1px solid red;
 }
 
 #search-name {
