@@ -8,13 +8,11 @@ export default function ProfilePic({
     toggleUploader,
     imgClass,
 }) {
-    // var profileSize = className({
-    //     headerProfile: true,
-    //     mainProfile,
-    // });
-
     return (
         <>
+            <div>
+                {first} {last}
+            </div>
             <div className={imgClass}>
                 <img
                     src={imgUrl || "/default.jpg"}
@@ -22,9 +20,6 @@ export default function ProfilePic({
                     className="profile-image"
                     onClick={toggleUploader}
                 />
-            </div>
-            <div>
-                {first} {last}
             </div>
         </>
     );

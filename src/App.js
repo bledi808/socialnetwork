@@ -96,7 +96,7 @@ export default class App extends React.Component {
                         >
                             <Logo />
                         </Link>
-                        <div className="profile-container">
+                        <div className="profile-container" id="profile-cont">
                             <ProfilePic
                                 first={this.state.first}
                                 last={this.state.last}

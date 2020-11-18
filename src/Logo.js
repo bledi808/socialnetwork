@@ -6,19 +6,9 @@ export default function Logo() {
             {/* <h2>I am the Logo</h2> */}
             <div className="logo-container">
                 <div className="logo-image-container">
-                    <img
-                        src="/logo.png"
-                        alt="anti-social network logo"
-                        className="logo-image"
-                    />
+                    <img src="/logo.png" className="logo-image" />
                 </div>
-                <div
-                    style={{
-                        color: "midnightblue",
-                    }}
-                >
-                    The Network
-                </div>
+                <div id="logo-title">The Network</div>
             </div>
         </>
     );
