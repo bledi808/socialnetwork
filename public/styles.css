@@ -258,6 +258,11 @@ body {
     text-align: justify;
 }
 
+#bio-textarea-div {
+    /* border: 1px #383838 solid; */
+    width: 385px;
+}
+
 #bio-textarea {
     border: 1px #383838 solid;
     resize: none;
@@ -700,7 +705,7 @@ body {
 }
 #chat-name {
     padding-left: 1%;
-    color: darkslategray;
+    color: tomato;
 }
 #chat-name:hover {
     color: blue;
@@ -710,4 +715,12 @@ body {
     padding: 10px 15px 5px 5px;
     background-color: lightgoldenrodyellow;
     box-shadow: 1px 1px 3px grey;
+}
+
+#chat-timestamp {
+    font-size: x-small;
+    /* border: 1px red solid; */
+    text-align: right;
+    padding-top: 2px;
+    color: darkslategray;
 }

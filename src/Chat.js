@@ -56,6 +56,14 @@ export default function Chat() {
                                         <p id="chat-name">{chat.first}</p>
                                     </Link>
                                     <p id="chat-msg">{chat.message}</p>
+                                    <p id="chat-timestamp">
+                                        <div>
+                                            {chat.timestamp.slice(11, 16)}
+                                        </div>
+                                        <div>
+                                            {chat.timestamp.split("T")[0]}
+                                        </div>
+                                    </p>
                                 </div>
                             </div>
                         ))}
