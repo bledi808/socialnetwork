@@ -8,7 +8,7 @@ export default function Logo() {
                 <div className="logo-image-container">
                     <img src="/logo.png" className="logo-image" />
                 </div>
-                <div id="logo-title">The Network</div>
+                <div id="logo-title">myDroogs</div>
             </div>
         </>
     );

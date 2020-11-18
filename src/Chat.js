@@ -74,11 +74,8 @@ export default function Chat() {
                         placeholder="Type your message here"
                         id="bio-textarea"
                         rows="2"
-                        cols="40"
+                        cols="53"
                         maxLength="255"
-                        style={{
-                            marginTop: "10px",
-                        }}
                     ></textarea>
                 </div>
             </div>
