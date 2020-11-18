@@ -67,9 +67,9 @@ export default class Uploader extends React.Component {
                     <div id="upload-modal">
                         <div id="upload-modal-layout">
                             <div id="upload-modal-header">
-                                <h3 id="upload-modal-title">
+                                <h2 id="upload-modal-title">
                                     Select profile photo
-                                </h3>
+                                </h2>
                                 <p
                                     id="upload-modal-x"
                                     onClick={() => this.methodInUploader()}
@@ -89,12 +89,14 @@ export default class Uploader extends React.Component {
                                 <button
                                     onClick={() => this.uploadImage()}
                                     className="button"
+                                    id="uploader-button"
                                 >
                                     Upload image
                                 </button>
                                 <button
                                     onClick={() => this.deleteImage()}
                                     className="button"
+                                    id="uploader-button"
                                 >
                                     Remove image
                                 </button>

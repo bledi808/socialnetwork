@@ -206,7 +206,10 @@ module.exports.getChatHistory = () => {
 module.exports.insertMessage = (message, senderId) => {
     return db.query(
         `
-        INSERT INTO chat (message, sender_id) VALUES($1,$2);
+        INSERT INTO chat 
+        (message, sender_id) 
+        VALUES($1,$2)
+        RETURNING *
         `,
         [message, senderId]
     );

@@ -29,7 +29,7 @@ export default class BioEditor extends Component {
                         <textarea
                             id="bio-textarea"
                             rows="4"
-                            cols="38"
+                            cols="44"
                             onChange={(e) => this.handleChange(e)}
                             maxLength="255"
                             value={this.state.draftBio}
@@ -61,8 +61,8 @@ export default class BioEditor extends Component {
             return (
                 //display mode; bio exists in database
                 <>
-                    <span id="bio-text">{this.props.bio}</span>
-                    <div id="bio-buttons-div">
+                    <div id="other-bio-text">{this.props.bio}</div>
+                    <div id="bio-buttons-div" className="bio-buttons">
                         <button
                             onClick={this.props.deleteAccount}
                             // id="delete-account-button"

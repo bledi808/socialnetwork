@@ -28,6 +28,14 @@ export default function NavBar({ logoutButton }) {
             >
                 <button className="navbar-buttons">Friends</button>
             </Link>
+            <Link
+                to="/chat"
+                style={{
+                    textDecoration: "none",
+                }}
+            >
+                <button className="navbar-buttons">Chat</button>
+            </Link>
             <button onClick={logoutButton} className="navbar-buttons">
                 Log out
             </button>

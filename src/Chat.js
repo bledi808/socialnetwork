@@ -5,20 +5,14 @@ import { Link } from "react-router-dom";
 
 export default function Chat() {
     const chatMessages = useSelector((state) => state.chatMessages);
-    console.log("chat messages: ", chatMessages); // undefined until redux steps completed
+    console.log("chat messages: ", chatMessages);
 
     const elemRef = useRef();
 
     useEffect(() => {
-        // console.log("chat just mounted");
-        // console.log("elemRef", elemRef);
-        // console.log("scroll top", elemRef.current.scrollTop);
-        // console.log("client height", elemRef.current.clientHeight);
-        // console.log("scroll height", elemRef.current.scrollHeight);
-        //ensures that chat mounts scrolled down to bottom
         elemRef.current.scrollTop =
             elemRef.current.scrollHeight - elemRef.current.clientHeight;
-    }, []);
+    }, [chatMessages]);
 
     const keyCheck = (e) => {
         // console.log("key pressed", e.target.value);
@@ -33,36 +27,53 @@ export default function Chat() {
 
     return (
         <>
-            <h1>Chat Component</h1>
-            <div className="chat-display-msgs" ref={elemRef}>
-                {chatMessages &&
-                    chatMessages.map((chat) => (
-                        <div
-                            key={chat.chat_id}
-                            id="friends-component-container"
-                        >
-                            <Link
-                                to={`/user/${chat.id}`}
-                                style={{
-                                    textDecoration: "none",
-                                }}
+            <div id="chat-container">
+                <div id="chat-heading">
+                    <h2>Chat Room</h2>
+                </div>
+                <div className="chat-display-msgs" ref={elemRef}>
+                    {chatMessages &&
+                        chatMessages.map((chat) => (
+                            <div
+                                key={chat.chat_id}
+                                id="chat-component-container"
                             >
-                                <div id="chat-image-container">
-                                    <img
-                                        className="chat-image"
-                                        src={chat.url || "/default.jpg"}
-                                    />
+                                <Link to={`/user/${chat.sender_id}`}>
+                                    <div id="chat-image-container">
+                                        <img
+                                            className="chat-image"
+                                            src={chat.url || "/default.jpg"}
+                                        />
+                                    </div>
+                                </Link>
+                                <div id="chat-text">
+                                    <Link
+                                        to={`/user/${chat.sender_id}`}
+                                        style={{
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        <p id="chat-name">{chat.first}</p>
+                                    </Link>
+                                    <p id="chat-msg">{chat.message}</p>
                                 </div>
-                                <p>{chat.first}</p>
-                            </Link>
-                            <p>{chat.message}</p>
-                        </div>
-                    ))}
+                            </div>
+                        ))}
+                </div>
+                <div id="chat-textarea">
+                    <textarea
+                        onKeyDown={keyCheck}
+                        placeholder="Type your message here"
+                        id="bio-textarea"
+                        rows="2"
+                        cols="40"
+                        maxLength="255"
+                        style={{
+                            marginTop: "10px",
+                        }}
+                    ></textarea>
+                </div>
             </div>
-            <textarea
-                onKeyDown={keyCheck}
-                placeholder="type your message here"
-            ></textarea>
         </>
     );
 }

@@ -43,7 +43,7 @@ body {
     border-right: 2px tomato solid;
     background-color: whitesmoke;
     align-items: flex-end;
-    padding-top: 8%;
+    padding-top: 5%;
 }
 
 /* NAVBAR*/
@@ -135,7 +135,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.712);
+    background-color: rgba(0, 0, 0, 0.812);
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -147,10 +147,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 320px;
-    height: 180px;
-    border-top: 2px tomato solid;
-    border-left: 2px tomato solid;
+    width: 420px;
+    height: 230px;
+    border: 2px tomato solid;
     background-color: whitesmoke;
     z-index: 100;
 }
@@ -171,7 +170,7 @@ body {
 
 #upload-modal-title {
     /* border: 2px blue solid; */
-    font-size: large;
+    /* font-size: large; */
     padding: 8% 0;
 }
 
@@ -207,6 +206,11 @@ body {
     width: 40%;
 }
 
+#uploader-button {
+    height: 30px;
+    font-size: large;
+}
+
 .button:hover {
     background-color: #383838;
     color: white;
@@ -227,57 +231,23 @@ body {
 #profile {
     /* border: 1px magenta solid; */
     height: 100%;
-    /* text-align: center; */
-    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#picture-bio-layout {
-    display: flex;
-    justify-content: center;
-    /* border: 2px green solid; */
-    /* margin-top: 5%; */
-    padding: 5px;
-    width: auto;
-    /* height: 80%; */
-}
-#profile-image-container {
-    width: 300px;
-    height: 300px;
-    /* border: 1px #383838 solid; */
-    overflow: hidden;
-    /* margin-right: 10px; */
-    cursor: pointer;
-    font-size: 20px;
-    color: teal;
-    text-align: left;
-}
-#profile-image-container {
-    width: 300px;
-    height: 300px;
-    /* border: 1px #383838 solid; */
-    overflow: hidden;
-    /* margin-right: 10px; */
-    cursor: pointer;
-    font-size: 20px;
-    /* color: teal; */
-    /* text-align: left; */
-}
 
-#profile-image-container:hover {
+.profile-pic:hover {
     filter: grayscale(100%);
+    cursor: pointer;
 }
 
 #bio-name {
     margin-bottom: 4%;
 }
-#bio-bio {
-    /* border: 2px yellow solid; */
-}
+
 #bio {
     /* border: 1px #383838 solid; */
-    border-left: 1px transparent solid;
+    /* border-left: 1px transparent solid; */
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -288,31 +258,14 @@ body {
     text-align: justify;
 }
 
-#bio-text {
-    /* border: 1px tomato solid; */
-    /* width: 40px; */
-    height: 88px;
-    /* text-align: justify; */
-    /* margin-left: 2px;
-    padding: 3%; */
-
-    /* padding: 1%; */
-    /* color: red; */
-}
-#bio-textarea-div {
-    display: flex;
-    /* border: 1px tomato solid; */
-}
 #bio-textarea {
     border: 1px #383838 solid;
-    /* width: 40px; */
-    /* height: 2em; */
     resize: none;
     font-family: "roboto", sans-serif;
     font-size: medium;
     padding: 2%;
-    /* text-align: justify; */
     color: darkcyan;
+    margin-bottom: 5px;
 }
 
 #edit-bio-button {
@@ -322,10 +275,14 @@ body {
 #save-bio-button {
     width: 100px;
     height: 30px;
+    margin: 1% 0 2% 0;
 }
 #bio-buttons-div {
-    margin-top: 3%;
-    border: 1px tomato solid;
+    margin: 3% 0 2% 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 385px;
 }
 
 /* LOGGED OUT STATE */
@@ -458,9 +415,8 @@ body {
 /* Other Profile */
 #other-bio-layout {
     display: flex;
-    /* border: 1px trasolid; */
-    /* border-radius: 10px; */
     box-shadow: 3px 3px 8px grey;
+    background-color: white;
 }
 
 #other-image-container {
@@ -480,18 +436,14 @@ body {
 }
 
 #bio-name {
-    /* background-color: royalblue; */
     color: #383838;
     margin-bottom: 10px;
-    /* padding: 2px 5px; */
-    /* border: 2px blue solid; */
 }
 
 #other-bio-text {
     /* border: 1px #383838 solid; */
     padding: 3%;
     margin-bottom: 10px;
-    /* box-shadow: 2px 2px 5px grey; */
     width: 385px;
     background-color: lightgoldenrodyellow;
 }
@@ -525,12 +477,6 @@ body {
 #log-out-button {
     width: 80px;
     height: 25px;
-}
-#bio-buttons-div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
 }
 
 #delete-account-button {
@@ -707,35 +653,61 @@ body {
 }
 
 /* Chat */
+
+#chat-container {
+    /* border: 1px magenta solid; */
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .chat-display-msgs {
-    width: 600px;
+    width: 480px;
     height: 400px;
     overflow: auto;
-    padding: 1%;
-
-    border: 1px black solid;
+    margin-top: 3px;
+    padding: 1% 5%;
+    background-color: whitesmoke;
+    box-shadow: 2px 2px 5px grey;
+    /* border: 1px black solid; */
 }
-.chat-component-container {
-    height: 120px;
-    /* width: 100px; */
+#chat-component-container {
     text-align: center;
-    cursor: pointer;
-    /* border: red 1px solid; */
-    color: teal;
+    display: flex;
 }
 #chat-image-container {
     height: 50px;
-    overflow: hidden;
     width: 50px;
     border-radius: 50px;
+    overflow: hidden;
+}
+
+#chat-text {
+    width: 300px;
+    text-align: left;
+    margin: 0% 3% 6% 3%;
 }
 
 .chat-image {
     height: 100%;
     width: 100%;
-    /* cursor: pointer; */
 }
 
-.chat-container:hover {
-    filter: grayscale(100%);
+#chat-image-container:hover {
+    filter: hue-rotate(90deg);
+}
+#chat-name {
+    padding-left: 1%;
+    color: darkslategray;
+}
+#chat-name:hover {
+    color: blue;
+}
+#chat-msg {
+    margin-top: 2px;
+    padding: 10px 15px 5px 5px;
+    background-color: lightgoldenrodyellow;
+    box-shadow: 1px 1px 3px grey;
 }

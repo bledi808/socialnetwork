@@ -16,10 +16,13 @@ export default function Profile({
 }) {
     return (
         <>
-            {/* <div id="profile-container"> */}
             <div id="profile">
-                <div id="picture-bio-layout">
-                    <div id="profile-image-container" onClick={toggleUploader}>
+                <div id="other-bio-layout">
+                    <div
+                        id="other-image-container"
+                        className="profile-pic"
+                        onClick={toggleUploader}
+                    >
                         <ProfilePic imgUrl={imgUrl} />
                     </div>
                     <div id="bio">

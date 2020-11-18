@@ -60,7 +60,7 @@ export default function (state = {}, action) {
         };
     }
 
-    //updates state with chat history
+    //updates state with chat history (upon mounting as well as after new message)
     if (action.type == "GET_HISTORY") {
         state = Object.assign({}, state, {
             chatMessages: action.chatMessages,
@@ -70,11 +70,11 @@ export default function (state = {}, action) {
     if (action.type == "ADD_MESSAGE") {
         state = {
             ...state,
-            chatMessages: action.message,
+            chatMessages: [...state.chatMessages, action.message],
         };
     }
 
-    console.log("global state", state);
+    // console.log("global state", state);
 
     return state;
 }

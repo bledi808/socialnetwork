@@ -614,31 +614,31 @@ io.on("connection", (socket) => {
 
     //retrieve chat history
     db.getChatHistory().then(({ rows }) => {
-        console.log("get chatHistory() rows: ", rows);
-        socket.emit("chatHistory", rows);
+        // console.log("get chatHistory() rows: ", rows);
+        socket.emit("chatHistory", rows.reverse());
     });
 
-    // receiving a new message from a connected user
     socket.on("newMessage", (newMsg) => {
-        console.log("received new msg from client: ", newMsg);
-        console.log("author of the new msg is user with userId: ", userId);
         // inserting new message into chat table
-        db.insertMessage(newMsg, userId).then(() => {
+        db.insertMessage(newMsg, userId).then(({ rows }) => {
+            console.log("insert info", rows[0]);
+            let timestamp = rows[0].timestamp;
+            let chat_id = rows[0].id;
             //retrieving user info of sender
             db.getUserInfo(userId).then(({ rows }) => {
-                console.log("userInfo in socket: ", rows);
-                let payload = [
-                    {
-                        message: newMsg,
-                        id: rows[0].id,
-                        first: rows[0].first,
-                        last: rows[0].last,
-                        url: rows[0].url,
-                    },
-                ];
-                // console.log("newMsgObj: ", newMsg);
-
-                socket.emit("addToHistory", payload);
+                // console.log("userInfo in socket: ", rows);
+                let payload = {
+                    user_id: rows[0].id,
+                    first: rows[0].first,
+                    last: rows[0].last,
+                    url: rows[0].url,
+                    message: newMsg,
+                    sender_id: rows[0].id,
+                    timestamp: timestamp,
+                    chat_id: chat_id,
+                };
+                // console.log("payload in addNewMsg ", payload);
+                io.emit("addToHistory", payload);
             });
         });
     });
