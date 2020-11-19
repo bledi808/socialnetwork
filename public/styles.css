@@ -302,7 +302,7 @@ body {
 }
 #file {
     /* border: 1px red solid; */
-    padding: 3% 0 8% 0;
+    padding: 3% 0 10% 0;
 }
 
 /* Profile */
@@ -368,6 +368,10 @@ body {
     flex-direction: row;
     justify-content: space-between;
     width: 385px;
+}
+
+#delete-account-confirmation {
+    margin: 3% 0 10% 0;
 }
 
 /* LOGGED OUT STATE */

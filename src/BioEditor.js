@@ -94,6 +94,57 @@ export default class BioEditor extends Component {
                             Edit Bio
                         </button>
                     </div>
+                    {deleteModal && (
+                        <div id="upload-overlay-container">
+                            <div
+                                id="upload-overlay"
+                                onClick={() => this.deleteModal()}
+                            ></div>
+                            <div
+                                id="upload-modal"
+                                style={{
+                                    textDecoration: "none",
+                                    height: "210px",
+                                }}
+                            >
+                                <div id="upload-modal-layout">
+                                    <div id="upload-modal-header">
+                                        <h2 id="upload-modal-title">
+                                            Did we hear that correctly?
+                                        </h2>
+                                        <p
+                                            id="upload-modal-x"
+                                            onClick={() => this.deleteModal()}
+                                        >
+                                            x
+                                        </p>
+                                    </div>
+                                    <div id="delete-account-confirmation">
+                                        <p>
+                                            Are you sure you want to delete your
+                                            account?
+                                        </p>
+                                    </div>
+                                    <div id="uploader-buttons-div">
+                                        <button
+                                            onClick={this.props.deleteAccount}
+                                            className="button"
+                                            id="uploader-button"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            onClick={() => this.deleteModal()}
+                                            className="button"
+                                            id="uploader-button"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </>
             );
         } else {
@@ -118,29 +169,23 @@ export default class BioEditor extends Component {
                             Add Bio
                         </button>
                     </div>
-                    {/* <> */}
-                    {/* <div id="bio-buttons-div">Are yousure?</div>
-                            <button
-                                // onClick={() => this.deleteModal()}
-                                onClick={this.props.deleteAccount}
-                                id="delete-account-button"
-                                className="button"
-                            >
-                                Yes
-                            </button> */}
-                    {/* </> */}
                     {deleteModal && (
                         <div id="upload-overlay-container">
                             <div
                                 id="upload-overlay"
                                 onClick={() => this.deleteModal()}
                             ></div>
-                            <div id="upload-modal">
+                            <div
+                                id="upload-modal"
+                                style={{
+                                    textDecoration: "none",
+                                    height: "210px",
+                                }}
+                            >
                                 <div id="upload-modal-layout">
                                     <div id="upload-modal-header">
                                         <h2 id="upload-modal-title">
-                                            Are you sure you want to delete your
-                                            account?
+                                            Did we hear that correctly?
                                         </h2>
                                         <p
                                             id="upload-modal-x"
@@ -149,20 +194,26 @@ export default class BioEditor extends Component {
                                             x
                                         </p>
                                     </div>
+                                    <div id="delete-account-confirmation">
+                                        <p>
+                                            Are you sure you want to delete your
+                                            account?
+                                        </p>
+                                    </div>
                                     <div id="uploader-buttons-div">
                                         <button
                                             onClick={this.props.deleteAccount}
                                             className="button"
                                             id="uploader-button"
                                         >
-                                            Yes, Delete
+                                            Delete
                                         </button>
                                         <button
                                             onClick={() => this.deleteModal()}
                                             className="button"
                                             id="uploader-button"
                                         >
-                                            No, Cancel
+                                            Cancel
                                         </button>
                                     </div>
                                 </div>
