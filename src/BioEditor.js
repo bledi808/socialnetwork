@@ -8,6 +8,7 @@ export default class BioEditor extends Component {
         this.state = {
             editorIsVisible: false,
             draftBio: "",
+            deleteModal: false,
         };
     }
 
@@ -18,9 +19,22 @@ export default class BioEditor extends Component {
         });
     }
 
+    deleteModal() {
+        this.setState({
+            deleteModal: !this.state.deleteModal,
+        });
+        // return (
+        //     <div>
+        //         Are you sure you want to delete?
+        //         {/* {this.props.deleteAccount} */}
+        //     </div>
+        // );
+    }
+
     getCurrentDisplay() {
         let editor = this.state.editorIsVisible;
         let bio = this.props.bio;
+        let deleteModal = this.state.deleteModal;
         if (editor) {
             // edit mode
             return (
@@ -64,7 +78,8 @@ export default class BioEditor extends Component {
                     <div id="other-bio-text">{this.props.bio}</div>
                     <div id="bio-buttons-div" className="bio-buttons">
                         <button
-                            onClick={this.props.deleteAccount}
+                            // onClick={this.props.deleteAccount}
+                            onClick={() => this.deleteModal()}
                             // id="delete-account-button"
                             className="button"
                         >
@@ -84,23 +99,77 @@ export default class BioEditor extends Component {
         } else {
             // display mode; no bio to display
             return (
-                <div id="bio-buttons-div">
-                    <button
-                        onClick={this.props.deleteAccount}
-                        id="delete-account-button"
-                        className="button"
-                    >
-                        Delete Account
-                    </button>
-                    <button
-                        className="button"
-                        id="edit-bio-button"
-                        onClick={() => this.toggleEditor()}
-                    >
-                        {" "}
-                        Add Bio
-                    </button>
-                </div>
+                <>
+                    <div id="bio-buttons-div">
+                        <button
+                            onClick={() => this.deleteModal()}
+                            // onClick={this.props.deleteAccount}
+                            id="delete-account-button"
+                            className="button"
+                        >
+                            Delete Account
+                        </button>
+                        <button
+                            className="button"
+                            id="edit-bio-button"
+                            onClick={() => this.toggleEditor()}
+                        >
+                            {" "}
+                            Add Bio
+                        </button>
+                    </div>
+                    {/* <> */}
+                    {/* <div id="bio-buttons-div">Are yousure?</div>
+                            <button
+                                // onClick={() => this.deleteModal()}
+                                onClick={this.props.deleteAccount}
+                                id="delete-account-button"
+                                className="button"
+                            >
+                                Yes
+                            </button> */}
+                    {/* </> */}
+                    {deleteModal && (
+                        <div id="upload-overlay-container">
+                            <div
+                                id="upload-overlay"
+                                onClick={() => this.deleteModal()}
+                            ></div>
+                            <div id="upload-modal">
+                                <div id="upload-modal-layout">
+                                    <div id="upload-modal-header">
+                                        <h2 id="upload-modal-title">
+                                            Are you sure you want to delete your
+                                            account?
+                                        </h2>
+                                        <p
+                                            id="upload-modal-x"
+                                            onClick={() => this.deleteModal()}
+                                        >
+                                            x
+                                        </p>
+                                    </div>
+                                    <div id="uploader-buttons-div">
+                                        <button
+                                            onClick={this.props.deleteAccount}
+                                            className="button"
+                                            id="uploader-button"
+                                        >
+                                            Yes, Delete
+                                        </button>
+                                        <button
+                                            onClick={() => this.deleteModal()}
+                                            className="button"
+                                            id="uploader-button"
+                                        >
+                                            No, Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </>
             );
         }
     }

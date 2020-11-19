@@ -9,6 +9,7 @@ export default function Logo() {
                     <img src="/logo.png" className="logo-image" />
                 </div>
                 <div id="logo-title">myDroogs</div>
+                {/* <h2 id="logo-title">myDroogs</h2> */}
             </div>
         </>
     );
