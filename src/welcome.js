@@ -9,7 +9,7 @@ export default function Welcome() {
     return (
         <div id="welcome-header">
             <div id="welcome-title">
-                <p id="welcome"> Social Network</p>
+                <p id="welcome">myDroogies</p>
             </div>
             {/* <img src="/logo.png" /> Link logo here */}
             <HashRouter>

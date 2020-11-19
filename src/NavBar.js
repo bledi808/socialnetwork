@@ -10,7 +10,7 @@ export default function NavBar({ logoutButton }) {
                     textDecoration: "none",
                 }}
             >
-                <button className="navbar-buttons">Profile</button>
+                <button className="navbar-buttons">PROFILE</button>
             </Link>
             <Link
                 to="/users"
@@ -18,7 +18,7 @@ export default function NavBar({ logoutButton }) {
                     textDecoration: "none",
                 }}
             >
-                <button className="navbar-buttons">Search</button>
+                <button className="navbar-buttons">SEARCH</button>
             </Link>
             <Link
                 to="/friends"
@@ -26,7 +26,7 @@ export default function NavBar({ logoutButton }) {
                     textDecoration: "none",
                 }}
             >
-                <button className="navbar-buttons">Friends</button>
+                <button className="navbar-buttons">FRIENDS</button>
             </Link>
             <Link
                 to="/chat"
@@ -34,10 +34,10 @@ export default function NavBar({ logoutButton }) {
                     textDecoration: "none",
                 }}
             >
-                <button className="navbar-buttons">Chat</button>
+                <button className="navbar-buttons">CHAT</button>
             </Link>
             <button onClick={logoutButton} className="navbar-buttons">
-                Log out
+                LOGOUT
             </button>
         </div>
     );
