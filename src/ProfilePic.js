@@ -10,9 +10,9 @@ export default function ProfilePic({
 }) {
     return (
         <>
-            <div>
+            <h3>
                 {first} {last}
-            </div>
+            </h3>
             <div className={imgClass}>
                 <img
                     src={imgUrl || "/default.jpg"}

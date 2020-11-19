@@ -95,9 +95,38 @@ app.get("/api/user", (req, res) => {
     }
 });
 
+// app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+//     console.log("ACCESSED POST /upload route ");
+
+//     const { userId } = req.session;
+//     const { filename } = req.file;
+//     const url = s3Url + filename;
+//     if (req.file) {
+//         db.uploadProfilePic(url, userId)
+//             .then(({ rows }) => {
+//                 console.log("POST /upload response", rows[0].url);
+//                 res.json(rows[0].url);
+//             })
+//             .catch((err) => {
+//                 console.log(
+//                     "error in POST /upload with uploadProfilePic()",
+//                     err
+//                 );
+//                 res.json({
+//                     success: false,
+//                     errorMsg: "Server error: Could not upload profile picture",
+//                 });
+//             });
+//     } else {
+//         res.json({
+//             success: false,
+//             errorMsg: "Please select a file",
+//         });
+//     }
+// });
+
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("ACCESSED POST /upload route ");
-
     const { userId } = req.session;
     const { filename } = req.file;
     const url = s3Url + filename;
@@ -123,6 +152,28 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
             errorMsg: "Please select a file",
         });
     }
+});
+
+// INCOMPLETE - DELETE images from S3 for userId - s3, db all done...this is last bit required
+// app.post("/delete/image", s3.delete, (req, res) => {
+//     const { userId } = req.session;
+//     const { key } = req.file;
+//     // get all urls for UserId from images db
+//     // then run the following command to get the key from teh URLs - const key = rows.link.split("/")[4];
+//     // then work out how instruct S3 to delete the list of keys for the UserID ???? MISSING LINK
+// })
+
+app.get("/delete/image", (req, res) => {
+    console.log("ACCESSED POST /delete/image route");
+    const { userId } = req.session;
+    db.deleteImage(userId)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((err) => {
+            console.log("error in /delete/image with deleteImage()", err);
+            res.json({ success: false, error: "Image could not be removed" });
+        });
 });
 
 app.post("/bio", (req, res) => {
@@ -312,19 +363,6 @@ app.get(`/api/getFriends`, async (req, res) => {
     } catch (err) {
         console.log("err in /api/getFriends with getFriends", err);
     }
-});
-
-app.get("/delete/image", (req, res) => {
-    console.log("ACCESSED POST /delete/image route");
-    const { userId } = req.session;
-    db.deleteImage(userId)
-        .then(() => {
-            res.json({ success: true });
-        })
-        .catch((err) => {
-            console.log("error in /delete/image with deleteImage()", err);
-            res.json({ success: false, error: "Image could not be removed" });
-        });
 });
 
 //////////////////////////////////////// LOGGED OUT ROUTES ///////////////////////////////////////

@@ -103,8 +103,7 @@ export default class BioEditor extends Component {
                             <div
                                 id="upload-modal"
                                 style={{
-                                    textDecoration: "none",
-                                    height: "210px",
+                                    paddingTop: "1%",
                                 }}
                             >
                                 <div id="upload-modal-layout">
@@ -154,7 +153,6 @@ export default class BioEditor extends Component {
                     <div id="bio-buttons-div">
                         <button
                             onClick={() => this.deleteModal()}
-                            // onClick={this.props.deleteAccount}
                             id="delete-account-button"
                             className="button"
                         >
@@ -178,8 +176,7 @@ export default class BioEditor extends Component {
                             <div
                                 id="upload-modal"
                                 style={{
-                                    textDecoration: "none",
-                                    height: "210px",
+                                    paddingTop: "1%",
                                 }}
                             >
                                 <div id="upload-modal-layout">

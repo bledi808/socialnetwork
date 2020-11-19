@@ -45,3 +45,18 @@ exports.upload = (req, res, next) => {
             console.log("smth went wrong with uploading to the cloud: ", err);
         });
 };
+
+//export deleteObject AWS method...
+exports.delete = (key) => {
+    const params = {
+        Bucket: "pimento-imgboard",
+        Key: key,
+    };
+    s3.deleteObject(params, function (err, data) {
+        if (err) console.log(err, err.stack);
+        // an error occurred
+        else console.log(data); // successful response
+
+        data = { s3 };
+    });
+};

@@ -11,6 +11,15 @@ CREATE TABLE users(
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
 
+  CREATE TABLE images(
+      id SERIAL PRIMARY KEY,
+      url VARCHAR(255),
+      user_id INT REFERENCES users(id) ON DELETE CASCADE,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+
+
+
   CREATE TABLE reset_codes(
     id SERIAL PRIMARY KEY,
     email VARCHAR NOT NULL,

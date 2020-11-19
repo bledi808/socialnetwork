@@ -58,9 +58,9 @@ body {
     padding-bottom: 3px;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 0 4%;
+    padding: 0 3% 0 3%;
     padding-bottom: 5px;
-    padding-left: 136px;
+    /* padding-left: 136px; */
     height: 20%;
     /* background-color: mistyrose;
     background-color: palegoldenrod;
@@ -118,16 +118,16 @@ body {
 }
 
 .navbar-buttons:hover {
-    border: 2px solid teal;
+    /* border: 2px solid teal; */
     border-right: 2px solid #ebebeb;
-    background-color: #ebebeb;
-    color: teal;
-    transition: 1s;
+    /* background-color: #ebebeb; */
+    color: rgb(255, 119, 0);
+    transition: 0.71s;
 }
 .navbar-buttons:focus {
-    color: teal;
-    border-right: 2px solid #ebebeb;
-    background-color: #ebebeb;
+    color: rgb(255, 119, 0);
+    /* border-right: 2px solid #ebebeb; */
+    /* background-color: #ebebeb; */
 }
 
 #app-content {
@@ -151,24 +151,24 @@ body {
 .logo-image-container {
     height: 100px;
     /* width: 100px; */
-    border-radius: 100px;
+    border-radius: 50px;
     overflow: hidden;
 }
 .logo-image {
     height: 100px;
     width: 100px;
+    opacity: 0.85;
 }
 
 #logo-title {
     margin-left: 5%;
     width: 150px;
-
     /* border: 1px red solid; */
 }
 
-.logo-image:hover {
-    filter: hue-rotate(90deg);
-    color: blue;
+#logo-title:hover {
+    /* filter: hue-rotate(90deg); */
+    color: rgb(255, 119, 0);
 }
 
 .profile-container {
@@ -203,8 +203,8 @@ body {
 }
 
 #profile-cont:hover {
-    filter: hue-rotate(90deg);
-    color: blue;
+    /* filter: hue-rotate(90deg); */
+    color: rgb(255, 119, 0);
 }
 
 /* UPLOADER MODAL*/
@@ -214,7 +214,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.812);
+    background-color: rgba(0, 0, 0, 0.612);
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -226,10 +226,10 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 420px;
-    height: 230px;
-    border: 2px tomato solid;
-    background-color: whitesmoke;
+    width: 500px;
+    height: 260px;
+    /* border: 2px tomato solid; */
+    background-color: white;
     z-index: 100;
 }
 #upload-modal-layout {
@@ -371,7 +371,7 @@ body {
 }
 
 #delete-account-confirmation {
-    margin: 3% 0 10% 0;
+    margin: 2% 0 10% 0;
 }
 
 /* LOGGED OUT STATE */

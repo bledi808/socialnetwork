@@ -66,12 +66,23 @@ module.exports.getUserInfo = (userId) => {
 };
 
 //Update Profile pic
+// module.exports.uploadProfilePic = (imgUrl, userId) => {
+//     return db.query(
+//         `
+//         UPDATE users
+//         SET url=$1
+//         WHERE id=$2
+//         RETURNING *
+//         `,
+//         [imgUrl, userId]
+//     );
+// };
+
 module.exports.uploadProfilePic = (imgUrl, userId) => {
     return db.query(
         `
-        UPDATE users
-        SET url=$1
-        WHERE id=$2
+        INSERT INTO images  (url, user_id)
+        VALUES($1,$2)
         RETURNING *
         `,
         [imgUrl, userId]
@@ -214,6 +225,7 @@ module.exports.insertMessage = (message, senderId) => {
         [message, senderId]
     );
 };
+
 // delete profile image
 module.exports.deleteImage = (userId) => {
     return db.query(
@@ -225,6 +237,17 @@ module.exports.deleteImage = (userId) => {
         [userId]
     );
 };
+
+//for incpmplete functionality to delete S3 images for userId
+// module.exports.deleteImage = (userId) => {
+//     return db.query(
+//         `
+//         DELETE FROM images
+//         WHERE id=$1
+//         `,
+//         [userId]
+//     );
+// };
 
 // delete account
 module.exports.deleteAccount = (userId) => {

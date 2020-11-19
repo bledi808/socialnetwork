@@ -8,8 +8,8 @@ export default function Logo() {
                 <div className="logo-image-container">
                     <img src="/logo.png" className="logo-image" />
                 </div>
-                <div id="logo-title">myDroogs</div>
-                {/* <h2 id="logo-title">myDroogs</h2> */}
+                {/* <div id="logo-title">myDroogies</div> */}
+                <h3 id="logo-title">myDroogies</h3>
             </div>
         </>
     );
