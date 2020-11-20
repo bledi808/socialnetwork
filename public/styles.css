@@ -15,7 +15,7 @@ body {
 
 /* colors */
 /* background-color: #e8e8e8;
-    background-color: #fa7f72; */
+background-color: #fa7f72; */
 /* background-color: teal; */
 /* color: #383838; */
 /* background-color: #449494d8; */
@@ -57,14 +57,11 @@ body {
     padding-bottom: 5px;
     /* padding-left: 136px; */
     height: 20%;
-    /* background-color: mistyrose;
-    background-color: palegoldenrod;
-    background-color: whitesmoke; */
+    /* background-color: mistyrose; */
+    /* background-color: palegoldenrod; */
+    /* background-color: whitesmoke; */
     /* background-color: #eef2f3; */
-
     /* background-color: papayawhip; */
-
-    /* border-bottom: 1px #383838 solid; */
     /* border-left: 2px teal solid; */
 }
 #app-body {

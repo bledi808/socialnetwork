@@ -65,29 +65,30 @@ module.exports.getUserInfo = (userId) => {
     return db.query(`SELECT * FROM users WHERE id=$1`, [userId]);
 };
 
-//Update Profile pic
-// module.exports.uploadProfilePic = (imgUrl, userId) => {
-//     return db.query(
-//         `
-//         UPDATE users
-//         SET url=$1
-//         WHERE id=$2
-//         RETURNING *
-//         `,
-//         [imgUrl, userId]
-//     );
-// };
-
+// Update Profile pic
 module.exports.uploadProfilePic = (imgUrl, userId) => {
     return db.query(
         `
-        INSERT INTO images  (url, user_id)
-        VALUES($1,$2)
+        UPDATE users
+        SET url=$1
+        WHERE id=$2
         RETURNING *
         `,
         [imgUrl, userId]
     );
 };
+
+// db for images table - required for delete account/image from s3 cloud
+// module.exports.uploadProfilePic = (imgUrl, userId) => {
+//     return db.query(
+//         `
+//         INSERT INTO images  (url, user_id)
+//         VALUES($1,$2)
+//         RETURNING *
+//         `,
+//         [imgUrl, userId]
+//     );
+// };
 
 //Update Bio
 module.exports.updateBio = (bio, userId) => {

@@ -36,14 +36,14 @@ DROP TABLE IF EXISTS friendships CASCADE;
    accepted BOOLEAN DEFAULT false
  );
 
-DROP TABLE IF EXISTS chat CASCADE;
+  DROP TABLE IF EXISTS chat CASCADE;
 
-CREATE TABLE chat(
-    id SERIAL PRIMARY KEY,
-    message VARCHAR NOT NULL,
-    sender_id INT REFERENCES users(id) ON DELETE CASCADE,
-    timestamp TIMESTAMP DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'CET')
-);
+  CREATE TABLE chat(
+      id SERIAL PRIMARY KEY,
+      message VARCHAR NOT NULL,
+      sender_id INT REFERENCES users(id) ON DELETE CASCADE,
+      timestamp TIMESTAMP DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'CET')
+  );
 
 INSERT INTO chat (message, sender_id) VALUES('hey long time no speak',1);
 INSERT INTO chat (message, sender_id) VALUES('is it?',2);
