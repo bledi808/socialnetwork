@@ -536,7 +536,7 @@ background-color: #fa7f72; */
 }
 
 .error-msg {
-    color: white;
+    color: #494949;
     font-size: large;
     /* border: 1px solid whitesmoke; */
     margin-top: 1%;
